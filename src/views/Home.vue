@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="bottom-bar">
-      <van-tabbar v-model="state.active">
+      <van-tabbar v-model="active">
         <van-tabbar-item icon="home-o">Home</van-tabbar-item>
         <van-tabbar-item icon="search">Find</van-tabbar-item>
         <van-tabbar-item icon="friends-o">Message</van-tabbar-item>
@@ -33,7 +33,10 @@
 </template>
 
 <script lang="ts">
-import { ref, reactive, watch } from "vue";
+import { reactive, ref, onMounted, toRefs, watch } from "vue";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { webGetSelectAreaCode } from "@/api/common/index";
+
 export default {
   setup() {
     const counts = ref(0);
@@ -51,9 +54,16 @@ export default {
         deep: true
       }
     );
+    onMounted(async () => {
+      const data = await webGetSelectAreaCode({
+        pageNum: 1,
+        pageSize: 223
+      });
+      console.log(data);
+    });
 
     return {
-      state,
+      ...toRefs(state),
       counts,
       countId
     };

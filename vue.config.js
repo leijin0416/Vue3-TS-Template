@@ -15,7 +15,31 @@ function resolve(dir) {
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const autoprefixer = require("autoprefixer");
+const isDev = process.env.NODE_ENV;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const devNeedCdn = isDev === "production" ? false : true;
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const isDevCS = {
+  "/api": {
+    target: "http://54.254.93.190:6100",
+    changeOrigin: true,
+    wx: true,
+    pathRewrite: {
+      "^/api": "/"
+    }
+  }
+};
+
 module.exports = {
+  runtimeCompiler: true,
+  productionSourceMap: devNeedCdn,
+  lintOnSave: false,
+  devServer: {
+    open: false,
+    https: false,
+    proxy: isDevCS
+  },
   parallel: false,
   css: {
     loaderOptions: {
