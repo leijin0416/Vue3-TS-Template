@@ -35,7 +35,7 @@
 <script lang="ts">
 import { reactive, ref, onMounted, toRefs, watch } from "vue";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { webGetSelectAreaCode } from "@/api/common/index";
+import { webGetInewNewsPages, webGetInewNewsChannel } from "@/mock/index";
 
 export default {
   setup() {
@@ -55,15 +55,22 @@ export default {
       }
     );
     onMounted(async () => {
-      const data = await webGetSelectAreaCode({
-        pageNum: 1,
-        pageSize: 223
+      const titleDataList = await webGetInewNewsChannel({
+        appkey: "ca05a06b9221f5d1"
       });
-      console.log(data);
+      const newsDataList = await webGetInewNewsPages({
+        channel: "头条",
+        start: 1,
+        num: 30,
+        appkey: "ca05a06b9221f5d1"
+      });
+
+      console.log(titleDataList);
+      console.log(newsDataList);
     });
 
     return {
-      ...toRefs(state),
+      ...toRefs(state), // 把一个响应式对象转换成普通对象
       counts,
       countId
     };

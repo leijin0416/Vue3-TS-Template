@@ -21,12 +21,12 @@ const devNeedCdn = isDev === "production" ? false : true;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const isDevCS = {
-  "/api": {
-    target: "http://54.254.93.190:6100",
+  "/inew": {
+    target: "http://api.jisuapi.com",
     changeOrigin: true,
     wx: true,
     pathRewrite: {
-      "^/api": "/"
+      "^/inew": "/"
     }
   }
 };
