@@ -35,7 +35,6 @@
 
 <script lang="ts">
 import { reactive, ref, onMounted, toRefs, watch } from "vue";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { webGetInewNewsPages, webGetInewNewsChannel } from "@/mock/index";
 
 export default {
@@ -93,12 +92,12 @@ export default {
     .user-head {
       display: flex;
       justify-content: space-between;
-      padding: 0 15px;
+      padding: 15px;
       .user-avatar {
         width: 80px;
         & > img {
-          width: 80px;
-          height: 80px;
+          width: 70px;
+          height: 70px;
           border: 1px solid #999;
           border-radius: 50%;
         }
