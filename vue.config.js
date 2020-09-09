@@ -96,7 +96,7 @@ module.exports = {
                   drop_console: true
               }
           },
-          test: /.ts$/g,
+          test: /.js$/g,
           sourceMap: false
         }),
         // 体积压缩提示
@@ -152,10 +152,6 @@ module.exports = {
       return args
     })
     // ============注入cdn start============
-
-    // ============解决ie11兼容ES6 start==========
-    // config.entry('main').add('babel-polyfill')
-    // ============解决ie11兼容ES6 end============
 
     config.resolve.alias
       .set("@", resolve("src"))
