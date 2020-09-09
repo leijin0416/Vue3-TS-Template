@@ -8,7 +8,7 @@
 
 `改造ts中，提示找不到模块vue`  -解决：tsconfig.json 的配置有问题：需要将compilerOptions中的 moduleResolution 改为Node。
 
-[mock -获取第三方新闻数据](https://www.jisuapi.com/api/news/) --|-- [新闻](https://segmentfault.com/a/1190000009811706?utm_source=sf-related)
+[mock -获取第三方新闻数据](https://www.jisuapi.com/api/news/) --|-- [新闻](https://segmentfault.com/a/1190000009811706?utm_source=sf-related) --|-- [vue-cli3.0中使用svg](https://blog.csdn.net/qq_41619796/article/details/100997432)
 
 ---
 

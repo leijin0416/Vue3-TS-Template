@@ -32,9 +32,11 @@ const isDevCS = {
 };
 
 module.exports = {
-  runtimeCompiler: true,
-  productionSourceMap: devNeedCdn,
+  // 关闭内置Eslint检查
   lintOnSave: false,
+  runtimeCompiler: true,
+  // 不要打包以后的map文件
+  productionSourceMap: false,
   devServer: {
     open: false,
     https: false,

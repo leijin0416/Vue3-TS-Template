@@ -20,6 +20,7 @@
           </div>
         </div>
       </div>
+      <p>123333</p>
     </div>
     <div class="bottom-bar">
       <van-tabbar v-model="active">
@@ -98,7 +99,8 @@ export default {
         & > img {
           width: 80px;
           height: 80px;
-          border-radius: 20px;
+          border: 1px solid #999;
+          border-radius: 50%;
         }
       }
       .user-info {
