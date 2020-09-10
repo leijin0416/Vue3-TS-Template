@@ -2,5 +2,5 @@
 import storageUser from './storageUser';
 
 export default {
-    storageUser,
+  storageUser,
 }

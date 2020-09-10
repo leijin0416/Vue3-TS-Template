@@ -65,7 +65,7 @@ export default {
     watch(() => store.state.storageUser.getSessionUserToken, val => {
       state.activeIds = val;
       console.log(`count is ${val}`);
-    })
+    });
 
     onMounted(async () => {
       /**
@@ -91,16 +91,16 @@ export default {
         appkey: "ca05a06b9221f5d1"
       });
       console.log(titleDataList);
-    }
+    };
 
     return {
       ...toRefs(state), // 把一个响应式对象转换成普通对象
       counts,
       countId,
       getInTheatersData
-    };
+    }
   }
-};
+}
 </script>
 
 <style lang="scss">
