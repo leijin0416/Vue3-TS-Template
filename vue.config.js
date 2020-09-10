@@ -10,7 +10,7 @@ const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 
 const path = require("path");
 function resolve(dir) {
-  return path.join(__dirname, dir);
+  return path.join(__dirname, dir)
 }
 
 const autoprefixer = require("autoprefixer");
@@ -42,7 +42,7 @@ const isDevCS = {
       "^/inew": "/"
     }
   }
-};
+}
 
 module.exports = {
   runtimeCompiler: true,
