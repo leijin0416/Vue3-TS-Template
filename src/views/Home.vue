@@ -51,8 +51,8 @@ export default {
       ids: '01',
       activeIds: '02',
     });
-
-    watch( () => state.activeIds,
+    
+    watch(() => state.activeIds,
       (count, prevCount) => {
         /* ... */
         console.log(`新的count${count}----旧的count${prevCount}`);
