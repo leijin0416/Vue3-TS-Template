@@ -1,8 +1,13 @@
 import { createStore } from "vuex";
+import sessionDataStore from './modules/index';
+
+let modules = {
+  ...sessionDataStore,
+};
 
 export default createStore({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: {}
+  state: {
+    testStatus: 10,
+  },
+  modules: modules
 });

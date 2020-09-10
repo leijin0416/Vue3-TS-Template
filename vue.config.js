@@ -1,14 +1,14 @@
 const webpack = require("webpack");
 const merge = require("webpack-merge");
 const tsImportPluginFactory = require("ts-import-plugin");
+const pxtoviewport = require("postcss-px-to-viewport");
+
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
 const CompressionWebpackPlugin = require("compression-webpack-plugin"); // gzip
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
-const pxtoviewport = require("postcss-px-to-viewport");
 
 const path = require("path");
-
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
@@ -21,16 +21,16 @@ const devNeedCdn = isDev === "production" ? false : true;
 
 // cdn链接
 const cdn = {
-    externals: {
-      'axios': 'axios',
-      'vant': 'Vant',
-    },
-    css: [
-      "https://cdn.jsdelivr.net/npm/vant@3.0.0-alpha.3/lib/index.min.css"
-    ],
-    js: [
-      "https://cdn.jsdelivr.net/npm/axios@0.20.0/dist/axios.min.js",
-    ]
+  externals: {
+    'axios': 'axios',
+    'vant': 'Vant',
+  },
+  css: [
+    "https://cdn.jsdelivr.net/npm/vant@3.0.0-alpha.3/lib/index.min.css"
+  ],
+  js: [
+    "https://cdn.jsdelivr.net/npm/axios@0.20.0/dist/axios.min.js",
+  ]
 }
 
 const isDevCS = {
@@ -145,6 +145,7 @@ module.exports = {
     config.optimization.splitChunks({
       chunks: 'all'
     });
+    
     // ============注入cdn start============
     config.plugin('html').tap(args => {
       // 生产环境或本地需要cdn时，才注入cdn

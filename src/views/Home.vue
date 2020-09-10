@@ -8,6 +8,7 @@
         <div class="user-info">
           <div class="hello">Good morning!</div>
           <div class="name">Marin Ramsey</div>
+          <p>vuex: {{activeIds}}</p>
         </div>
         <div class="message">
           <div class="message-box">
@@ -20,7 +21,6 @@
           </div>
         </div>
       </div>
-      <p>123333</p>
     </div>
     <div class="bottom-bar">
       <van-tabbar v-model="active">
@@ -34,27 +34,53 @@
 </template>
 
 <script lang="ts">
-import { reactive, ref, onMounted, toRefs, watch } from "vue";
+import { ref, reactive, onMounted, computed, toRefs, getCurrentInstance, watch } from "vue";
+import { useStore } from 'vuex';
+import { sessionData } from '@/filters/storage';
 import { webGetInewNewsPages, webGetInewNewsChannel } from "@/mock/index";
 
 export default {
   setup() {
+    const ctx = getCurrentInstance();  // 获取路由
+    const store = useStore();  // 状态管理vuex
+
     const counts = ref(0);
     const countId = ref(0);
     const state = reactive({
-      active: 0
+      active: 0,
+      ids: '01',
+      activeIds: '02',
     });
-    watch(
-      () => state.active,
+
+    watch( () => state.activeIds,
       (count, prevCount) => {
         /* ... */
         console.log(`新的count${count}----旧的count${prevCount}`);
       },
-      {
-        deep: true
-      }
+      { deep: true }
     );
+    /**
+     *  监听vuex
+     */
+    watch(() => store.state.storageUser.getSessionUserToken, val => {
+      state.activeIds = val;
+      console.log(`count is ${val}`);
+    })
+
     onMounted(async () => {
+      /**
+       *  状态管理
+       */
+      state.activeIds = store.getters["storageUser/getSessionUserToken"];
+      store.commit('storageUser/SET_sessionUserToken', 123);
+      const data = sessionData("get", "getSessionUserToken", "");
+
+      getInTheatersData();
+    });
+    const getInTheatersData = async () => {
+      /**
+       *  异步加载数据
+       */
       const titleDataList = await webGetInewNewsChannel({
         appkey: "ca05a06b9221f5d1"
       });
@@ -64,15 +90,14 @@ export default {
         num: 30,
         appkey: "ca05a06b9221f5d1"
       });
-
       console.log(titleDataList);
-      console.log(newsDataList);
-    });
+    }
 
     return {
       ...toRefs(state), // 把一个响应式对象转换成普通对象
       counts,
-      countId
+      countId,
+      getInTheatersData
     };
   }
 };
