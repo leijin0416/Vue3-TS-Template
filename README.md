@@ -14,7 +14,7 @@
 
 ## Vue3.x 生命周期变化
 
-[深入vue响应式原理](https://juejin.im/post/6844904078724562951)
+[深入vue响应式原理](https://juejin.im/post/6844904078724562951) --|-- [git看1](https://github.com/Duanzihuang/heimamovie) --|-- [git看2](https://github.com/kaiqiangren/vue-next-ts-preview)
 
 vue2|vue3|含义
 :-|:-:|-:

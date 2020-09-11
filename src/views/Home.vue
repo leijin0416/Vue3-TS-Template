@@ -35,13 +35,15 @@
 
 <script lang="ts">
 import { ref, reactive, onMounted, computed, toRefs, getCurrentInstance, watch } from "vue";
+import { useRouter, useRoute } from 'vue-router';
 import { useStore } from 'vuex';
 import { sessionData } from '@/filters/storage';
 import { webGetInewNewsPages, webGetInewNewsChannel } from "@/mock/index";
 
 export default {
   setup() {
-    const ctx = getCurrentInstance();  // 获取路由
+    const router = useRouter();   // 获取路由
+    const route = useRoute();    // 获取路由
     const store = useStore();  // 状态管理vuex
 
     const counts = ref(0);
@@ -98,7 +100,7 @@ export default {
       counts,
       countId,
       getInTheatersData
-    }
+    };
   }
 }
 </script>
