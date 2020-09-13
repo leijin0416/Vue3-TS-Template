@@ -1,4 +1,4 @@
-import { RouteRecordRaw } from "vue-router";
+import { RouteRecordRaw } from "vue-router"
 
 /**
  * getComponentMin() 路由懒加载
@@ -6,10 +6,10 @@ import { RouteRecordRaw } from "vue-router";
  * @param {string} component  -.vue
  */
 const getComponentMin = (component: any) => () =>
-  import(`@/views/${component}.vue`);
+  import(`@/views/${component}.vue`)
 
 const getComponentMax = (name: any, component: any) => () =>
-  import(`@/views/${name}/${component}.vue`);
+  import(`@/views/${name}/${component}.vue`)
 
 /**
  * @param {boolean} displayNavBar 是否需要底部导航

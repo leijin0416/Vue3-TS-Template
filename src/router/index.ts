@@ -1,5 +1,5 @@
-import { createRouter, createWebHistory } from "vue-router";
-import { routerMaps } from './routerMap';
+import { createRouter, createWebHistory } from "vue-router"
+import { routerMaps } from './routerMap'
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
@@ -8,10 +8,10 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.path === '/login') {
-    next();
+    next()
   } else {
-    next();
+    next()
   }
 });
 
-export default router;
+export default router
