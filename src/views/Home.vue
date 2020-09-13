@@ -54,20 +54,24 @@ export default {
       activeIds: '02',
     })
     
-    watch(() => state.activeIds,
-      (count, prevCount) => {
-        /* ... */
-        console.log(`新的count${count}----旧的count${prevCount}`)
-      },
-      { deep: true }
-    )
     /**
      *  监听vuex
      */
-    watch(() => store.state.storageUser.getSessionUserToken, val => {
-      state.activeIds = val
-      console.log(`count is ${val}`)
-    })
+    watch(() => state.activeIds,
+      (newer, older) => {
+        /* ... */
+        console.log(`新的count${newer}----旧的count${older}`)
+      }, { deep: true })
+
+    watch(() => store.state.storageUser.getSessionUserToken, (newer, older) => {
+      if (newer == null) {
+          return
+      } else {
+        // 监听 vuex 地址 getSessionUserToken
+        state.activeIds = newer
+        console.log(`count is ${newer}`)
+      }
+    }, { deep: true })
 
     onMounted(async () => {
       /**

@@ -102,7 +102,20 @@ setup() {
     // 状态管理vuex
     const store = useStore()
 
-    // 使用
+    /**
+     *  监听vuex
+     */
+    watch(() => store.state.storageUser.getSessionUserToken, (newer, older) => {
+        if (newer == null) {
+            return
+        } else {
+            // 监听 vuex 地址 getSessionUserToken
+            state.activeIds = newer
+            console.log(`count is ${newer}`)
+        }
+    }, { deep: true })
+
+    // 加载使用
     onMounted(async () => {
         /**
          *  状态管理
@@ -111,13 +124,6 @@ setup() {
         store.commit('storageUser/SET_sessionUserToken', 123)
 
         const data = sessionData("get", "getSessionUserToken", "")
-    })
-    /**
-     *  监听vuex
-     */
-    watch(() => store.state.storageUser.getSessionUserToken, val => {
-        state.activeIds = val
-        console.log(`count is ${val}`)
     })
 
     return { }
