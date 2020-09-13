@@ -1,7 +1,7 @@
-import axios from 'axios';
-import { Toast } from "vant";
+import axios from 'axios'
+import { Toast } from "vant"
 
-axios.defaults.baseURL = '';
+axios.defaults.baseURL = ''
 /**
  * 提示函数
  * 禁止点击蒙层、显示一秒后关闭 vant.Toast('提示');
@@ -11,7 +11,7 @@ const tip = (msg: string) => {
     message: msg,
     duration: 3000,
     forbidClick: true
-  });
+  })
 }
 
 // 请求拦截器
@@ -27,8 +27,8 @@ axios.interceptors.response.use(response => {
   
   return response
 }, error => {
-  console.log(error);
-  const status = error.response.status;
+  // console.log(error)
+  const status = error.response.status
   if (error && error.response) {
     switch (status) {
       case 400:
@@ -68,7 +68,7 @@ export default {
       .catch(res => {
         reject(res)
       })
-    }).catch((e) => { });
+    }).catch((e) => { })
   },
   post(url: any, param: any) {
     return new Promise((resolve, reject) => {
@@ -83,6 +83,6 @@ export default {
       .catch(res => {
         reject(res)
       })
-    }).catch((e) => { });
+    }).catch((e) => { })
   }
 }
