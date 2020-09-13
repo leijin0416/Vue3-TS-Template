@@ -31,9 +31,11 @@ destroyed | onUnmounted | 实例销毁后调用。该钩子被调用后，对应
 
 在 vue3 中通过安装 @vue/composition-api 来使用，Composition API的例子：
 
-## ref 或者 reactive 代替data中的变量
+## 响应式变量声明： ref 或者 reactive 代替data中的变量
 
-reactive 处理的是对象的双向绑定，而 ref 则可以处理js基础类型的双向绑定。
+- reactive 处理的是对象的双向绑定，而 ref 则可以处理js基础类型的双向绑定。
+
+- ref 将给定的值创建一个响应式的数据对象并赋值初始值（**int或者string**），reactive 可以直接定义**复杂响应式对象**。
 
 ```js
 /*================ 之前 ================ */
@@ -57,7 +59,37 @@ setup(){
 }
 ```
 
-ref 将给定的值创建一个响应式的数据对象并赋值初始值（**int或者string**），reactive 可以直接定义**复杂响应式对象**。
+## vue-router 路由
+
+```js
+// 组件内部路由拦截器的使用方式
+import { useRouter, useRoute } from "vue-router"
+
+setup() {
+    // 组件内路由
+    const router = useRouter()
+    router.beforeEach((to, from, next) => {
+        next()
+    })
+    router.push({
+        path: '/'
+    })
+    // 组件内路由信息
+    const route = useRoute();
+    const typeTitle = ()  => {
+        // console.log(route.meta.title)
+        switch (route.meta.title) {
+            case 'NAI Trading Center':
+                return '正在热映'
+            case 'coming_soon':
+                return '即将上映'
+        }
+    }
+    return {
+        typeTitle
+    }
+}
+```
 
 ## watch来监听对象改变
 
@@ -67,24 +99,23 @@ vue3 除了 watch api, 还新增了一个 watchEffect 的 api
 
 ```js
 setup(){
-    const state=reactive({count:0})
-    const changeCount=()=>{
-        state.count++;
+    const state = reactive({count:0})
+    // 更新值
+    const changeCount = () => {
+        state.count ++
     }
     // 必须指定监听属性,不能监听整个state
-    watch(
-        () => state.count,
+    watch( () => state.count,
         (count, preCount) => {
             console.log(`新的count${count}----旧的count${preCount}`)
-        },
-        {
+        }, {
     　　　　deep: true,
             lazy:true // 默认情况下逐渐初始化会执行一次watch，lazy设置为true初始化不会调用watch
     })
     return{
-    // state,
-    //或者
-    ...toRefs(state),
+        // state,
+        //或者
+        ...toRefs(state),
         changeCount
     }
 },

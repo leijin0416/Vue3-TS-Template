@@ -1,5 +1,5 @@
-import { createStore } from "vuex";
-import sessionDataStore from './modules/index';
+import { createStore } from "vuex"
+import sessionDataStore from './modules/index'
 
 let modules = {
   ...sessionDataStore,
@@ -10,4 +10,4 @@ export default createStore({
     testStatus: 10,
   },
   modules: modules
-});
+})

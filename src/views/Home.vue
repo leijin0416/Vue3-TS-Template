@@ -34,73 +34,73 @@
 </template>
 
 <script lang="ts">
-import { ref, reactive, onMounted, computed, toRefs, getCurrentInstance, watch } from "vue";
-import { useRouter, useRoute } from 'vue-router';
-import { useStore } from 'vuex';
-import { sessionData } from '@/filters/storage';
-import { webGetInewNewsPages, webGetInewNewsChannel } from "@/mock/index";
+import { ref, reactive, onMounted, computed, toRefs, getCurrentInstance, watch } from "vue"
+import { useRouter, useRoute } from 'vue-router'
+import { useStore } from 'vuex'
+import { sessionData } from '@/filters/storage'
+import { webGetInewNewsPages, webGetInewNewsChannel } from "@/mock/index"
 
 export default {
   setup() {
-    const router = useRouter();   // 获取路由
-    const route = useRoute();    // 获取路由
-    const store = useStore();  // 状态管理vuex
+    const router = useRouter()   // 获取路由
+    const route = useRoute()   // 获取路由
+    const store = useStore()  // 状态管理vuex
 
-    const counts = ref(0);
-    const countId = ref(0);
+    const counts = ref(0)
+    const countId = ref(0)
     const state = reactive({
       active: 0,
       ids: '01',
       activeIds: '02',
-    });
+    })
     
     watch(() => state.activeIds,
       (count, prevCount) => {
         /* ... */
-        console.log(`新的count${count}----旧的count${prevCount}`);
+        console.log(`新的count${count}----旧的count${prevCount}`)
       },
       { deep: true }
-    );
+    )
     /**
      *  监听vuex
      */
     watch(() => store.state.storageUser.getSessionUserToken, val => {
-      state.activeIds = val;
-      console.log(`count is ${val}`);
-    });
+      state.activeIds = val
+      console.log(`count is ${val}`)
+    })
 
     onMounted(async () => {
       /**
        *  状态管理
        */
-      state.activeIds = store.getters["storageUser/getSessionUserToken"];
-      store.commit('storageUser/SET_sessionUserToken', 123);
-      const data = sessionData("get", "getSessionUserToken", "");
+      state.activeIds = store.getters["storageUser/getSessionUserToken"]
+      store.commit('storageUser/SET_sessionUserToken', 123)
+      const data = sessionData("get", "getSessionUserToken", "")
 
-      getInTheatersData();
-    });
+      getInTheatersData()
+    })
     const getInTheatersData = async () => {
       /**
        *  异步加载数据
        */
       const titleDataList = await webGetInewNewsChannel({
         appkey: "ca05a06b9221f5d1"
-      });
+      })
       const newsDataList = await webGetInewNewsPages({
         channel: "头条",
         start: 1,
         num: 30,
         appkey: "ca05a06b9221f5d1"
-      });
-      console.log(titleDataList);
-    };
+      })
+      console.log(titleDataList)
+    }
 
     return {
       ...toRefs(state), // 把一个响应式对象转换成普通对象
       counts,
       countId,
       getInTheatersData
-    };
+    }
   }
 }
 </script>
