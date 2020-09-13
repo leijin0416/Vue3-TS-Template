@@ -14,7 +14,7 @@
 
 ## Vue3.x 生命周期变化
 
-[深入vue响应式原理](https://juejin.im/post/6844904078724562951) --|-- [git看1](https://github.com/Duanzihuang/heimamovie) --|-- [git看2](https://github.com/kaiqiangren/vue-next-ts-preview)
+[深入vue响应式原理](https://juejin.im/post/6844904078724562951) --|-- [git看1](https://github.com/Duanzihuang/heimamovie) --|-- [git看文2](https://github.com/kaiqiangren/vue-next-ts-preview)
 
 vue2|vue3|含义
 :-|:-:|-:
@@ -46,7 +46,7 @@ data() {
     }
 },
 /*================ 之后 ================ */
-import {ref,reactive} from 'vue'
+import { ref, reactive } from 'vue'
 setup(){
     const name = ref('test')
     const state = reactive({
@@ -91,6 +91,43 @@ setup() {
 }
 ```
 
+## vuex 状态管理
+
+创建 `modules` 文件
+
+```JS
+import { useStore } from 'vuex'
+
+setup() {
+    // 状态管理vuex
+    const store = useStore()
+
+    // 使用
+    onMounted(async () => {
+        /**
+         *  状态管理
+         */
+        state.activeIds = store.getters["storageUser/getSessionUserToken"]
+        store.commit('storageUser/SET_sessionUserToken', 123)
+
+        const data = sessionData("get", "getSessionUserToken", "")
+    })
+    /**
+     *  监听vuex
+     */
+    watch(() => store.state.storageUser.getSessionUserToken, val => {
+        state.activeIds = val
+        console.log(`count is ${val}`)
+    })
+
+    return { }
+}
+// console.log(mapState(store.state),'mapState')
+// console.log(mapMutations(store._mutations),'mapMutations')
+// console.log(mapActions(store._actions),'mapActions')
+// console.log(mapGetters(store.getters),'mapGetters')
+```
+
 ## watch来监听对象改变
 
 vue3 除了 watch api, 还新增了一个 watchEffect 的 api
@@ -109,8 +146,8 @@ setup(){
         (count, preCount) => {
             console.log(`新的count${count}----旧的count${preCount}`)
         }, {
-    　　　　deep: true,
-            lazy:true // 默认情况下逐渐初始化会执行一次watch，lazy设置为true初始化不会调用watch
+        deep: true,
+        lazy:true // 默认情况下逐渐初始化会执行一次watch，lazy设置为true初始化不会调用watch
     })
     return{
         // state,
