@@ -1,4 +1,4 @@
-import { sessionData } from '@/filters/storage';
+import { sessionData } from '@/filters/storage'
 
 export default {
   namespaced: true,
@@ -10,8 +10,8 @@ export default {
   },
   mutations: {
     SET_sessionUserToken(state: any, userToken: any) {
-      state.getSessionUserToken = userToken;
-      sessionData('set', 'getSessionUserToken', userToken);
+      state.getSessionUserToken = userToken
+      sessionData('set', 'getSessionUserToken', userToken)
     },
   },
   actions: {},

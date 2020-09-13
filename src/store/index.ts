@@ -9,5 +9,5 @@ export default createStore({
   state: {
     testStatus: 10,
   },
-  modules: modules
+  modules,
 })
