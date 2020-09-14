@@ -2,8 +2,9 @@
  *  eslintrc配置文件修改
  *  https://www.lovean.com/view-10-338507-0.html
  */
-{
-  "parserOptions": {
+module.exports = {
+  root: true,
+  parserOptions: {
     "parser": "@typescript-eslint/parser",
     "project": "./tsconfig.json",
     "extraFileExtensions": [".vue"],
@@ -17,7 +18,7 @@
       "impliedStrict":true               //启用严格校验模式
     }
   },
-  "env": {
+  env: {
     "browser":true,               //启用浏览器全局变量。
     "node":true,                  //Node.js全局变量和Node.js范围。
     "commonjs":true,              //CommonJS全局变量和CommonJS范围。
@@ -60,7 +61,7 @@
     }
    }
   },
-  "plugins": [
+  plugins: [
     "vue",
     "babel",
     "@typescript-eslint"
@@ -71,7 +72,7 @@
     "typescript",
     "standard"
   ],
-  "rules": {
+  rules: {
     "func-names": 0,
     "one-var": [1, "never"],
     "prefer-const": 1,
@@ -145,6 +146,8 @@
     "arrow-parens": 0,
     "space-before-function-paren": ["error", "never"],
     "comma-dangle": [2, "never"],
-    "semi": [2, "always"]
+    "semi": [2, "always"],
+    "vue/no-parsing-error": [2, { 'x-invalid-end-tag': false }], // end标签
+    "no-irregular-whitespace": "off"//这禁止掉 空格报错检查
   }
  }
