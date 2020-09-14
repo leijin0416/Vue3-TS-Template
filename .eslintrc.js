@@ -46,20 +46,20 @@ module.exports = {
     "greasemonkey":true                   // GreaseMonkey全局变量
   },
   "settings": {
-   "import/resolver": {
-    "node": {
-     "extensions": [".js", ".jsx", ".ts", ".tsx", ".eslintrc"]
-    },
-    "webpack": {
-     "config": {
-      "resolve": {
-       "alias": {
-        "src": "src"
-       }
-      }
-     }
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx", ".eslintrc"]
+      },
+      "webpack": {
+        "config": {
+          "resolve": {
+            "alias": {
+              "src": "src"
+            }
+          }
+        }
+      },
     }
-   }
   },
   plugins: [
     "vue",
@@ -150,4 +150,4 @@ module.exports = {
     "vue/no-parsing-error": [2, { 'x-invalid-end-tag': false }], // end标签
     "no-irregular-whitespace": "off" // 禁止掉空格报错检查
   }
- }
+}
