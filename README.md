@@ -8,13 +8,13 @@
 
 `改造ts中，提示找不到模块vue`  -解决：tsconfig.json 的配置有问题：需要将compilerOptions中的 moduleResolution 改为Node。
 
-[mock -获取第三方新闻API数据](https://www.jisuapi.com/api/news/) --|-- [新闻API](https://segmentfault.com/a/1190000009811706?utm_source=sf-related) --|-- [vue-cli3.0中使用svg](https://blog.csdn.net/qq_41619796/article/details/100997432) --|-- [自我模拟面试++](https://juejin.im/post/6870374238760894472#comment)
+[mock -获取第三方新闻API数据](https://www.jisuapi.com/api/news/) --|-- [新闻API](https://segmentfault.com/a/1190000009811706?utm_source=sf-related) --|-- [vue-cli3.0中使用svg](https://blog.csdn.net/qq_41619796/article/details/100997432) --|-- [自我模拟面试++](https://juejin.im/post/6870374238760894472#comment) --|-- [防抖节流++](https://juejin.im/post/6872144813051871246)
 
 ---
 
 ## Vue3.x 生命周期变化
 
-[深入vue响应式原理](https://juejin.im/post/6844904078724562951) --|-- [git看1](https://github.com/Duanzihuang/heimamovie) --|-- [git看文2](https://github.com/kaiqiangren/vue-next-ts-preview)
+[深入vue响应式原理](https://juejin.im/post/6844904078724562951)[Vue3.0来袭1](https://juejin.im/post/6872113750636232712) --|-- [git看1](https://github.com/Duanzihuang/heimamovie) --|-- [git看文2](https://github.com/kaiqiangren/vue-next-ts-preview)
 
 vue2|vue3|含义
 :-|:-:|-:
