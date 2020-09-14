@@ -148,6 +148,6 @@ module.exports = {
     "comma-dangle": [2, "never"],
     "semi": [2, "always"],
     "vue/no-parsing-error": [2, { 'x-invalid-end-tag': false }], // end标签
-    "no-irregular-whitespace": "off"//这禁止掉 空格报错检查
+    "no-irregular-whitespace": "off" // 禁止掉空格报错检查
   }
  }
