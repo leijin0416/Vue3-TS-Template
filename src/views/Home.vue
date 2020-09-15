@@ -22,14 +22,6 @@
         </div>
       </div>
     </div>
-    <div class="bottom-bar">
-      <van-tabbar v-model="active">
-        <van-tabbar-item icon="home-o">Home</van-tabbar-item>
-        <van-tabbar-item icon="search">Find</van-tabbar-item>
-        <van-tabbar-item icon="friends-o">Message</van-tabbar-item>
-        <van-tabbar-item icon="setting-o">Setting</van-tabbar-item>
-      </van-tabbar>
-    </div>
   </div>
 </template>
 
@@ -57,11 +49,11 @@ export default {
     /**
      *  监听vuex
      */
-    watch(() => state.activeIds,
-      (newer, older) => {
-        /* ... */
-        console.log(`新的count${newer}----旧的count${older}`)
-      }, { deep: true })
+    watch(() => state.activeIds, (newer, older) => {
+      /* ... */
+      console.log(`新的count${newer}----旧的count${older}`)
+
+    }, { deep: true })
 
     watch(() => store.state.storageUser.getSessionUserToken, (newer, older) => {
       if (newer == null) {
@@ -82,11 +74,13 @@ export default {
       const data = sessionData("get", "getSessionUserToken", "")
 
       getInTheatersData()
+
     })
+
+    /**
+     *  异步加载数据
+     */
     const getInTheatersData = async () => {
-      /**
-       *  异步加载数据
-       */
       const titleDataList = await webGetInewNewsChannel({
         appkey: "ca05a06b9221f5d1"
       })

@@ -28,12 +28,12 @@ export const routerMaps: Array<RouteRecordRaw> = [
     path: '/about',
     name: 'About',
     component: getComponentMin('About'),
-    meta: { title: 'NAI Trading Center', displayNavBar: false }
+    meta: { title: 'NAI Trading Center', displayNavBar: true }
   },
   {
     path: '/index',
     name: 'Home',
     component: getComponentMin('Home'),
-    meta: { title: 'NAI Trading Center', displayNavBar: false }
+    meta: { title: 'NAI Trading Center', displayNavBar: true }
   },
 ]

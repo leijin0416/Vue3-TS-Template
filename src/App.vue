@@ -4,7 +4,7 @@
     <MTabBar 
       v-if="$route.meta.displayNavBar"
       :navTabsData="navTabsData"
-      @onTabsChange="onTabsChange"></MTabBar>
+      @onTabsChange="onTabsChange" />
   </div>
 </template>
 

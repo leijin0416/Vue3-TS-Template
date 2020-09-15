@@ -26,7 +26,7 @@ const cdn = {
     'vant': 'Vant',
   },
   css: [
-    "https://cdn.jsdelivr.net/npm/vant@3.0.0-alpha.4/lib/index.min.css"
+    // "https://cdn.jsdelivr.net/npm/vant@3.0.0-alpha.4/lib/index.min.css"
   ],
   js: [
     "https://cdn.jsdelivr.net/npm/axios@0.20.0/dist/axios.min.js",
