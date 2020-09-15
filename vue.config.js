@@ -23,7 +23,7 @@ const devNeedCdn = isDev === "production" ? false : true;
 const cdn = {
   externals: {
     'axios': 'axios',
-    'vant': 'Vant',
+    // 'vant': 'Vant',
   },
   css: [
     // "https://cdn.jsdelivr.net/npm/vant@3.0.0-alpha.4/lib/index.min.css"
