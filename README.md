@@ -10,7 +10,7 @@
 
 标签|内容
 :-|:-:
-`Vue3.0` | [Vue3.0来袭1](https://juejin.im/post/6872113750636232712) -- [Vue3.0来袭清单2](https://segmentfault.com/a/1190000022451034?utm_source=sf-related) -- [Vue3.0来袭清单3](https://segmentfault.com/a/1190000017088044?utm_source=sf-related)
+`Vue3.0` | [Vue Composition API](https://composition-api.vuejs.org/) -- [Vue3.0来袭1](https://juejin.im/post/6872113750636232712) -- [Vue3.0来袭清单2](https://segmentfault.com/a/1190000022451034?utm_source=sf-related) -- [Vue3.0来袭清单3](https://segmentfault.com/a/1190000017088044?utm_source=sf-related)
 `Git` | [git看1](https://github.com/Duanzihuang/heimamovie) -- [git看文2](https://github.com/kaiqiangren/vue-next-ts-preview)
 `Vue` | [vue-cli3.0中使用svg](https://blog.csdn.net/qq_41619796/article/details/100997432) -- [自我模拟面试++](https://juejin.im/post/6870374238760894472#comment) -- [深入vue响应式原理](https://juejin.im/post/6844904078724562951)
 `JavaScript` | [mock -获取第三方新闻API数据](https://www.jisuapi.com/api/news/) -- [新闻API](https://segmentfault.com/a/1190000009811706?utm_source=sf-related) -- [防抖节流++](https://juejin.im/post/6872144813051871246)
@@ -18,6 +18,8 @@
 ---
 
 ## Vue3.x 生命周期变化
+
+在 vue3 中通过安装 @vue/composition-api 来使用，Composition API的例子：
 
 vue2|vue3|含义
 :-|:-:|-:
@@ -31,8 +33,6 @@ beforeDestroy | onBeforeUnmount | 实例销毁之前调用。在这一步，实�
 destroyed | onUnmounted | 实例销毁后调用。该钩子被调用后，对应 Vue 实例的所有指令都被解绑，所有的事件监听器被移除，所有的子实例也都被销毁。
 
 ---
-
-在 vue3 中通过安装 @vue/composition-api 来使用，Composition API的例子：
 
 ## 响应式变量声明： ref 或者 reactive 代替data中的变量
 
