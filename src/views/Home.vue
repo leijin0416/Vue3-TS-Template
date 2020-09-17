@@ -52,19 +52,13 @@ export default {
     /**
      *  监听vuex
      */
-    watch(() => state.activeIds, (newer, older) => {
-      /* ... */
-      console.log(`新的count${newer}----旧的count${older}`)
-
-    }, { deep: true })
-
     watch(() => store.state.storageUser.getSessionUserToken, (newer, older) => {
-      if (newer == null) {
+      if (newer === null) {
           return
       } else {
         // 监听 vuex 地址 getSessionUserToken
         state.activeIds = newer
-        console.log(`count is ${newer}`)
+        console.log(`新的count${newer}----旧的count${older}`)
       }
     }, { deep: true })
 

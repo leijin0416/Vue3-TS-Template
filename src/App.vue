@@ -55,8 +55,8 @@ export default {
         getSessionNavTabrsType.value = data
 
       }
-      console.log(data)
-      console.log(sessionNav)
+      // console.log(data)
+      // console.log(sessionNav)
     })
 
     const onTabsChange = (index: any) => {
