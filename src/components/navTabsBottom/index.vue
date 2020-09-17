@@ -14,7 +14,7 @@
         :name="item.name">
         <span>{{item.label + active}}</span>
         <template #icon="props">
-            <img :src="props.active ? item.active : item.inactive" />
+          <img :src="props.active ? item.active : item.inactive" />
         </template>
       </van-tabbar-item>
     </van-tabbar>
@@ -47,7 +47,7 @@ export default {
      *  监听vuex
      */
     watch(() => store.state.storageUser.getSessionNavTabrsID, (newer, older) => {
-      if (newer == null) {
+      if (newer === null) {
         return
       } else {
         active.value = newer

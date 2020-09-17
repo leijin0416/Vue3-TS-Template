@@ -9,6 +9,9 @@
           <div class="hello">Good morning!</div>
           <div class="name">Marin Ramsey</div>
           <p>vuex: {{activeIds}}</p>
+          <p>
+            <router-link to="/text">Lets Go!!!</router-link>
+          </p>
         </div>
         <div class="message">
           <div class="message-box">

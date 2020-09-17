@@ -25,15 +25,21 @@ export const routerMaps: Array<RouteRecordRaw> = [
     redirect: '/index',
   },
   {
+    path: '/index',
+    name: 'Home',
+    component: getComponentMin('Home'),
+    meta: { title: 'NAI Trading Center', displayNavBar: true }
+  },
+  {
     path: '/about',
     name: 'About',
     component: getComponentMin('About'),
     meta: { title: 'NAI Trading Center', displayNavBar: true }
   },
   {
-    path: '/index',
-    name: 'Home',
-    component: getComponentMin('Home'),
-    meta: { title: 'NAI Trading Center', displayNavBar: true }
+    path: '/text',
+    name: 'Text',
+    component: getComponentMin('Text'),
+    meta: { title: 'NAI Trading Center', displayNavBar: false }
   },
 ]
