@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router"
 import { routerMaps } from './routerMap'
 // 状态管理vuex
 import store from "@/store"
+import { sessionData } from '@/filters/storage'
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
@@ -37,7 +38,9 @@ router.beforeEach((to, from, next) => {
           store.commit('storageUser/SET_sessionNavTabrsType', 'next')
   
         } else if (numToIndex === numPrevIndex) {  // 一级栏目无切换效果
-          store.commit('storageUser/SET_sessionNavTabrsType', null)
+          console.log('===== NAV TYPE STRAT =====')
+          sessionData('clean', 'getSessionNavTabrsType', '')
+          store.commit('storageUser/SET_sessionNavTabrsType', 'null')
   
         } else {
           store.commit('storageUser/SET_sessionNavTabrsType', 'prev')

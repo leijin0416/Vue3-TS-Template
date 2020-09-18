@@ -1,6 +1,12 @@
 <template>
   <div class="create-app">
-    <router-view v-wechat-title="$route.meta.title" />
+    <!-- END： can no longer be used directly inside -->
+    <router-view v-wechat-title="$route.meta.title" v-slot="{ Component }">
+      <transition :name="'vux-pop-'+(getSessionNavTabrsType === 'next' ? 'in' : getSessionNavTabrsType ==='prev' ? 'out' : '')">
+        <component :is="Component" />
+      </transition>
+    </router-view>
+
     <MTabBar 
       v-if="$route.meta.displayNavBar"
       :navTabsData="navTabsData"
@@ -38,7 +44,7 @@ export default {
         return
       } else {
         getSessionNavTabrsType.value = newer
-        console.log(`Navs newer is ${newer}`)
+        console.log(`Nav newer is ${newer}`)
       }
     }, { deep: true })
     
@@ -48,7 +54,7 @@ export default {
        */
       const sessionNav = sessionData("get", "getSessionNavTabrsType", "")
       const data = store.getters["storageUser/getSessionNavTabrsType"]
-      if (data === '' && sessionNav !== 'null') {
+      if (data === '' && typeof sessionNav === 'string') {
         getSessionNavTabrsType.value = sessionNav
 
       } else {
@@ -65,7 +71,8 @@ export default {
 
     return {
       ...toRefs(state),
-      onTabsChange
+      onTabsChange,
+      getSessionNavTabrsType
     }
   },
 }
@@ -81,5 +88,35 @@ export default {
 #app {
   color: #333;
   font-size: 16px;
+}
+.vux-pop-out-enter-active,
+.vux-pop-out-leave-active,
+.vux-pop-in-enter-active,
+.vux-pop-in-leave-active {
+  position: relative;
+  z-index: 9999;
+  will-change: transform;
+  transition: all 0.3s linear;
+  height: 100%;
+  top: 0;
+  position: absolute;
+  backface-visibility: hidden;
+  perspective: 500px;
+}
+.vux-pop-out-enter {
+  opacity: 0;
+  transform: translate3d(-100%, 0, 0);
+}
+.vux-pop-out-leave-active {
+  opacity: 0;
+  transform: translate3d(100%, 0, 0);
+}
+.vux-pop-in-enter {
+  opacity: 0;
+  transform: translate3d(100%, 0, 0);
+}
+.vux-pop-in-leave-active {
+  opacity: 0;
+  transform: translate3d(-100%, 0, 0);
 }
 </style>

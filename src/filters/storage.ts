@@ -6,7 +6,7 @@
  *  
  *  @param {*} localData('set', 'localeCut', val);  -调用方式
  */
-const localData = function (method: any, name: any, obj: any) {
+const localData = function (method: string, name: string, obj: any) {
   /*
     * 参数说明：
     * localStorage.getItem(key):    获取指定key本地存储的值
@@ -17,10 +17,13 @@ const localData = function (method: any, name: any, obj: any) {
     case 'get':
       if (localStorage.getItem(name + '_str')) {
         return localStorage.getItem(name + '_str')
+
+      } else if (localStorage.getItem(name + '_str')) {
+        return localStorage.getItem(name + '_str')
+          
       } else {
         return null
       }
-
     case 'set':
       // localData('clean', name);
       if (typeof obj == 'object') {
@@ -29,7 +32,6 @@ const localData = function (method: any, name: any, obj: any) {
         localStorage.setItem(name + '_str', obj)
       }
       return true
-
     case 'clean':
       window.localStorage.removeItem(name + '_obj')
       window.localStorage.removeItem(name + '_str')
@@ -45,15 +47,18 @@ const localData = function (method: any, name: any, obj: any) {
  *  
  *  @param {*} sessionData('set', 'localeCut', val);  -调用方式
  */
-const sessionData = function (method: any, name: any, obj: any) {
+const sessionData = function (method: string, name: string, obj: any) {
   switch (method) {
     case 'get':
       if (sessionStorage.getItem(name + '_str')) {
         return sessionStorage.getItem(name + '_str')
+
+      } else if (sessionStorage.getItem(name + '_str')) {
+        return sessionStorage.getItem(name + '_str')
+
       } else {
         return null
       }
-
     case 'set':
       // sessionData('clean', name)
       if (typeof obj == 'object') {
@@ -62,7 +67,6 @@ const sessionData = function (method: any, name: any, obj: any) {
         sessionStorage.setItem(name + '_str', obj)
       }
       return true
-
     case 'clean':
       window.sessionStorage.removeItem(name + '_obj')
       window.sessionStorage.removeItem(name + '_str')
