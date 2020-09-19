@@ -39,7 +39,7 @@ const isDevCS = {
     changeOrigin: true,
     wx: true,
     pathRewrite: {
-      "^/inew": "/"
+      "^/inew": "/",
     }
   }
 }
@@ -63,14 +63,14 @@ module.exports = {
         plugins: [
           autoprefixer(),
           pxtoviewport({
-            viewportWidth: 375
+            viewportWidth: 375,
           })
         ]
       }
     }
   },
   configureWebpack: config => {
-    if (isProduction || devNeedCdn) config.externals = cdn.externals;
+    if (isProduction || devNeedCdn) config.externals = cdn.externals
     if (isDev === "production") {
       config.plugins.push(
         // 压缩代码
@@ -80,24 +80,24 @@ module.exports = {
           test: productionGzips,
           threshold: 10240, // 只有大小大于该值的资源会被处理
           minRatio: 0.8, // 只有压缩率小于这个值的资源才会被处理
-          deleteOriginalAssets: false // 删除原文件
+          deleteOriginalAssets: false, // 删除原文件
         }),
         // 添加自定义代码压缩配置
         new ParallelUglifyPlugin({
           uglifyJS: {
               output: {
                   beautify: false,
-                  comments: false
+                  comments: false,
               },
               warnings: false,
               compress: {
                   reduce_vars: true,
                   drop_debugger: true,
-                  drop_console: true
+                  drop_console: true,
               }
           },
           test: /.js$/g,
-          sourceMap: false
+          sourceMap: false,
         }),
         // 体积压缩提示
         new BundleAnalyzerPlugin(),
@@ -113,7 +113,7 @@ module.exports = {
               minChunks: 1,
               maxInitialRequests: 5,
               minSize: 0,
-              priority: 100
+              priority: 100,
             },
             common: {
               chunks: "all",
@@ -122,16 +122,16 @@ module.exports = {
               minChunks: 2,
               maxInitialRequests: 5,
               minSize: 0,
-              priority: 60
+              priority: 60,
             },
             styles: {
               name: "styles",
               test: /\.(sa|sc|c)ss$/,
               chunks: "all",
-              enforce: true
+              enforce: true,
             },
             runtimeChunk: {
-              name: "manifest"
+              name: "manifest",
             }
           }
         }
@@ -140,23 +140,23 @@ module.exports = {
   },
   chainWebpack: config => {
     // 最小化代码
-    config.optimization.minimize(true);
+    config.optimization.minimize(true)
     // 分割代码
     config.optimization.splitChunks({
       chunks: "all",
-    });
+    })
     
     // ============注入cdn start============
     config.plugin("html").tap(args => {
       // 生产环境或本地需要cdn时，才注入cdn
-      if (isProduction || devNeedCdn) args[0].cdn = cdn;
+      if (isProduction || devNeedCdn) args[0].cdn = cdn
       return args
     })
     // ============注入cdn start============
 
     config.resolve.alias
       .set("@", resolve("src"))
-      .set("@assets", resolve("src/assets"));
+      .set("@assets", resolve("src/assets"))
 
     config.module
       .rule("ts")
@@ -169,18 +169,18 @@ module.exports = {
               tsImportPluginFactory({
                 libraryName: "vant",
                 libraryDirectory: "es",
-                style: true
+                style: true,
               })
             ]
           }),
           compilerOptions: {
-            module: "es2015"
+            module: "es2015",
           }
         });
-        return options;
-      });
+        return options
+      })
   },
   transpileDependencies: [
     "biyi-admin", // 指定对第三方依赖包进行babel-polyfill处理
   ]
-};
+}
