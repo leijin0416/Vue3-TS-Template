@@ -18,7 +18,7 @@ router.beforeEach((to, from, next) => {
   // 第一级栏目
   const subArr = ["/", "/index", "/about"]
   const [toIndex, prevIndex] = [history.getItem(to.path), history.getItem(from.path)]
-  for (let index in subArr) history.setItem(subArr[index], '0')
+  for (let index in subArr) history.setItem(subArr[index], "0")
   const numToIndex = Number(toIndex)  // 当前
   const numPrevIndex = Number(prevIndex) // 过去的
 
