@@ -1,5 +1,5 @@
 import { createStore } from "vuex"
-import sessionDataStore from './modules/index'
+import sessionDataStore from "./modules/index"
 
 let modules = {
   ...sessionDataStore,

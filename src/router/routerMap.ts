@@ -1,6 +1,8 @@
 import { RouteRecordRaw } from "vue-router"
 
 /**
+ * i18n.t('loginPage_037')
+ * 
  * getComponentMin() 路由懒加载
  * @param {string} name  -文件夹
  * @param {string} component  -.vue

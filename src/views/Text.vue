@@ -16,39 +16,39 @@
 </template>
 
 <script>
-import { ref, watch, computed, onMounted, getCurrentInstance } from "vue";
+import { ref, watch, computed, onMounted, getCurrentInstance } from "vue"
 
 export default {
   setup() {
-    const { ctx } = getCurrentInstance();
-    const count = ref(0);
-    const other_count = ref(0);
-    const demoArr = ref([0, 1, 2, 3]);
+    const { ctx } = getCurrentInstance()
+    const count = ref(0)
+    const other_count = ref(0)
+    const demoArr = ref([0, 1, 2, 3])
     const add = () => {
-      count.value++;
+      count.value++
     };
     watch(
       () => count.value,
       () => {
-        other_count.value = count.value * count.value;
+        other_count.value = count.value * count.value
       }
     );
     const other_two_count = computed(() => {
-      return other_count.value * other_count.value;
+      return other_count.value * other_count.value
     });
     onMounted(() => {
-      document.body.style.cssText = "font-size:30px;";
+      document.body.style.cssText = "font-size:30px;"
     });
     // vuex
     const testStatus = computed(() => {
-      return ctx.$store.state.testStatus;
+      return ctx.$store.state.testStatus
     });
     const commit = () => {
-      ctx.$store.commit("set_testStatus", testStatus.value + 1);
+      ctx.$store.commit("set_testStatus", testStatus.value + 1)
     };
     // vue-router
     const routerName = computed(() => {
-      return ctx.$router.currentRoute.value.name;
+      return ctx.$router.currentRoute.value.name
     });
     return {
       count,
@@ -59,9 +59,9 @@ export default {
       testStatus,
       commit,
       routerName
-    };
+    }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped></style>

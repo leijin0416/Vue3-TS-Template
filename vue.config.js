@@ -1,28 +1,28 @@
-const webpack = require("webpack");
-const merge = require("webpack-merge");
-const tsImportPluginFactory = require("ts-import-plugin");
-const pxtoviewport = require("postcss-px-to-viewport");
+const webpack = require("webpack")
+const merge = require("webpack-merge")
+const tsImportPluginFactory = require("ts-import-plugin")
+const pxtoviewport = require("postcss-px-to-viewport")
 
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
-const CompressionWebpackPlugin = require("compression-webpack-plugin"); // gzip
-const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
+const CompressionWebpackPlugin = require("compression-webpack-plugin") // gzip
+const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 
-const path = require("path");
+const path = require("path")
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
-const autoprefixer = require("autoprefixer");
-const productionGzips = /\.(js|css|json|ts|html|ico|svg)(\?.*)?$/i;
-const isDev = process.env.NODE_ENV;
-const isProduction = process.env.NODE_ENV !== "development";
-const devNeedCdn = isDev === "production" ? false : true;
+const autoprefixer = require("autoprefixer")
+const productionGzips = /\.(js|css|json|ts|html|ico|svg)(\?.*)?$/i
+const isDev = process.env.NODE_ENV
+const isProduction = process.env.NODE_ENV !== "development"
+const devNeedCdn = isDev === "production" ? false : true
 
 // cdn链接
 const cdn = {
   externals: {
-    'axios': 'axios',
+    "axios": "axios",
     // 'vant': 'Vant',
   },
   css: [
@@ -107,31 +107,31 @@ module.exports = {
         splitChunks: {
           cacheGroups: {
             vendor: {
-              chunks: 'all',
+              chunks: "all",
               test: /node_modules/,
-              name: 'vendor',
+              name: "vendor",
               minChunks: 1,
               maxInitialRequests: 5,
               minSize: 0,
               priority: 100
             },
             common: {
-              chunks: 'all',
+              chunks: "all",
               test: /[\\/]src[\\/]js[\\/]/,
-              name: 'common',
+              name: "common",
               minChunks: 2,
               maxInitialRequests: 5,
               minSize: 0,
               priority: 60
             },
             styles: {
-              name: 'styles',
+              name: "styles",
               test: /\.(sa|sc|c)ss$/,
-              chunks: 'all',
+              chunks: "all",
               enforce: true
             },
             runtimeChunk: {
-              name: 'manifest'
+              name: "manifest"
             }
           }
         }
@@ -143,11 +143,11 @@ module.exports = {
     config.optimization.minimize(true);
     // 分割代码
     config.optimization.splitChunks({
-      chunks: 'all'
+      chunks: "all",
     });
     
     // ============注入cdn start============
-    config.plugin('html').tap(args => {
+    config.plugin("html").tap(args => {
       // 生产环境或本地需要cdn时，才注入cdn
       if (isProduction || devNeedCdn) args[0].cdn = cdn;
       return args
@@ -181,6 +181,6 @@ module.exports = {
       });
   },
   transpileDependencies: [
-    'biyi-admin', // 指定对第三方依赖包进行babel-polyfill处理
+    "biyi-admin", // 指定对第三方依赖包进行babel-polyfill处理
   ]
 };
