@@ -30,9 +30,9 @@
 
 <script lang="ts">
 import { ref, reactive, onMounted, computed, toRefs, getCurrentInstance, watch } from "vue"
-import { useRouter, useRoute } from 'vue-router'
-import { useStore } from 'vuex'
-import { sessionData } from '@/filters/storage'
+import { useRouter, useRoute } from "vue-router"
+import { useStore } from "vuex"
+import { sessionData } from "@/filters/storage"
 import { webGetInewNewsPages, webGetInewNewsChannel } from "@/mock/index"
 
 export default {
@@ -45,8 +45,8 @@ export default {
     const countId = ref(0)
     const state = reactive({
       active: 0,
-      ids: '01',
-      activeIds: '02',
+      ids: "01",
+      activeIds: "02",
     })
     
     /**
@@ -67,7 +67,7 @@ export default {
        *  状态管理
        */
       state.activeIds = store.getters["storageUser/getSessionUserToken"]
-      store.commit('storageUser/SET_sessionUserToken', 123)
+      store.commit("storageUser/SET_sessionUserToken", 123)
       const data = sessionData("get", "getSessionUserToken", "")
 
       getInTheatersData()

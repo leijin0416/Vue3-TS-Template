@@ -3,9 +3,9 @@ import { sessionData } from '@/filters/storage'
 export default {
   namespaced: true,
   state: {
-    getSessionUserToken: '001',
-    getSessionNavTabrsType: '',
-    getSessionNavTabrsID: '',
+    getSessionUserToken: "01",
+    getSessionNavTabrsType: "",
+    getSessionNavTabrsID: "",
   },
   getters: {
     getSessionUserToken: (state: any) => state.getSessionUserToken,
@@ -16,15 +16,15 @@ export default {
     // 导航ID
     SET_sessionNavTabrsType(state: any, context: any) {
       state.getSessionNavTabrsType = context
-      sessionData('set', 'getSessionNavTabrsType', context)
+      sessionData("set", "getSessionNavTabrsType", context)
     },
-    SET_sessionUserToken(state: any, userToken: any) {
-      state.getSessionUserToken = userToken
-      sessionData('set', 'getSessionUserToken', userToken)
+    SET_sessionUserToken(state: any, context: any) {
+      state.getSessionUserToken = context
+      sessionData("set", "getSessionUserToken", context)
     },
     SET_sessionNavTabrsID(state: any, context: any) {
       state.getSessionNavTabrsID = context
-      sessionData('set', 'getSessionNavTabrsID', context)
+      sessionData("set", "getSessionUserToken", context)
     },
   },
   actions: {},

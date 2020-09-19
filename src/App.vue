@@ -16,8 +16,8 @@
 
 <script lang="ts">
 import { reactive, ref, onMounted, computed, toRefs, watch } from "vue"
-import { useStore } from 'vuex'
-import { sessionData } from '@/filters/storage'
+import { useStore } from "vuex"
+import { sessionData } from "@/filters/storage"
 import MTabBar from "@/components/navTabsBottom/index.vue"
 
 export default {
@@ -29,8 +29,8 @@ export default {
 
     const state = reactive({
       navTabsData: [
-        {label: '首页', name: 1, active: require('@/assets/images/nav-otc-inactive.png'), inactive: require('@/assets/images/nav-otc-active.png'), path: '/'},
-        {label: '我的', name: 2, active: require('@/assets/images/nav-home-inactive.png'), inactive: require('@/assets/images/nav-home-active.png'), path: '/about'},
+        {label: "首页", name: 1, active: require('@/assets/images/nav-otc-inactive.png'), inactive: require('@/assets/images/nav-otc-active.png'), path: "/"},
+        {label: "我的", name: 2, active: require('@/assets/images/nav-home-inactive.png'), inactive: require('@/assets/images/nav-home-active.png'), path: '"/about'},
       ],
     })
 
@@ -54,7 +54,7 @@ export default {
        */
       const sessionNav = sessionData("get", "getSessionNavTabrsType", "")
       const data = store.getters["storageUser/getSessionNavTabrsType"]
-      if (data === '' && typeof sessionNav === 'string') {
+      if (data === '' && typeof sessionNav === "string") {
         getSessionNavTabrsType.value = sessionNav
 
       } else {

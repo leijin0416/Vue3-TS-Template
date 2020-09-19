@@ -23,9 +23,9 @@
 
 <script lang="ts">
 import { reactive, ref, onMounted, computed, toRefs, watch } from "vue"
-import { useRouter, useRoute } from 'vue-router'
-import { useStore } from 'vuex'
-import { sessionData } from '@/filters/storage'
+import { useRouter, useRoute } from "vue-router"
+import { useStore } from "vuex"
+import { sessionData } from "@/filters/storage"
 
 export default {
   props: {
@@ -68,8 +68,8 @@ export default {
         // 刷新页面的时候
         let displayNavBar = route.meta.displayNavBar;
         if (displayNavBar) {
-          if (sessionTabs === '1') router.push('/');
-          if (sessionTabs === '2') router.push('/about');
+          if (sessionTabs === "1") router.push("/");
+          if (sessionTabs === "2") router.push("/about");
         }
         // Reflect.set(active, 0, Number(sessionTabs));
         active.value = Number(sessionTabs);
@@ -81,8 +81,8 @@ export default {
     })
 
     const onTabsChange = (index: any) => {
-      store.commit('storageUser/SET_sessionNavTabrsID', index)
-      context.emit('onTabsChange', index)
+      store.commit("storageUser/SET_sessionNavTabrsID", index)
+      context.emit("onTabsChange", index)
     }
 
     return {
