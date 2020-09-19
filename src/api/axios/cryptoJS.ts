@@ -1,10 +1,10 @@
-import CryptoJS from 'crypto-js'
+import CryptoJS from "crypto-js"
 
 /**
  *  3des 加解密
  */
-const key = CryptoJS.enc.Utf8.parse('123456789012345678901234')
-const iv = CryptoJS.enc.Utf8.parse('01234567')
+const key = CryptoJS.enc.Utf8.parse("123456789012345678901234")
+const iv = CryptoJS.enc.Utf8.parse("01234567")
 
 export default {
   /**
