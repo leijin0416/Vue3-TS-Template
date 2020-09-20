@@ -28,7 +28,12 @@ router.beforeEach((to, from, next) => {
     // console.log(numToIndex)
     // console.log(numPrevIndex)
 
-    if (numToIndex || numToIndex === 0) {
+    if (!subArr.includes(to.path)) {
+      ++numCount
+      history.setItem(to.path, numCount.toString())
+      store.commit("storageUser/SET_sessionNavTabrsType", "next")
+      
+    } else if (numToIndex || numToIndex === 0) {
       if (numToIndex > numPrevIndex) {
         store.commit("storageUser/SET_sessionNavTabrsType", "next")
 
@@ -40,10 +45,6 @@ router.beforeEach((to, from, next) => {
       } else {
         store.commit("storageUser/SET_sessionNavTabrsType", "prev")
       }
-    } else if (!subArr.includes(to.path)) {
-      ++numCount
-      history.setItem(to.path, numCount.toString())
-      // store.commit("storageUser/SET_sessionNavTabrsType", "next")
     }
     next()
   }
