@@ -45,7 +45,7 @@ router.beforeEach((to, from, next) => {
       } else {
         store.commit("storageUser/SET_sessionNavTabrsType", "prev")
       }
-    }
+    } else {console.log("===== NAV TYPE END =====")}
     next()
   }
 });
