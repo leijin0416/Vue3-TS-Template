@@ -10,10 +10,11 @@
 
 标签|内容
 :-|:-:
-`Vue3.0` | [Vue Composition API](https://composition-api.vuejs.org/) -- [Vue3.0来袭1](https://juejin.im/post/6872113750636232712) -- [Vue3.0来袭清单2](https://segmentfault.com/a/1190000022451034?utm_source=sf-related) -- [Vue3.0来袭清单3](https://segmentfault.com/a/1190000017088044?utm_source=sf-related)
+`Vue3.0` | [Vue Composition API](https://composition-api.vuejs.org/) [Vue Composition CN API](https://v3.cn.vuejs.org/api/options-lifecycle-hooks.html) -- [Vue3.0来袭清单1 jj](https://juejin.im/post/6872113750636232712) -- [Vue3.0来袭清单2 sf](https://segmentfault.com/a/1190000022451034?utm_source=sf-related) -- [Vue3.0来袭清单3 sf](https://segmentfault.com/a/1190000017088044?utm_source=sf-related)
 `Git` | [git看1](https://github.com/Duanzihuang/heimamovie) -- [git看文2](https://github.com/kaiqiangren/vue-next-ts-preview)
 `Vue` | [vue-cli3.0中使用svg](https://blog.csdn.net/qq_41619796/article/details/100997432) -- [自我模拟面试++](https://juejin.im/post/6870374238760894472#comment) -- [深入vue响应式原理](https://juejin.im/post/6844904078724562951)
 `JavaScript` | [mock -获取第三方新闻API数据](https://www.jisuapi.com/api/news/) -- [新闻API](https://segmentfault.com/a/1190000009811706?utm_source=sf-related) -- [防抖节流++](https://juejin.im/post/6872144813051871246) -- [TS采坑相关](https://www.jianshu.com/p/017ef6300ebc)
+`面试自检` | [分享自检1 jj](https://juejin.im/post/6873444336059711495) -- [分享自检2 jj](https://juejin.im/post/6874275613360783368)
 
 ---
 
@@ -150,7 +151,7 @@ setup(){
     const state = reactive({count:0})
     // 更新值
     const changeCount = () => {
-        state.count ++
+        state.count++
     }
     // 必须指定监听属性,不能监听整个state
     watch( () => state.count,
@@ -176,10 +177,19 @@ setup(){
 ```js
 export default {
     props: {
-        name: String,
+        // 必传且是String
+        propC: {
+            type: String,
+            required: true
+        },
+        // 数字有默认值
+        propD: {
+            type: Number,
+            default: 101
+        },
     },
-    setup(props,ctx) {
-        console.log(props.name)
+    setup(props:any, ctx:any) {
+        console.log(props.propC)
         ctx.emit('event')
     },
 }

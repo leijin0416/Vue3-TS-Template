@@ -18,7 +18,7 @@
 import { reactive, ref, onMounted, computed, toRefs, watch } from "vue"
 import { useStore } from "vuex"
 import { sessionData } from "@/filters/storage"
-import MTabBar from "@/components/navTabsBottom/index.vue"
+import MTabBar from "@/components/NavTabBarFixed/index.vue"
 
 export default {
   components: {

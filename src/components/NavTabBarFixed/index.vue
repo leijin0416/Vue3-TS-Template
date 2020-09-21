@@ -22,21 +22,24 @@
 </template>
 
 <script lang="ts">
-import { reactive, ref, onMounted, computed, toRefs, watch } from "vue"
+import { reactive, ref, toRef, onMounted, computed, toRefs, watch } from "vue"
 import { useRouter, useRoute } from "vue-router"
 import { useStore } from "vuex"
 import { sessionData } from "@/filters/storage"
 
 export default {
   props: {
-    navTabsData: Array,
+    navTabsData: {
+      type: Array,
+      required: true
+    }
   },
   setup(props:any, context:any) {
-    // console.log(props.navTabsData)
+    // console.log(props.navTabsData[0].label)
     // ctx.emit('event')
     const router = useRouter()   // 路由
     const route = useRoute()    // 获取路由信息
-    const store = useStore() // 状态管理vuex
+    const store = useStore()    // 状态管理vuex
 
     const state = reactive({
       id: 1,

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,22 +20,30 @@
     <meta name="keywords" content="NAI Trading Center">
     <meta name="description" content="NAI Trading Center">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-
-    <!-- 使用CDN的CSS文件 -->
+    <!-- ====== 使用CDN的CSS文件 ====== -->
     <% for (var i in htmlWebpackPlugin.options.cdn &&
                 htmlWebpackPlugin.options.cdn.css) { %>
     <link href="<%= htmlWebpackPlugin.options.cdn.css[i] %>" rel="stylesheet" />
     <% } %>
-    <!-- 使用CDN的CSS文件 -->
+    <!-- ====== 使用CDN的CSS文件 ====== -->
 </head>
-
 <body>
     <div id="app"></div>
-    <!-- 使用CDN的JS文件 -->
+    <!-- ====== 使用CDN的JS文件 ====== -->
     <% for (var i in htmlWebpackPlugin.options.cdn &&
             htmlWebpackPlugin.options.cdn.js) { %>
     <script type="text/javascript" src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
     <% } %>
-    <!-- 使用CDN的JS文件 -->
+    <!-- ====== 使用CDN的JS文件 ====== -->
+    <!-- ====== vw 的兼容性处理 ====== -->
+    <script src="//g.alicdn.com/fdilab/lib3rd/viewport-units-buggyfill/0.6.2/??viewport-units-buggyfill.hacks.min.js,viewport-units-buggyfill.min.js">
+    </script>
+    <script>
+        window.onload = function () {
+            window.viewportUnitsBuggyfill.init({
+                hacks: window.viewportUnitsBuggyfillHacks
+            });
+        }
+    </script>
 </body>
 </html>

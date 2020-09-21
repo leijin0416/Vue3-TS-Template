@@ -7,7 +7,7 @@ import { sessionData } from "@/filters/storage"
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes: routerMaps,
-});
+})
 
 let history = window.sessionStorage
 let count = history.getItem("count") || 0
@@ -48,6 +48,6 @@ router.beforeEach((to, from, next) => {
     } else {console.log("===== NAV TYPE END =====")}
     next()
   }
-});
+})
 
 export default router
