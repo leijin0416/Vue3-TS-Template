@@ -13,8 +13,9 @@
 `Vue3.0` | [Vue Composition API](https://composition-api.vuejs.org/) [Vue Composition CN API](https://v3.cn.vuejs.org/api/options-lifecycle-hooks.html) -- [Vue3.0来袭清单1 jj](https://juejin.im/post/6872113750636232712) -- [Vue3.0来袭清单2 sf](https://segmentfault.com/a/1190000022451034?utm_source=sf-related) -- [Vue3.0来袭清单3 sf](https://segmentfault.com/a/1190000017088044?utm_source=sf-related)
 `Git` | [git看1](https://github.com/Duanzihuang/heimamovie) -- [git看文2](https://github.com/kaiqiangren/vue-next-ts-preview)
 `Vue` | [vue-cli3.0中使用svg](https://blog.csdn.net/qq_41619796/article/details/100997432) -- [自我模拟面试++](https://juejin.im/post/6870374238760894472#comment) -- [深入vue响应式原理](https://juejin.im/post/6844904078724562951)
-`JavaScript` | [mock -获取第三方新闻API数据](https://www.jisuapi.com/api/news/) -- [新闻API](https://segmentfault.com/a/1190000009811706?utm_source=sf-related) -- [防抖节流++](https://juejin.im/post/6872144813051871246) -- [TS采坑相关](https://www.jianshu.com/p/017ef6300ebc)
+`JavaScript` | [mock -获取第三方新闻API数据](https://www.jisuapi.com/api/news/) -- [新闻API](https://segmentfault.com/a/1190000009811706?utm_source=sf-related) -- [TS采坑相关](https://www.jianshu.com/p/017ef6300ebc) -- [防抖节流++](https://juejin.im/post/6872144813051871246) -- [手撕JS 1](https://juejin.im/post/6875152247714480136) -- [手撕JS手写 2](https://juejin.im/post/6873513007037546510) -- [手撕闭包](https://juejin.im/post/6874829017006997511)
 `面试自检` | [分享自检1 jj](https://juejin.im/post/6873444336059711495) -- [分享自检2 jj](https://juejin.im/post/6874275613360783368)
+`vue方法` | [vue方法技巧1 jj](https://juejin.im/post/6874007172578033677#heading-25) -- [DOM diff jj](https://juejin.im/post/6873375844870553608)
 
 ---
 
