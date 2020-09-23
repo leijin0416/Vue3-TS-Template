@@ -43,7 +43,7 @@ export default {
 
       } else {
         getSessionNavTabrsType.value = newer
-        console.log(`Nav newer is ${newer}`)
+        console.log(`Vuex Nav newer is：${newer}`)
 
       }
     }, { deep: true })
@@ -66,6 +66,10 @@ export default {
       // console.log(sessionNav)
     })
 
+    const onTabsChange = (index: any) => {
+      console.log(`组件的上下文对象底部导航：${index}`)
+    }
+
     function removeVeget(index: any) {
       state.navTabsData.splice(index, 1);
     }
@@ -74,6 +78,7 @@ export default {
     return {
       ...toRefs(state),
       getSessionNavTabrsType,
+      onTabsChange,
       removeVeget
     }
   },

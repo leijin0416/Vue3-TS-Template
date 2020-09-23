@@ -1,6 +1,6 @@
 const webpack = require("webpack")
 const merge = require("webpack-merge")
-const tsImportPluginFactory = require("ts-import-plugin")
+const tsImportPluginFactory = require("ts-import-plugin")   // 按需加载
 const pxtoviewport = require("postcss-px-to-viewport")
 
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
@@ -23,12 +23,18 @@ const devNeedCdn = isDev === "production" ? false : true
 const cdn = {
   externals: {
     "axios": "axios",
+    'vue': 'Vue',
+    'vuex': 'Vuex',
+    'vue-router': 'VueRouter',
     // 'vant': 'Vant',
   },
   css: [
     // "https://cdn.jsdelivr.net/npm/vant@3.0.0-alpha.4/lib/index.min.css"
   ],
   js: [
+    'https://cdn.jsdelivr.net/npm/vue@3.0.0/dist/vue.global.min.js',
+    'https://cdn.jsdelivr.net/npm/vuex@4.0.0-beta.4/dist/vuex.global.min.js',
+    'https://cdn.jsdelivr.net/npm/vue-router@4.0.0-beta.11/dist/vue-router.global.min.js',
     "https://cdn.jsdelivr.net/npm/axios@0.20.0/dist/axios.min.js",
   ]
 }

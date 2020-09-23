@@ -74,12 +74,13 @@ export default {
           if (sessionTabs === "1") router.push("/");
           if (sessionTabs === "2") router.push("/about");
         }
-        // Reflect.set(active, 0, Number(sessionTabs));
+        // Reflect.set(active, 0, Number(sessionTabs))
         active.value = Number(sessionTabs);
+        console.log(`底部导航刷新后状态：${sessionTabs}`)
         
       } else {
         // 默认
-        active.value = Number(navId);
+        active.value = Number(navId)
       }
     })
 

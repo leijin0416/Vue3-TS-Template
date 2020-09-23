@@ -13,17 +13,18 @@ export default {
     getSessionNavTabrsID: (state: any) => state.getSessionNavTabrsID,
   },
   mutations: {
-    // 导航ID
+    // 底部导航切换ID
     SET_sessionNavTabrsType(state: any, context: any) {
       state.getSessionNavTabrsType = context
       sessionData("set", "getSessionNavTabrsType", context)
     },
-    SET_sessionUserToken(state: any, context: any) {
-      state.getSessionUserToken = context
-      sessionData("set", "getSessionUserToken", context)
-    },
+    // 底部导航ID
     SET_sessionNavTabrsID(state: any, context: any) {
       state.getSessionNavTabrsID = context
+      sessionData("set", "getSessionNavTabrsID", context)
+    },
+    SET_sessionUserToken(state: any, context: any) {
+      state.getSessionUserToken = context
       sessionData("set", "getSessionUserToken", context)
     },
   },
