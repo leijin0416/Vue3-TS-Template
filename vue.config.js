@@ -1,12 +1,12 @@
 const webpack = require("webpack")
 const merge = require("webpack-merge")
-const tsImportPluginFactory = require("ts-import-plugin")   // 按需加载
 const pxtoviewport = require("postcss-px-to-viewport")
+const tsImportPluginFactory = require("ts-import-plugin")   // 按需加载
 
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-  .BundleAnalyzerPlugin;
 const CompressionWebpackPlugin = require("compression-webpack-plugin") // gzip
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin
 
 const path = require("path")
 function resolve(dir) {
@@ -76,6 +76,7 @@ module.exports = {
     }
   },
   configureWebpack: config => {
+    // cdn 添加
     if (isProduction || devNeedCdn) config.externals = cdn.externals
     if (isDev === "production") {
       config.plugins.push(
@@ -84,9 +85,9 @@ module.exports = {
           algorithm: "gzip",
           filename: "[path].gz[query]",
           test: productionGzips,
-          threshold: 10240, // 只有大小大于该值的资源会被处理
-          minRatio: 0.8, // 只有压缩率小于这个值的资源才会被处理
-          deleteOriginalAssets: false, // 删除原文件
+          threshold: 10240,             // 只有大小大于该值的资源会被处理
+          minRatio: 0.8,                // 只有压缩率小于这个值的资源才会被处理
+          deleteOriginalAssets: false,  // 删除原文件
         }),
         // 添加自定义代码压缩配置
         new ParallelUglifyPlugin({
@@ -151,15 +152,13 @@ module.exports = {
     config.optimization.splitChunks({
       chunks: "all",
     })
-    
     // ============注入cdn start============
     config.plugin("html").tap(args => {
       // 生产环境或本地需要cdn时，才注入cdn
       if (isProduction || devNeedCdn) args[0].cdn = cdn
       return args
     })
-    // ============注入cdn start============
-
+    // ============注入cdn   end============
     config.resolve.alias
       .set("@", resolve("src"))
       .set("@assets", resolve("src/assets"))
@@ -182,7 +181,7 @@ module.exports = {
           compilerOptions: {
             module: "es2015",
           }
-        });
+        })
         return options
       })
   },
