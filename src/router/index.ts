@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router"
-import { routerMaps } from "./routerMap"
-// 状态管理vuex
-import store from "@/store"
+import { routerMaps } from "./routerMap"  // 异步组件
+
+import store from "@/store"   // 状态管理vuex
 import { sessionData } from "@/filters/storage"
 
 const router = createRouter({
