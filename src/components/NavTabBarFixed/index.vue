@@ -47,14 +47,13 @@ export default {
     const active = ref(1)
 
     /**
-     *  监听vuex
+     *  监听vuex -获取底部导航栏的切换ID
      */
     watch(() => store.state.storageUser.getSessionNavTabrsID, (newer, older) => {
-      if (newer === null) {
-        return
-      } else {
+      if (newer === null) return
+      else {
         active.value = newer
-        console.log(`navTab newer is ${newer}`)
+        console.log(`Watch navTab newer is ${newer}`)
       }
     }, { deep: true })
 
@@ -74,9 +73,10 @@ export default {
           if (sessionTabs === "1") router.push("/");
           if (sessionTabs === "2") router.push("/about");
         }
-        // Reflect.set(active, 0, Number(sessionTabs))
         active.value = Number(sessionTabs);
-        console.log(`底部导航刷新后状态：${sessionTabs}`)
+        console.log(`组件上下文对象的底部切换导航刷新ID：${sessionTabs}`)
+
+        // Reflect.set(active, 0, Number(sessionTabs))
         
       } else {
         // 默认
@@ -84,6 +84,7 @@ export default {
       }
     })
 
+    // 组件上下文对象的底部切换导航ID
     const onTabsChange = (index: any) => {
       store.commit("storageUser/SET_sessionNavTabrsID", index)
       context.emit("onTabsChange", index)
