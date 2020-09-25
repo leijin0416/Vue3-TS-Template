@@ -7,7 +7,7 @@
       </transition>
     </router-view>
 
-    <MTabBar 
+    <asyncMTabBarPage 
       v-if="$route.meta.displayNavBar"
       :navTabsData="navTabsData"
       @onTabsChange="onTabsChange" />
@@ -15,14 +15,16 @@
 </template>
 
 <script lang="ts">
-import { reactive, ref, onMounted, computed, toRefs, watch } from "vue"
+import { reactive, ref, onMounted, computed, toRefs, watch, defineAsyncComponent } from "vue"
 import { useStore } from "vuex"
 import { sessionData } from "@/filters/storage"
-import MTabBar from "@/components/NavTabBarFixed/index.vue"
+
+// 异步组件 -defineAsyncComponent可以接受一个加载器函数，该函数将承诺解析返回给实际的组件
+const asyncMTabBarPage = defineAsyncComponent(() => import('@/components/NavTabBarFixed/index.vue'))
 
 export default {
   components: {
-    MTabBar,
+    asyncMTabBarPage,
   },
   setup() {
     const store = useStore() // 声明、获取 状态管理vuex

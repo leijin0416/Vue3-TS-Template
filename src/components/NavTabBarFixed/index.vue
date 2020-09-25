@@ -101,6 +101,7 @@ export default {
 <style lang="scss" scoped>
 /deep/.van-tabbar-item--active {
   color: red;
+  background-color: transparent;
 }
 /deep/.van-tabbar-item__icon img {
   width: auto;

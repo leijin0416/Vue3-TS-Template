@@ -12,8 +12,6 @@
           <p>
             <router-link to="/text">Lets Go!!!</router-link>
           </p>
-
-          <asyncTextPage />
         </div>
         <div class="message">
           <div class="message-box">
@@ -31,18 +29,14 @@
 </template>
 
 <script lang="ts">
-import { ref, reactive, onMounted, computed, toRefs, defineAsyncComponent, watch } from "vue"
+import { ref, reactive, onMounted, computed, toRefs, watch } from "vue"
 import { useRouter, useRoute } from "vue-router"
 import { useStore } from "vuex"
 import { sessionData } from "@/filters/storage"
 import { webGetInewNewsPages, webGetInewNewsChannel } from "@/mock/index"
 
-// 异步组件 -defineAsyncComponent可以接受一个加载器函数，该函数将承诺解析返回给实际的组件
-const asyncTextPage = defineAsyncComponent(() => import('@/views/Text.vue'))
-
 export default {
   components: {
-    asyncTextPage
   },
   setup() {
     const router = useRouter()   // 获取路由
