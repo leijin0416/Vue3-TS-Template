@@ -37,22 +37,19 @@ export default {
     const getSessionNavTabrsType:any = ref()  // 初始null
 
     /**
-     *  监听vuex -获取底部导航栏的ID
+     *  监听vuex -获取底部导航栏的切换状态
      */
     watch(() => store.state.storageUser.getSessionNavTabrsType, (newer, older) => {
-      if (newer === null) {
-        return
-
-      } else {
+      if (newer === null) return
+      else {
         getSessionNavTabrsType.value = newer
-        console.log(`Vuex Nav newer is：${newer}`)
-
+        console.log(`Watch vuex navType newer is：${newer}`)
       }
     }, { deep: true })
     
     onMounted(async () => {
       /**
-       *  状态管理  -获取底部导航栏的ID
+       *  状态管理  -获取底部导航栏的切换状态
        *  页面刷新
        */
       const sessionNav = sessionData("get", "getSessionNavTabrsType", "")
@@ -69,7 +66,7 @@ export default {
     })
 
     const onTabsChange = (index: any) => {
-      console.log(`组件的上下文对象底部导航：${index}`)
+      console.log(`组件上下文对象的底部切换导航ID：${index}`)
     }
 
     function removeVeget(index: any) {
