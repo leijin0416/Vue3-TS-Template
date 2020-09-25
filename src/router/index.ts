@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router"
-import { routerMaps } from "./routerMap"  // 异步组件
+import { routerMaps } from "./routerMap"  // 异步路由
 
 import store from "@/store"   // 状态管理vuex
 import { sessionData } from "@/filters/storage"
