@@ -15,7 +15,7 @@
 `Vue` | [vue-cli3.0中使用svg](https://blog.csdn.net/qq_41619796/article/details/100997432) -- [自我模拟面试++](https://juejin.im/post/6870374238760894472#comment) -- [深入vue响应式原理](https://juejin.im/post/6844904078724562951)
 `JavaScript` | [mock -获取第三方新闻API数据](https://www.jisuapi.com/api/news/) -- [新闻API](https://segmentfault.com/a/1190000009811706?utm_source=sf-related) -- [TS采坑相关](https://www.jianshu.com/p/017ef6300ebc) -- [防抖节流++](https://juejin.im/post/6872144813051871246) -- [手撕JS 1](https://juejin.im/post/6875152247714480136) -- [手撕JS手写 2](https://juejin.im/post/6873513007037546510) -- [手撕闭包](https://juejin.im/post/6874829017006997511)
 `面试自检` | [分享自检1 jj](https://juejin.im/post/6873444336059711495) -- [分享自检2 jj](https://juejin.im/post/6874275613360783368)
-`vue方法` | [vue方法技巧1 jj](https://juejin.im/post/6874007172578033677#heading-25) -- [DOM diff jj](https://juejin.im/post/6873375844870553608)
+`vue方法` | [vue方法技巧1 jj](https://juejin.im/post/6874007172578033677#heading-25) -- [DOM diff jj](https://juejin.im/post/6873375844870553608) -- [git 异步组件提案](https://cloud.tencent.com/developer/article/1657954)
 
 ---
 
@@ -35,6 +35,8 @@ beforeDestroy | onBeforeUnmount | 实例销毁之前调用。在这一步，实�
 destroyed | onUnmounted | 实例销毁后调用。该钩子被调用后，对应 Vue 实例的所有指令都被解绑，所有的事件监听器被移除，所有的子实例也都被销毁。
 
 ---
+
+$nextTick(() => {})  - DOM更新后执行，也就是页面加载完成后执行回调函数的操作
 
 ## 响应式变量声明： ref 或者 reactive 代替data中的变量
 
