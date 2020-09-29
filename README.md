@@ -40,13 +40,19 @@ destroyed | onUnmounted | 实例销毁后调用。该钩子被调用后，对应
 
 ---
 
-## 响应式变量声明： ref 或者 reactive 代替data中的变量
+`options API -VUE3.0 选项型接口`
 
-- reactive 处理的是对象的双向绑定，而 ref 则可以处理js基础类型的双向绑定。
+`composition API -函数式编程思想  Hooks钩子函数`
+
+## 响应式变量声明，钩子函数： ref 或者 reactive 代替data中的变量
+
+- reactive 数据集合。
+
+- reactive 处理的是对象的**响应式双向绑定**，而 ref 则可以处理js基础类型的双向绑定。
 
 - ref 将给定的值创建一个响应式的数据对象并赋值初始值（**int或者string**），reactive 可以直接定义**复杂响应式对象**。
 
-- ref 需要**通过` .value `属性**进行获取值
+- ref 需要**通过` .value `属性**进行获取值。中译 “引用函数”
 
 ```js
 /*================ 之前 ================ */
