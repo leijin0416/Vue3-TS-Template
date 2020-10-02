@@ -12,7 +12,7 @@
         :key="item.name"
         :to="item.path" 
         :name="item.name">
-        <span>{{item.label + active}}</span>
+        <span>{{ item.label }}</span>
         <template #icon="props">
           <img :src="props.active ? item.active : item.inactive" />
         </template>

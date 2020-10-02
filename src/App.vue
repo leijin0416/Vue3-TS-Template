@@ -20,7 +20,7 @@ import { useStore } from "vuex"
 import { sessionData } from "@/filters/storage"
 
 // 异步组件 -defineAsyncComponent可以接受一个加载器函数，该函数将承诺解析返回给实际的组件
-const BottomNavTabs = defineAsyncComponent(() => import('@/components/NavTabBarFixed/index.vue'))
+const BottomNavTabs = defineAsyncComponent(() => import('@/components/BottomNavFixed/index.vue'))
 
 export default {
   components: {
@@ -69,7 +69,7 @@ export default {
       console.log(`组件上下文对象的底部切换导航ID：${index}`)
     }
 
-    function removeVeget(index: any) {
+    const removeVeget = (index: any) => {
       state.navTabsData.splice(index, 1);
     }
 
