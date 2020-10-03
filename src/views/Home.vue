@@ -24,20 +24,26 @@
           </div>
         </div>
       </div>
+
+      <NewsList />
       
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { ref, reactive, onMounted, computed, toRefs, watch } from "vue"
+import { ref, reactive, onMounted, computed, toRefs, watch, defineAsyncComponent } from "vue"
 import { useRouter, useRoute } from "vue-router"
 import { useStore } from "vuex"
 import { sessionData } from "@/filters/storage"
 import { webGetInewNewsPages, webGetInewNewsChannel } from "@/mock/index"
 
+// 异步组件 -defineAsyncComponent可以接受一个加载器函数，该函数将承诺解析返回给实际的组件
+const NewsList = defineAsyncComponent(() => import('@/components/NewsList/index.vue'))
+
 export default {
   components: {
+    NewsList
   },
   setup() {
     const router = useRouter()   // 获取路由
@@ -73,8 +79,6 @@ export default {
       store.commit("storageUser/SET_sessionUserToken", 123)
       const data = sessionData("get", "getSessionUserToken", "")
 
-      getInTheatersData()
-
     })
 
     /**
@@ -90,7 +94,6 @@ export default {
         num: 30,
         appkey: "ca05a06b9221f5d1"
       })
-      console.log(titleDataList)
     }
 
     return {
