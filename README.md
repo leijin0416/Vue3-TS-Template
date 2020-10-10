@@ -15,7 +15,7 @@
 `JavaScript` | [mock -获取第三方新闻API数据](https://www.jisuapi.com/api/news/) -- [新闻API](https://segmentfault.com/a/1190000009811706?utm_source=sf-related) -- [TS采坑相关](https://www.jianshu.com/p/017ef6300ebc) -- [防抖节流++](https://juejin.im/post/6872144813051871246) -- [手撕JS 1](https://juejin.im/post/6875152247714480136) -- [手撕JS手写 2](https://juejin.im/post/6873513007037546510) -- [手撕闭包](https://juejin.im/post/6874829017006997511)
 `面试自检` | [分享自检1 jj](https://juejin.im/post/6873444336059711495) -- [分享自检2 jj](https://juejin.im/post/6874275613360783368)
 `vue方法` | [vue方法技巧1 jj](https://juejin.im/post/6874007172578033677#heading-25) -- [DOM diff jj](https://juejin.im/post/6873375844870553608) -- [git 异步组件提案](https://cloud.tencent.com/developer/article/1657954)
-`Git` | [git看1](https://github.com/Duanzihuang/heimamovie) -- [git看文2](https://github.com/kaiqiangren/vue-next-ts-preview)
+`Git` | [git看1](https://github.com/Duanzihuang/heimamovie) -- [git看文2](https://github.com/kaiqiangren/vue-next-ts-preview) --/-- [VUE3 API 1](https://github.com/Duanzihuang/heimamovie/blob/master/src/views/Home.vue) --/-- [VUE3 API 2](https://github.com/qqlcx5/zhihu/blob/master/src/views/Detail.vue)
 
 ---
 
@@ -75,6 +75,8 @@ setup(){
     }
 }
 ```
+
+`.value()`是为了让基础类型也具有响应式（现在已经叫做ref了）,reactive就是一般用法。vue3利用proxy实现响应式，而proxy不能代理基础类型，vue3就只能给他包装成一个对象再进行代理
 
 ## vue-router 路由
 
@@ -204,4 +206,64 @@ export default {
         ctx.emit('event')
     },
 }
+```
+
+---
+
+```vue
+<template>
+  <div class='form-element'>
+    <h2> {{ state.title }} </h2>
+    <input type='text' v-model='state.username' placeholder='Username' />
+    <input type='password' v-model='state.password' placeholder='Password' />
+
+    <button @click='login'>
+      Submit
+    </button>
+    <p>
+      Values: {{ state.username + ' ' + state.password }}
+    </p>
+  </div>
+</template>
+<script>
+import { reactive, onMounted, computed } from 'vue'
+
+/**
+  context.attrs
+  context.slots
+  context.parent
+  context.root
+  context.emit
+  context.refs
+*/
+export default {
+  props: {
+    title: String
+  },
+  setup (props, { emit }) {
+    const state = reactive({
+      username: '',
+      password: '',
+      lowerCaseUsername: computed(() => state.username.toLowerCase()) // 计算username属性
+    })
+
+    onMounted(() => {
+      console.log('title: ' + props.title)
+    })
+
+    // 子传递父
+    const login = () => {
+      emit('login', {
+        username: state.username,
+        password: state.password
+      })
+    }
+
+    return {
+      login,
+      state
+    }
+  }
+}
+</script>
 ```
