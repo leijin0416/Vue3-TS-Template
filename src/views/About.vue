@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="headBox">
-        <span class="back" @click="$router.push('/')">返回</span>
+        <!-- <span class="back" @click="$router.push('/')">返回</span> -->
         <div class="info">
           <h3>{{id}}</h3>
         </div>
