@@ -29,7 +29,10 @@
         <div class="info">
           <h3>{{id}}</h3>
           <div class="v-input-box">
-            <van-search v-model="searchValue" placeholder="请输入基金代码或名称" />
+            <van-search 
+              v-model="searchValue"
+              @search="onSearchClick"
+              placeholder="请输入基金代码或名称" />
           </div>
         </div>
       </div>
@@ -37,41 +40,76 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { watch, toRefs, ref, reactive } from "vue"
+import searchData from '@/mock/searchData';
 // import API from "../api"
+
+type MatchItem = {
+  code: string,
+  shortcut: string,
+  name: string,
+  type: string,
+}
 
 export default {
   setup() {
     let id = ref(1)
-    let searchValue = ref()
     let state = reactive({
       image: '',
       body: '',
       title: '',
-      section: ''
+      section: '',
     })
+    let searchValue = ref()
+    let matchList = ref<MatchItem[]>([])
+
     watch(id, async () => {
       // let { image, body, title,section } = await API.zhihu.API_DETAIL(id.value)
-      // state.image = image
       // state.body = body
       // state.title = title,
       // state.section = section? section.name : '佚名'
     })
+    
+    /**
+     *  监听输入框的值  3点3个流程
+     */
+    watch(searchValue, (newer, older) => {
+      // 1 监听，输入框值过滤
+      const preList = newer ? searchData.filter((d) => d.some(searchsMapSome)).slice(0, 8) : []
+      console.log(preList)
+      // 3 返回新数组
+      matchList.value = preList.map((item) => {
+        const [code, shortcut, name, type] = item
+        return { code, shortcut, name, type }
+      })
+    })
+
+    // 2 some 用于检测数组中的元素是否满足指定条件
+    const searchsMapSome = (input: any) => {
+      // 查找字符串是否包含 "searchText.value.toUpperCase() 的值"
+      return input.includes(searchValue.value.toUpperCase())
+    }
+
+    const onSearchClick = (val: string) => {
+      console.log(val)
+    }
+
     return {
       searchValue,
       id,
+      onSearchClick,
       ...toRefs(state)
     }
   },
   beforeMount(){
-    let { id } = this.$route.params
-    // console.log(id)
+    // let { id } = this.$route.params
   }
 }
 </script>
 
 <style lang="scss" scoped>
+/deep/.van-field__label {width: 20px;}
 .page {
   display: flex;
   flex-direction: column;
