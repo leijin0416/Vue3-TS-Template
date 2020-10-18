@@ -1,6 +1,6 @@
 <template>
-  <div class="home">
-    <div class="content">
+  <div class="page">
+    <div class="container">
       <div class="user-head">
         <div class="user-avatar">
           <img src="@assets/images/avatar.jpg" alt="" />
@@ -8,8 +8,9 @@
         <div class="user-info">
           <div class="hello">Good morning!</div>
           <div class="name">Marin Ramsey</div>
-          <p>vuex: {{activeIds}}</p>
+          <p>vuex: {{searchValue}}</p>
           <p>
+            <!-- <span class="back" @click="$router.push('/')">返回</span> -->
             <router-link to="/text">Lets Go!!!</router-link>
           </p>
         </div>
@@ -24,10 +25,12 @@
           </div>
         </div>
       </div>
-      <div class="headBox">
-        <!-- <span class="back" @click="$router.push('/')">返回</span> -->
+      <div class="v-head-box">
         <div class="info">
           <h3>{{id}}</h3>
+          <div class="v-input-box">
+            <van-search v-model="searchValue" placeholder="请输入基金代码或名称" />
+          </div>
         </div>
       </div>
     </div>
@@ -40,21 +43,23 @@ import { watch, toRefs, ref, reactive } from "vue"
 
 export default {
   setup() {
-    let id = ref(1);
+    let id = ref(1)
+    let searchValue = ref()
     let state = reactive({
       image: '',
       body: '',
       title: '',
       section: ''
-    });
+    })
     watch(id, async () => {
       // let { image, body, title,section } = await API.zhihu.API_DETAIL(id.value)
       // state.image = image
       // state.body = body
       // state.title = title,
       // state.section = section? section.name : '佚名'
-    });
+    })
     return {
+      searchValue,
       id,
       ...toRefs(state)
     }
@@ -67,14 +72,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.home {
+.page {
   display: flex;
   flex-direction: column;
   height: 100vh;
   .bottom-bar {
     height: 50px;
   }
-  .content {
+  .container {
     flex: 1;
     overflow: auto;
     .user-head {
@@ -117,6 +122,9 @@ export default {
           box-shadow: 1px 4px 25px rgba($color: #000000, $alpha: 0.15);
         }
       }
+    }
+    .v-head-box {
+      h3 {padding: 15px;}
     }
   }
 }
