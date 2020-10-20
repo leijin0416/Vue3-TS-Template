@@ -33,6 +33,15 @@
               v-model="searchValue"
               @search="onSearchClick"
               placeholder="请输入基金代码或名称" />
+              <ul>
+                <li
+                  v-for="(item, index) in matchList"
+                  :key="index"
+                  >
+                    <span v-html="highlight(item.code, searchValue)" class="fund-code" />
+                    <span v-html="highlight(item.name, searchValue)" />
+                  </li>
+              </ul>
           </div>
         </div>
       </div>
@@ -61,7 +70,7 @@ export default {
       title: '',
       section: '',
     })
-    let searchValue = ref()
+    let searchValue = ref('')
     let matchList = ref<MatchItem[]>([])
 
     watch(id, async () => {
@@ -83,6 +92,7 @@ export default {
         const [code, shortcut, name, type] = item
         return { code, shortcut, name, type }
       })
+      console.log(matchList.value)
     })
 
     // 2 some 用于检测数组中的元素是否满足指定条件
@@ -95,10 +105,15 @@ export default {
       console.log(val)
     }
 
+    const highlight = (text: string, keyword: string) =>
+      text.replace(new RegExp(keyword, 'ig'), `<span class='active'>${keyword}</span>`);
+
     return {
       searchValue,
+      matchList,
       id,
       onSearchClick,
+      highlight,
       ...toRefs(state)
     }
   },

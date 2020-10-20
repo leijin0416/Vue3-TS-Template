@@ -1,5 +1,7 @@
 # 文档
 
+[文档理解2.0/3.0](https://www.zhihu.com/question/402884177)
+
 - vue2.x中，所有的数据都在data方法中定义返回，方法定义在methods下面，**并通过 this调用**。
 
 - vue3.x中，所有的代码逻辑将在setup方法中实现，包括 `data、watch、computed、methods、hooks`，**并且不再有 this**。
