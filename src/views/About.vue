@@ -40,6 +40,7 @@
                   >
                     <span v-html="highlight(item.code, searchValue)" class="fund-code" />
                     <span v-html="highlight(item.name, searchValue)" />
+                    <span class="fund-type" :style="{ color: fundTypeColors.get(item.type) || '#3e3a3a' }">{{ item.type }} </span>
                   </li>
               </ul>
           </div>
@@ -51,7 +52,7 @@
 
 <script lang="ts">
 import { watch, toRefs, ref, reactive } from "vue"
-import searchData from '@/mock/searchData';
+import searchData from '@/mock/searchData'
 // import API from "../api"
 
 type MatchItem = {
@@ -105,12 +106,28 @@ export default {
       console.log(val)
     }
 
-    const highlight = (text: string, keyword: string) =>
-      text.replace(new RegExp(keyword, 'ig'), `<span class='active'>${keyword}</span>`);
+    const highlight = (text: string, keyword: string) => {
+      return text.replace(new RegExp(keyword, 'ig'), `<span class='active'>${keyword}</span>`);
+    }
+
+    // map() 方法返回一个新数组，get() 取值
+    const fundTypeColors = new Map([
+      ['混合型', '#d08a31'],
+      ['债券型', '#318fbb'],
+      ['股票型', '#ef0505'],
+      ['货币型', '#67bf43'],
+      ['定开债券', '#32af86'],
+      ['联接基金', '#8e26a7'],
+      ['QDII', '#d03077'],
+      ['QDII-指数', '#f562a4'],
+      ['股票指数', '#ce2222'],
+      ['混合-FOF', '#317929'],
+    ])
 
     return {
       searchValue,
       matchList,
+      fundTypeColors,
       id,
       onSearchClick,
       highlight,
