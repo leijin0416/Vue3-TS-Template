@@ -108,6 +108,7 @@ export default {
 
     // replace 替换
     const highlight = (text: string, keyword: string) => {
+      
       return text.replace(new RegExp(keyword, 'ig'), `<span class='active'>${keyword}</span>`);
     }
 
