@@ -102,17 +102,16 @@ export default {
       return input.includes(searchValue.value.toUpperCase())
     }
 
+    // 4 replace 替换, 正则
+    const highlight = (text: string, keyword: string) => {
+      return text.replace(new RegExp(keyword, 'ig'), `<span class='active'>${keyword}</span>`);
+    }
+
     const onSearchClick = (val: string) => {
       console.log(val)
     }
 
-    // replace 替换
-    const highlight = (text: string, keyword: string) => {
-      
-      return text.replace(new RegExp(keyword, 'ig'), `<span class='active'>${keyword}</span>`);
-    }
-
-    // map() 方法返回一个新数组，get() 取值
+    // map() 方法返回一个新数组，get() 可以取值
     const fundTypeColors = new Map([
       ['混合型', '#d08a31'],
       ['债券型', '#318fbb'],

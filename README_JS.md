@@ -52,4 +52,21 @@ var n = str.includes("world");
 
 replace() 方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。
 
+```js
+/** 正则：
+ * /(\d+)岁/g  -/g是全局匹配（img）
+ *             -i 忽略大小写 ， m 多行模式 ， g 全局模式
+ *             -\D:类似[^0-9] 非数字
+ *
+ * "^\d+$"　　 -非负整数（正整数 + 0）
+ */
+var str="他今年22岁，她今年20岁，他的爸爸今年45岁，她的爸爸今年44岁，一共有4人";
+var newstr = str.replace(/(\d+)岁/g, function(m, n) {
+  console.log(arguments);
+  var year = new Date().getYear()+1-parseInt(m);
+  return m+"("+year+"年出生)";
+});
+console.log(newstr) // 他今年22岁(97年出生)，她今年20岁(99年出生)，他的爸爸今年45岁(74年出生)，她的爸爸今年44岁(75年出生)，一共有4人
+```
+
 2
