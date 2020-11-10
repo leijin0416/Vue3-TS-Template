@@ -36,8 +36,7 @@
               <ul>
                 <li
                   v-for="(item, index) in matchList"
-                  :key="index"
-                  >
+                  :key="index" >
                     <span v-html="highlight(item.code, searchValue)" class="fund-code" />
                     <span v-html="highlight(item.name, searchValue)" />
                     <span class="fund-type" :style="{ color: fundTypeColors.get(item.type) || '#3e3a3a' }">{{ item.type }} </span>
