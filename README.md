@@ -21,7 +21,7 @@
 —— |
 **`面试自检`** | [分享自检1 jj](https://juejin.im/post/6873444336059711495) -- [分享自检2 jj](https://juejin.im/post/6874275613360783368)
 —— |
-[【vue3.0】 掘金 全 评论](https://juejin.im/post/6874604408030789640) --/-- [【vue2/3.0】 知乎理解](https://www.zhihu.com/question/402884177) | [【leevii】 搜索框 博客](https://www.leevii.com/2020/09/the-first-experience-of-vue3-0.html) --/-- [【tower1229】 树形组件 博客](https://github.com/tower1229)
+[【vue3.0】 掘金 全 评论](https://juejin.im/post/6874604408030789640) | [【leevii】 搜索框 博客](https://www.leevii.com/2020/09/the-first-experience-of-vue3-0.html) --/-- [【tower1229】 树形组件 博客](https://github.com/tower1229) --/-- [【vue2/3.0】 知乎理解 全](https://www.zhihu.com/question/402884177)
 
 ---
 
