@@ -1,23 +1,21 @@
 const webpack = require("webpack")
+const path = require("path")
 const merge = require("webpack-merge")
 const pxtoviewport = require("postcss-px-to-viewport")
 const tsImportPluginFactory = require("ts-import-plugin")   // 按需加载
 
+// const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 const CompressionWebpackPlugin = require("compression-webpack-plugin") // gzip
-const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin
 
-const path = require("path")
-function resolve(dir) {
-  return path.join(__dirname, dir)
-}
+function resolve(dir) { return path.join(__dirname, dir) }
 
 const autoprefixer = require("autoprefixer")
-const productionGzips = /\.(js|css|json|ts|html|ico|svg)(\?.*)?$/i
-const isDev = process.env.NODE_ENV
-const isProduction = process.env.NODE_ENV !== "development"
-const devNeedCdn = isDev === "production" ? false : true
+const productionGzips = /\.(js|css|json|ts|html|ico|svg)(\?.*)?$/i;
+const isDev = process.env.NODE_ENV;
+const isProduction = process.env.NODE_ENV !== "development";
+const devNeedCdn = isDev === "production" ? false : true;
 
 // cdn链接
 const cdn = {
@@ -81,6 +79,8 @@ module.exports = {
     if (isProduction || devNeedCdn) config.externals = cdn.externals
     if (isDev === "production") {
       config.plugins.push(
+        // 删除
+        config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
         // 压缩代码
         new CompressionWebpackPlugin({
           algorithm: "gzip",
@@ -89,23 +89,6 @@ module.exports = {
           threshold: 10240,             // 只有大小大于该值的资源会被处理
           minRatio: 0.8,                // 只有压缩率小于这个值的资源才会被处理
           deleteOriginalAssets: false,  // 删除原文件
-        }),
-        // 添加自定义代码压缩配置
-        new ParallelUglifyPlugin({
-          uglifyJS: {
-              output: {
-                  beautify: false,
-                  comments: false,
-              },
-              warnings: false,
-              compress: {
-                  reduce_vars: true,
-                  drop_debugger: true,
-                  drop_console: true,
-              }
-          },
-          test: /.js$/g,
-          sourceMap: false,
         }),
         // 体积压缩提示
         new BundleAnalyzerPlugin(),
