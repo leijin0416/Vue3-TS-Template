@@ -173,3 +173,24 @@ module.exports = {
     "biyi-admin", // 指定对第三方依赖包进行babel-polyfill处理
   ]
 }
+
+function defineReactive (obj, key) {
+  let val = obj[key]
+  Object.defineProperty(obj, key, {
+    get () {
+      console.log(' === 收集依赖 === ')
+      console.log(' 当前值为：' + val)
+      return val
+    },
+    set (newValue) {
+      console.log(' === 通知变更 === ')
+      console.log(' 当前值为：' + newValue)
+      val = newValue
+    }
+  })
+}
+const student = {
+  name: 'xiaoming'
+}
+// 劫持 name 属性的读取和设置操作
+defineReactive(student, 'name') 

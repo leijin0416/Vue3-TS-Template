@@ -15,13 +15,13 @@
 —— |
 [【vue3.0】 掘金 全 评论](https://juejin.im/post/6874604408030789640) | [【leevii】 搜索框 博客](https://www.leevii.com/2020/09/the-first-experience-of-vue3-0.html) --/-- [【tower1229】 树形组件 博客](https://github.com/tower1229) --/-- [【vue2/3.0】 知乎理解 全](https://www.zhihu.com/question/402884177)
 
-- vue2.x中，所有的数据都在data方法中定义返回，方法定义在methods下面，**并通过 this调用**。
+- vue2.x中，所有的数据都在data方法中定义返回，方法定义在methods下面，**并通过 this调用**；
 
-- vue3.x中，所有的代码逻辑将在setup方法中实现，包括 `data、watch、computed、methods、hooks`，**并且不再有 this**。
+- vue3.x中，所有的代码逻辑将在setup方法中实现，包括 `data、watch、computed、methods、hooks`，**并且不再有 this**；
 
-`yarn报错：Found incompatible module`  -解决：`yarn config set ignore-engines true`
+`yarn报错：Found incompatible module`  -解决：`yarn config set ignore-engines true`；
 
-`改造ts中，提示找不到模块vue`  -解决：tsconfig.json 的配置有问题：需要将compilerOptions中的 moduleResolution 改为 node。
+`改造ts中，提示找不到模块vue`  -解决：tsconfig.json 的配置有问题：需要将compilerOptions中的 moduleResolution 改为 node；
 
 ---
 
