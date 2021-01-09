@@ -79,8 +79,6 @@ module.exports = {
     if (isProduction || devNeedCdn) config.externals = cdn.externals
     if (isDev === "production") {
       config.plugins.push(
-        // 删除
-        config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
         // 压缩代码
         new CompressionWebpackPlugin({
           algorithm: "gzip",
@@ -92,6 +90,8 @@ module.exports = {
         }),
         // 体积压缩提示
         new BundleAnalyzerPlugin(),
+        // 删除
+        config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
       )
       // 公共代码抽离
       config.optimization = {
