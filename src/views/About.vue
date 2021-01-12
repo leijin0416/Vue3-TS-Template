@@ -62,6 +62,8 @@ type MatchItem = {
 }
 
 export default {
+  components: {
+  },
   setup() {
     let id = ref(1)
     let state = reactive({

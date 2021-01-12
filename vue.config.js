@@ -2,17 +2,18 @@ const webpack = require("webpack")
 const path = require("path")
 const merge = require("webpack-merge")
 const pxtoviewport = require("postcss-px-to-viewport")
-const tsImportPluginFactory = require("ts-import-plugin")   // 按需加载
+const tsImportPluginFactory = require("ts-import-plugin")   // Vant按需加载
 
 // const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 const CompressionWebpackPlugin = require("compression-webpack-plugin") // gzip
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin
+const TerserPlugin = require("terser-webpack-plugin")
 
 function resolve(dir) { return path.join(__dirname, dir) }
-
 const autoprefixer = require("autoprefixer")
 const productionGzips = /\.(js|css|json|ts|html|ico|svg)(\?.*)?$/i;
+
 const isDev = process.env.NODE_ENV;
 const isProduction = process.env.NODE_ENV !== "development";
 const devNeedCdn = isDev === "production" ? false : true;
@@ -24,17 +25,14 @@ const cdn = {
     'vue': 'Vue',
     'vuex': 'Vuex',
     'vue-router': 'VueRouter',
-    // 'vant': 'Vant',
   },
   css: [
-    // "https://cdn.jsdelivr.net/npm/vant@3.0.0-beta.3/lib/index.css"
   ],
   js: [
-    'https://cdn.jsdelivr.net/npm/vue@3.0.0/dist/vue.global.min.js',
-    'https://cdn.jsdelivr.net/npm/vuex@4.0.0-beta.4/dist/vuex.global.min.js',
-    'https://cdn.jsdelivr.net/npm/vue-router@4.0.0-beta.11/dist/vue-router.global.min.js',
+    'https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.min.js',
+    'https://cdn.jsdelivr.net/npm/vuex@4.0.0-rc.1/dist/vuex.global.min.js',
+    'https://cdn.jsdelivr.net/npm/vue-router@4.0.0/dist/vue-router.global.min.js',
     "https://cdn.jsdelivr.net/npm/axios@0.20.0/dist/axios.min.js",
-    // "https://cdn.jsdelivr.net/npm/vant@3.0.0-beta.3/lib/vant.min.js"
   ]
 }
 
@@ -53,6 +51,7 @@ module.exports = {
   runtimeCompiler: true,
   // 不要打包以后的map文件
   productionSourceMap: false,
+  parallel: false,
   // 关闭内置Eslint检查
   lintOnSave: false,
   devServer: {
@@ -78,7 +77,36 @@ module.exports = {
     // cdn 添加
     if (isProduction || devNeedCdn) config.externals = cdn.externals
     if (isDev === "production") {
+      // 将每个依赖包打包成单独的js文件
+      const optimization = {
+        // 启用最小化压缩
+        minimize: true,
+        minimizer: [new TerserPlugin({
+          // 和productionSourceMap一样
+          // sourceMap: false,
+          terserOptions: {
+            compress: {
+              // 移除所有console相关的代码，比如console.log,console.error
+              drop_console: true,
+              // 关闭自动断点功能，vue代码里插入debugger指令后，执行到对应位置会自动断线，此选项是移除debugger指令
+              drop_debugger: true,
+              // pure_funcs数组是用来配置移除指定的指令，比如console.log  alert等等
+              // 移除console.log，需要配合.eslintrc.js文件里的如下设置，不然打包会出警告
+              // rules: {
+              //   'no-console':  'off',
+              // }
+              pure_funcs: ['console.log', 'console.error']
+            }
+          }
+        })]
+      }
+      // 将optimization的所有属性合并到config里
+      Object.assign(config, {
+        optimization
+      })
       config.plugins.push(
+        // 删除
+        // config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
         // 压缩代码
         new CompressionWebpackPlugin({
           algorithm: "gzip",
@@ -90,8 +118,6 @@ module.exports = {
         }),
         // 体积压缩提示
         new BundleAnalyzerPlugin(),
-        // 删除
-        config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
       )
       // 公共代码抽离
       config.optimization = {
@@ -173,24 +199,3 @@ module.exports = {
     "biyi-admin", // 指定对第三方依赖包进行babel-polyfill处理
   ]
 }
-
-function defineReactive (obj, key) {
-  let val = obj[key]
-  Object.defineProperty(obj, key, {
-    get () {
-      console.log(' === 收集依赖 === ')
-      console.log(' 当前值为：' + val)
-      return val
-    },
-    set (newValue) {
-      console.log(' === 通知变更 === ')
-      console.log(' 当前值为：' + newValue)
-      val = newValue
-    }
-  })
-}
-const student = {
-  name: 'xiaoming'
-}
-// 劫持 name 属性的读取和设置操作
-defineReactive(student, 'name') 

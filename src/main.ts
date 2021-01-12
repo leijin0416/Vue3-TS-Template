@@ -9,6 +9,6 @@ import { vantPlugins } from "./plugins/vant"
 createApp(App)
   .use(store)
   .use(router)
-  .use(vantPlugins)
   .use(VueWechatTitle)
-  .mount("#app");
+  .use(vantPlugins)
+  .mount("#app")

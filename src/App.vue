@@ -43,7 +43,7 @@ export default {
       if (newer === null) return
       else {
         getSessionNavTabrsType.value = newer
-        console.log(`Watch vuex navType newer is：${newer}`)
+        console.log(`Watch-Vuex navType newer is：${newer}`)
       }
     }, { deep: true })
     
