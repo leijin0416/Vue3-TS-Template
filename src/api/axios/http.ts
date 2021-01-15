@@ -92,12 +92,12 @@ axios.interceptors.response.use( response => {
  *  qs.stringify(param)  -pageNum=1&pageSize=223
  */
 export default {
-  get(url: any, param: any) {
+  get(url: any) {
     return new Promise( (resolve, reject) => {
       axios({
           method: "get",
           url,
-          params: param
+          params: ''
       })
       .then( res => {
           resolve(res)

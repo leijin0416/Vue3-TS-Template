@@ -16,7 +16,6 @@ const tip = (msg: string) => {
 
 // 请求拦截器
 axios.interceptors.request.use(config => {
-
   return config
 }, error => {
   return Promise.reject(error)
@@ -24,7 +23,6 @@ axios.interceptors.request.use(config => {
 
 // 响应拦截器即异常处理
 axios.interceptors.response.use(response => {
-  
   return response
 }, error => {
   // console.log(error)
@@ -55,12 +53,12 @@ axios.interceptors.response.use(response => {
 })
 
 export default {
-  get(url: any, param: any) {
+  get(url: any) {
     return new Promise((resolve, reject) => {
       axios({
         method: "get",
         url,
-        params: param
+        params: ''
       })
       .then(res => {
         resolve(res)

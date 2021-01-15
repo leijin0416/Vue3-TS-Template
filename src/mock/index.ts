@@ -7,9 +7,9 @@ import requestMock from "./http"
  * 新闻
  * @param {*} params 
  */
-export const webGetInewNewsPages = (params: any) => requestMock.get("/inew/news/get", params)
+export const webGetInewNewsPages = (params: any) => requestMock.get("/inew/news/get")
 /**
  * 新闻Title
  * @param {*} params 
  */
-export const webGetInewNewsChannel = (params: any) => requestMock.get("/inew/news/channel", params)
+export const webGetInewNewsChannel = (params: any) => requestMock.get("/inew/news/channel")
