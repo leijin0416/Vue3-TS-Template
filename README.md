@@ -87,6 +87,18 @@ setup(){
 ## vue-router 路由
 
 ```js
+const route = useRoute();
+const router = useRouter();
+const state = reactive({
+    from: route.query.from
+})
+
+const onAdd = () => {
+    router.push({ path: '/address-edit', query: { type: 'add', from: state.from }})
+}
+
+---
+
 // 组件内部路由拦截器的使用方式
 import { useRouter, useRoute } from "vue-router"
 

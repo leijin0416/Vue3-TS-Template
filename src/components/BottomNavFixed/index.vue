@@ -5,16 +5,16 @@
       @change="onTabsChange"
       :placeholder="true"
       :border="true"
-      z-index="9999"
-      fixed >
+      z-index="9999">
       <van-tabbar-item 
         v-for="(item, index) of navTabsData"  
         :key="item.name"
         :to="item.path" 
         :name="item.name">
         <span>{{ item.label }}</span>
+        <!-- 图标 -->
         <template #icon="props">
-          <img :src="props.active ? item.active : item.inactive" />
+          <img :src="props.active ? item.inactive : item.active" />
         </template>
       </van-tabbar-item>
     </van-tabbar>
@@ -100,15 +100,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.v-navtabs-box {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
 /deep/.van-tabbar-item--active {
-  color: red;
+  color: #fe4f70;
   background-color: transparent;
 }
 /deep/.van-tabbar-item__icon img {
   width: auto;
   height: 20px;
-}
-/deep/.van-tabbar {
-  background-color: #f1f1f1;
 }
 </style>

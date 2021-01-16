@@ -30,8 +30,8 @@ export default {
     const store = useStore() // 声明、获取 状态管理vuex
     const state = reactive({
       navTabsData: [
-        {label: "首页", name: 1, active: require('@/assets/images/nav-otc-inactive.png'), inactive: require('@/assets/images/nav-otc-active.png'), path: "/"},
-        {label: "我的", name: 2, active: require('@/assets/images/nav-home-inactive.png'), inactive: require('@/assets/images/nav-home-active.png'), path: '"/about'},
+        {label: "首页", name: 1, active: require('@/assets/images/banner_active1.png'), inactive: require('@/assets/images/banner_inactive1.png'), path: "/"},
+        {label: "我的", name: 2, active: require('@/assets/images/banner_active2.png'), inactive: require('@/assets/images/banner_inactive2.jpg'), path: '"/about'},
       ],
     })
     const getSessionNavTabrsType:any = ref()  // 初始null
@@ -93,7 +93,8 @@ export default {
 }
 #app {
   color: #333;
-  font-size: 16px;
+  font-size: 14px;
+  background-color: #f9f9f9;
 }
 .vux-pop-out-enter-active,
 .vux-pop-out-leave-active,

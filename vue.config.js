@@ -59,6 +59,7 @@ module.exports = {
   runtimeCompiler: true,
   // 不要打包以后的map文件
   productionSourceMap: false,
+  // 未配置可能导致build后vantUI 无样式
   parallel: false,
   // 关闭内置Eslint检查
   lintOnSave: false,
@@ -71,6 +72,13 @@ module.exports = {
   css: {
     extract: false,
     loaderOptions: {
+      sass: {
+        // prependData 最新
+        prependData: `
+          @import "@/style/mixin.scss";
+          @import "@/style/_var.scss";
+        `
+      },
       postcss: {
         plugins: [
           autoprefixer(),

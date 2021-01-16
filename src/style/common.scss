@@ -1,0 +1,33 @@
+a,button,input{ outline:none; border:0;resize:none; }
+input{ outline:none; border:0; }
+input:focus{
+  outline:none; 
+  box-shadow: none !important;
+  border-color: $color-body-c !important;
+} 
+/*
+ *  去掉input type=number时输入框内的上下箭头
+ */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+  -webkit-appearance: none;
+}	
+input[type="number"]{
+  -moz-appearance: textfield !important;
+}
+
+// 弹性布局
+.weui-flex {
+  @include flex(row, nowrap);
+  @include align-item(center);  // 垂直Y
+  word-break: break-all;
+  overflow-wrap: break-word;
+  word-wrap: break-word; //兼容IE
+  overflow: hidden;
+  .weui-flex-hd, .weui-flex-hd {
+    display: inline-block;
+  }
+  .weui-flex-bd {
+    @include flex-size(1)
+  }
+}

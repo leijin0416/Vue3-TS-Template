@@ -8,11 +8,11 @@
  */
 const localData = function (method: string, name: string, obj: any) {
   /*
-    * 参数说明：
-    * localStorage.getItem(key):    获取指定key本地存储的值
-    * localStorage.setItem(key,value)： 将value存储到key字段
-    * localStorage.removeItem(key): 删除指定key本地存储的值
-    * */
+   * 参数说明：
+   * localStorage.getItem(key):    获取指定key本地存储的值
+   * localStorage.setItem(key,value)： 将value存储到key字段
+   * localStorage.removeItem(key): 删除指定key本地存储的值
+   **/
   switch (method) {
     case 'get':
       if (localStorage.getItem(name + '_str')) {
@@ -40,12 +40,12 @@ const localData = function (method: string, name: string, obj: any) {
 }
 
 /**
- *  sessionStorage 操作
- *  @param {any} method       get获取，set存入或覆盖，clean清除
- *  @param {any} name         session 名称
- *  @param {any} obj          存入的内容，可以是任意类型
+ * sessionStorage 操作
+ * @param {any} method       get获取，set存入或覆盖，clean清除
+ * @param {any} name         session 名称
+ * @param {any} obj          存入的内容，可以是任意类型
  *  
- *  @param {*} sessionData('set', 'localeCut', val);  -调用方式
+ * @param {*} sessionData('set', 'localeCut', val);  -调用方式
  */
 const sessionData = function (method: string, name: string, obj: any) {
   switch (method) {

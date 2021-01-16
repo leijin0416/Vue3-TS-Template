@@ -1,13 +1,15 @@
 # Vite
 
-## 参考链接
-
 ```js
 'https://github.com/leevare?tab=repositories'
 'https://www.leevii.com/2020/09'                leevii
 
 'https://dsx2016.com/?cat=5'                    大师兄
+
 ```
+
+
+---
 
 ### JavaScript filter() 方法
 
@@ -68,5 +70,3 @@ var newstr = str.replace(/(\d+)岁/g, function(m, n) {
 });
 console.log(newstr) // 他今年22岁(97年出生)，她今年20岁(99年出生)，他的爸爸今年45岁(74年出生)，她的爸爸今年44岁(75年出生)，一共有4人
 ```
-
-2

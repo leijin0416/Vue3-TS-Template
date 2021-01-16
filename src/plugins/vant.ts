@@ -9,7 +9,7 @@ import { Button,
   Tabs,
   Field,
   CellGroup,
-  Search, } from "vant"
+  Search, Swipe, SwipeItem } from "vant"
 
 const plugins = [ Button,
   List,
@@ -21,7 +21,7 @@ const plugins = [ Button,
   Tabs,
   Field,
   CellGroup,
-  Search, ]
+  Search, Swipe, SwipeItem ]
 
 export const vantPlugins = {
   install: function(vm: VM) {
