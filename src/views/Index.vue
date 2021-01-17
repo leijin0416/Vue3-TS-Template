@@ -17,10 +17,69 @@
         </div>
       </div>
     </div>
-    <h2 class="v-title-min">新品上线<span></span></h2>
+    <h2 class="v-title-min">
+      <p>新品上线</p>
+      <p class="v-radius">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </p>
+    </h2>
     <div class="v-content-tabs">
-    所有的学习，最开始都像是在照镜子，无非是学到了，再换一个老师，换一面镜子，直到有一天你发现，你的新的镜子里是你自己，你就有你自己的方法了，你就可以做别人的镜子了
+      <div class="v-list-box">
+        <van-row>
+          <van-col span="12" v-for="item in newProducts" :key="item.goodsId">
+            <div class="v-info">
+              <div class="v-img-box">
+                <img :src="item.goodsCoverImg" alt="tabs.png" class="v-img">
+              </div>
+              <div class="v-title">{{item.goodsName}}</div>
+              <div class="v-price">
+                <p>￥ <span>{{item.sellingPrice}}</span></p>
+                <p class="v-icon"><van-icon name="cart-o" color="#d8182d" size="24" /></p>
+              </div>
+            </div>
+          </van-col>
+        </van-row>
+      </div>
     </div>
+    <h2 class="v-title-min">
+      <p>热门商品</p>
+      <p class="v-radius">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </p>
+    </h2>
+    <div class="v-content-tabs">
+      <div class="v-list-box">
+        <van-row>
+          <van-col span="12" v-for="item in newProducts" :key="item.goodsId">
+            <div class="v-info">
+              <div class="v-img-box">
+                <img :src="item.goodsCoverImg" alt="tabs.png" class="v-img">
+              </div>
+              <div class="v-title">{{item.goodsName}}</div>
+              <div class="v-price">
+                <p>￥ <span>{{item.sellingPrice}}</span></p>
+                <p class="v-icon"><van-icon name="cart-o" color="#d8182d" size="24" /></p>
+              </div>
+            </div>
+          </van-col>
+        </van-row>
+      </div>
+    </div>
+    <h2 class="v-title-min">
+      <p>新品推荐</p>
+      <p class="v-radius">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </p>
+    </h2>
   </div>
 </template>
 
@@ -98,6 +157,7 @@ export default {
           image: require('@assets/images/banner_center10.png')
         }
       ],
+      newProducts: [],
     })
     const active = ref(1)
 
@@ -116,7 +176,7 @@ export default {
      */
     onMounted(async () => {
       const { data }:any = await webGetSelectAreaCode({})
-      const { carousels } = data.data;
+      const { carousels, newGoodses } = data.data;
       if (!data) {
         state.swiperList = []
         return
@@ -127,6 +187,7 @@ export default {
           image: item.carouselUrl,
         }
       })
+      state.newProducts = newGoodses
       console.log(data);
     })
 
@@ -146,27 +207,47 @@ export default {
 
 <style lang="scss" scoped>
 .v-title-min {
-  padding: 15px 0;
-  font-size: 16px;
+  padding: 15px 0 4px;
+  font-size: 14px;
+  line-height: 1;
   text-align: center;
-  span {
+  .v-radius {
     position: relative;
-    display: block;
-    display: block;
-    width: 30px;
-    height: 30px;
-    border-radius: 50px;
-    background-color: red;
-    &::before {
-      contain: ' ';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
+    display: inline-block;
+    transform: scale(0.4);
+    span {
       display: block;
-      width: 10px;
-      height: 10px;
-      background-color: red;
-      transform: translateX(-50%);
+      &:nth-child(1), &:nth-child(2) {
+        width: 40px;
+        height: 20px;
+        border-radius: 0 0 100px 100px;
+      }
+      &:nth-child(3), &:nth-child(4) {
+        z-index: 999;
+        position: absolute;
+        top: 0;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color:  red;
+      }
+      &:nth-child(1) {
+        background-color: red;
+      }
+      &:nth-child(2) {
+        z-index: 99;
+        position: absolute;
+        left: 0;
+        top: -4px;
+        transform: scale(0.9);
+        background-color: #f9f9f9;
+      }
+      &:nth-child(3) {
+        left: -2px;
+      }
+      &:nth-child(4) {
+        right: -2px;
+      }
     }
   }
 }
@@ -187,7 +268,7 @@ export default {
     width: 20%;
     margin: 10px 0;
     .v-text-box {
-      font-size: 14px;
+      font-size: 12px;
       line-height: 1;
       text-align: center;
       .v-img {
@@ -202,7 +283,42 @@ export default {
   }
 }
 .v-content-tabs {
-  padding: 15px 10px;
-  background-color: #fff;
+  .v-list-box {
+    padding: 0 5px;
+  }
+  .v-info {
+    padding: 10px;
+    margin: 5px;
+    font-size: 12px;
+    border-radius: 5px;
+    background-color: #fff;
+    .v-img-box {
+      line-height: 1;
+      .v-img {
+        display: block;
+        width: 80%;
+        margin: 0 auto;
+      }
+    }
+    .v-title {
+      padding: 10px 0 5px;
+    }
+    .v-price {
+      position: relative;
+      padding: 10px 0;
+      color:#d8182d;
+      span {
+        display: inline-block;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .v-icon {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
 }
 </style>
