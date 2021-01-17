@@ -80,11 +80,21 @@ module.exports = {
         `
       },
       postcss: {
-        plugins: [
+        plugins: (loader) => [
           autoprefixer(),
-          pxtoviewport({
-            viewportWidth: 375,
-          })
+          require('postcss-px-to-viewport')({
+              viewportWidth: 750,     // 视窗的宽度
+              viewportHeight: 1080,   // 视窗的高度
+              unitPrecision: 3,       // 单位转换后保留的精度
+              viewportUnit: 'vw',     // 希望使用的视口单位
+              fontViewportUnit: 'vw', // 字体使用的视口单位
+              minPixelValue: 1,
+              mediaQuery: false,  // 媒体查询里的单位是否需要转换单位
+              exclude: /(\/|\\)(node_modules)(\/|\\)/,   // 忽略某些文件夹下的文件或特定文件
+              selectorBlackList: ['.ignore', '.hairlines'],    // 指定不转换为视窗单位的类
+              landscapeUnit: 'vw', // 横屏时使用的单位
+              landscapeWidth: 568 //  横屏时使用的视口宽度
+          }),
         ]
       }
     }

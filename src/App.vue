@@ -1,6 +1,5 @@
 <template>
   <div class="create-app">
-    <!-- END： can no longer be used directly inside -->
     <router-view v-wechat-title="$route.meta.title" v-slot="{ Component }">
       <transition :name="'vux-pop-'+(getSessionNavTabrsType === 'next' ? 'in' : getSessionNavTabrsType ==='prev' ? 'out' : '')">
         <component :is="Component" />
@@ -34,7 +33,7 @@ export default {
         {label: "我的", name: 2, active: require('@/assets/images/banner_active2.png'), inactive: require('@/assets/images/banner_inactive2.jpg'), path: '"/about'},
       ],
     })
-    const getSessionNavTabrsType:any = ref()  // 初始null
+    const getSessionNavTabrsType: any = ref()  // 初始null
 
     /**
      *  监听vuex -获取底部导航栏的切换状态
@@ -93,7 +92,6 @@ export default {
 }
 #app {
   color: #333;
-  font-size: 14px;
   background-color: #f9f9f9;
 }
 .vux-pop-out-enter-active,

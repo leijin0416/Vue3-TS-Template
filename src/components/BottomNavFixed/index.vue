@@ -111,7 +111,7 @@ export default {
   background-color: transparent;
 }
 /deep/.van-tabbar-item__icon img {
-  width: auto;
-  height: 20px;
+  width: 30px;
+  height: 30px;
 }
 </style>

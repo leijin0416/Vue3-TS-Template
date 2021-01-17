@@ -17,6 +17,7 @@
         </div>
       </div>
     </div>
+    <!-- 内容 -->
     <h2 class="v-title-min">
       <p>新品上线</p>
       <p class="v-radius">
@@ -56,10 +57,10 @@
     <div class="v-content-tabs">
       <div class="v-list-box">
         <van-row>
-          <van-col span="12" v-for="item in newProducts" :key="item.goodsId">
+          <van-col span="12" v-for="item in hotRecommend" :key="item.goodsId">
             <div class="v-info">
               <div class="v-img-box">
-                <img :src="item.goodsCoverImg" alt="tabs.png" class="v-img">
+                <img :src="url + item.goodsCoverImg" alt="tabs.png" class="v-img">
               </div>
               <div class="v-title">{{item.goodsName}}</div>
               <div class="v-price">
@@ -80,6 +81,25 @@
         <span></span>
       </p>
     </h2>
+    <div class="v-content-tabs">
+      <div class="v-list-box">
+        <van-row>
+          <van-col span="12" v-for="item in newsRecommend" :key="item.goodsId">
+            <div class="v-info">
+              <div class="v-img-box">
+                <img :src="url + item.goodsCoverImg" alt="tabs.png" class="v-img" v-if="item.goodsId !== 10907">
+                <img :src="item.goodsCoverImg" alt="tabs.png" class="v-img" v-else>
+              </div>
+              <div class="v-title">{{item.goodsName}}</div>
+              <div class="v-price">
+                <p>￥ <span>{{item.sellingPrice}}</span></p>
+                <p class="v-icon"><van-icon name="cart-o" color="#d8182d" size="24" /></p>
+              </div>
+            </div>
+          </van-col>
+        </van-row>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -104,6 +124,7 @@ export default {
 
     const state = reactive({
       id: 1,
+      url: 'http://47.99.134.126:28019',
       swiperList: [],
       categoryList: [
         {
@@ -158,6 +179,8 @@ export default {
         }
       ],
       newProducts: [],
+      hotRecommend: [],
+      newsRecommend: [],
     })
     const active = ref(1)
 
@@ -176,7 +199,7 @@ export default {
      */
     onMounted(async () => {
       const { data }:any = await webGetSelectAreaCode({})
-      const { carousels, newGoodses } = data.data;
+      const { carousels, newGoodses, hotGoodses, recommendGoodses } = data.data;
       if (!data) {
         state.swiperList = []
         return
@@ -188,6 +211,8 @@ export default {
         }
       })
       state.newProducts = newGoodses
+      state.hotRecommend = hotGoodses
+      state.newsRecommend = recommendGoodses
       console.log(data);
     })
 
@@ -206,9 +231,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.router-view {
+  padding-bottom: 110px;
+}
 .v-title-min {
-  padding: 15px 0 4px;
-  font-size: 14px;
+  padding: 30px 0 10px;
+  font-size: 28px;
   line-height: 1;
   text-align: center;
   .v-radius {
@@ -218,16 +246,16 @@ export default {
     span {
       display: block;
       &:nth-child(1), &:nth-child(2) {
-        width: 40px;
-        height: 20px;
+        width: 80px;
+        height: 40px;
         border-radius: 0 0 100px 100px;
       }
       &:nth-child(3), &:nth-child(4) {
         z-index: 999;
         position: absolute;
         top: 0;
-        width: 6px;
-        height: 6px;
+        width: 10px;
+        height: 10px;
         border-radius: 50%;
         background-color:  red;
       }
@@ -252,7 +280,7 @@ export default {
   }
 }
 .v-swiper-main {
-  min-height: 167px;
+  min-height: 330px;
   line-height: 1;
   background-color: #fff;
   /deep/.van-swipe .v-img {
@@ -262,54 +290,57 @@ export default {
 .v-flex-main {
   @include flex(row, wrap);
   @include align-item(center);  // 垂直Y
-  padding: 4px 0;
+  padding: 10px 0;
   background-color: #fff;
   .v-flex-list {
     width: 20%;
-    margin: 10px 0;
+    margin: 20px 0;
     .v-text-box {
-      font-size: 12px;
       line-height: 1;
       text-align: center;
       .v-img {
         display: block;
-        width: 40px;
-        margin: 0 auto 8px;
+        width: 70px;
+        margin: 0 auto 20px;
       }
       .v-text {
+        font-size: 24px;
         color: #86807c;
       }
     }
   }
 }
 .v-content-tabs {
+  min-height: 600px;
   .v-list-box {
-    padding: 0 5px;
+    padding: 0 10px;
   }
   .v-info {
-    padding: 10px;
-    margin: 5px;
-    font-size: 12px;
-    border-radius: 5px;
+    padding: 20px;
+    margin: 10px;
+    font-size: 24px;
+    border-radius: 10px;
     background-color: #fff;
     .v-img-box {
       line-height: 1;
       .v-img {
         display: block;
         width: 80%;
+        height: 260px;
         margin: 0 auto;
       }
     }
     .v-title {
-      padding: 10px 0 5px;
+      min-height: 80px;
+      padding: 20px 0 10px;
     }
     .v-price {
       position: relative;
-      padding: 10px 0;
+      padding: 20px 0;
       color:#d8182d;
       span {
         display: inline-block;
-        font-size: 18px;
+        font-size: 36px;
         font-weight: bold;
       }
       .v-icon {

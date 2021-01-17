@@ -25,11 +25,17 @@
 
 ---
 
+`options API -VUE3.0 选项型接口`
+
+`composition API -函数式编程思想  Hooks钩子函数`
+
 ## Vue3.x 生命周期变化
+
+**$nextTick(() => {})**  - DOM更新后执行，也就是页面加载完成后执行回调函数的操作。
 
 在 vue3 中通过安装 @vue/composition-api 来使用，Composition API的例子：
 
-vue2|vue3|含义
+vue2 | vue3 | 含义
 :-|:-:|-:
 beforeCreate | setup() | 在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
 created |setup()| 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)。然而，挂载阶段还没开始，$el 属性目前尚不可用。
@@ -41,14 +47,6 @@ beforeDestroy | onBeforeUnmount | 实例销毁之前调用。在这一步，实�
 destroyed | onUnmounted | 实例销毁后调用。该钩子被调用后，对应 Vue 实例的所有指令都被解绑，所有的事件监听器被移除，所有的子实例也都被销毁。
 
 ---
-
-**$nextTick(() => {})**  - DOM更新后执行，也就是页面加载完成后执行回调函数的操作。
-
----
-
-`options API -VUE3.0 选项型接口`
-
-`composition API -函数式编程思想  Hooks钩子函数`
 
 ## 响应式变量声明，钩子函数： ref 或者 reactive 代替data中的变量
 
