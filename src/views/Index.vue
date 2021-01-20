@@ -4,7 +4,7 @@
     <div class="v-swiper-main">
       <van-swipe class="v-swiper" :autoplay="3000" indicator-color="#fe4f70">
         <van-swipe-item v-for="item in swiperList" :key="item.id">
-          <img :src="item.image" class="v-img" />
+          <img :src="item.image" class="v-img">
         </van-swipe-item>
       </van-swipe>
     </div>
@@ -33,12 +33,12 @@
           <van-col span="12" v-for="item in newProducts" :key="item.goodsId">
             <div class="v-info">
               <div class="v-img-box">
-                <img :src="item.goodsCoverImg" alt="tabs.png" class="v-img">
+                <img :src="item.goodsCoverImg" alt="tabs.png" class="v-img" v-lazy="item.goodsCoverImg" >
               </div>
               <div class="v-title">{{item.goodsName}}</div>
               <div class="v-price">
-                <p>￥ <span>{{item.sellingPrice}}</span></p>
-                <p class="v-icon"><van-icon name="cart-o" color="#d8182d" size="24" /></p>
+                <p>￥<span>{{item.sellingPrice}}</span>.00</p>
+                <p class="v-icon"><van-icon name="cart-o" color="#fff" size="18" /></p>
               </div>
             </div>
           </van-col>
@@ -60,12 +60,12 @@
           <van-col span="12" v-for="item in hotRecommend" :key="item.goodsId">
             <div class="v-info">
               <div class="v-img-box">
-                <img :src="url + item.goodsCoverImg" alt="tabs.png" class="v-img">
+                <img :src="url + item.goodsCoverImg" alt="tabs.png" class="v-img" >
               </div>
               <div class="v-title">{{item.goodsName}}</div>
               <div class="v-price">
-                <p>￥ <span>{{item.sellingPrice}}</span></p>
-                <p class="v-icon"><van-icon name="cart-o" color="#d8182d" size="24" /></p>
+                <p>￥<span>{{item.sellingPrice}}</span>.00</p>
+                <p class="v-icon"><van-icon name="cart-o" color="#fff" size="18" /></p>
               </div>
             </div>
           </van-col>
@@ -92,8 +92,8 @@
               </div>
               <div class="v-title">{{item.goodsName}}</div>
               <div class="v-price">
-                <p>￥ <span>{{item.sellingPrice}}</span></p>
-                <p class="v-icon"><van-icon name="cart-o" color="#d8182d" size="24" /></p>
+                <p>￥<span>{{item.sellingPrice}}</span>.00</p>
+                <p class="v-icon"><van-icon name="cart-o" color="#fff" size="18" /></p>
               </div>
             </div>
           </van-col>
@@ -318,7 +318,7 @@ export default {
   .v-info {
     padding: 20px;
     margin: 10px;
-    font-size: 24px;
+    font-size: 28px;
     border-radius: 10px;
     background-color: #fff;
     .v-img-box {
@@ -331,23 +331,29 @@ export default {
       }
     }
     .v-title {
-      min-height: 80px;
+      box-sizing: border-box;
+      min-height: 110px;
       padding: 20px 0 10px;
     }
     .v-price {
       position: relative;
-      padding: 20px 0;
+      padding: 10px 0;
+      font-weight: bold;
       color:#d8182d;
       span {
         display: inline-block;
-        font-size: 36px;
-        font-weight: bold;
+        font-size: 38px;
       }
       .v-icon {
         position: absolute;
         right: 0;
         top: 50%;
         transform: translateY(-50%);
+        /deep/.van-icon {
+          padding: 10px;
+          border-radius: 50%;
+          background-color: #d8182d;
+        }
       }
     }
   }

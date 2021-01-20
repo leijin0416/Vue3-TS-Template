@@ -105,6 +105,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
+  min-height: 100px;
 }
 /deep/.van-tabbar-item--active {
   color: #fe4f70;
