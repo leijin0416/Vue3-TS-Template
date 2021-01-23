@@ -4,7 +4,7 @@
     <div class="v-swiper-main">
       <van-swipe class="v-swiper" :autoplay="3000" indicator-color="#fe4f70">
         <van-swipe-item v-for="item in swiperList" :key="item.id">
-          <img :src="item.image" class="v-img">
+          <img class="v-img" v-lazy="item.image" >
         </van-swipe-item>
       </van-swipe>
     </div>
@@ -33,7 +33,7 @@
           <van-col span="12" v-for="item in newProducts" :key="item.goodsId">
             <div class="v-info">
               <div class="v-img-box">
-                <img :src="item.goodsCoverImg" alt="tabs.png" class="v-img" v-lazy="item.goodsCoverImg" >
+                <img alt="tabs.png" class="v-img" v-lazy="item.goodsCoverImg" >
               </div>
               <div class="v-title">{{item.goodsName}}</div>
               <div class="v-price">
@@ -280,11 +280,13 @@ export default {
   }
 }
 .v-swiper-main {
-  min-height: 330px;
+  height: 340px;
+  overflow: hidden;
   line-height: 1;
-  background-color: #fff;
   /deep/.van-swipe .v-img {
     width: 100%;
+    height: 340px;
+    object-fit: cover;
   }
 }
 .v-flex-main {

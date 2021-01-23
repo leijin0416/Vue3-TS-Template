@@ -66,6 +66,7 @@ data() {
         list: [],
     }
 },
+
 /*================ 之后 ================ */
 import { ref, reactive } from 'vue'
 setup(){
@@ -73,9 +74,12 @@ setup(){
     const state = reactive({
         list: []
     })
+
+    // 用 toRefs 把每一项都转化为响应式对象
+    const refData = toRefs(data)
     return {
         name,
-        state
+        ...refData
     }
 }
 ```

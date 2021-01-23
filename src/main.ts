@@ -3,7 +3,7 @@ import App from "./App.vue"
 import router from "./router"
 import store from "./store"
 
-import { Lazyload } from 'vant'
+import { Lazyload } from 'vant'  // 图片懒加载
 import "./style/common.scss"
 
 import VueWechatTitle from "vue-wechat-title"
@@ -16,5 +16,7 @@ createApp(App)
   .use(vantPlugins)
   .use(Lazyload, {
     lazyComponent: true,
+    error: require('@/assets/error.jpg'),      //报错需要的图片
+    loading: require('@/assets/loading.png')	// 替换需要的图片
   })
   .mount("#app")

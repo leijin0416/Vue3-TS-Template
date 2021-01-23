@@ -131,8 +131,6 @@ module.exports = {
         optimization
       })
       config.plugins.push(
-        // 删除
-        // config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
         // 压缩代码
         new CompressionWebpackPlugin({
           algorithm: "gzip",

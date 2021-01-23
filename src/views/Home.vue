@@ -30,9 +30,7 @@ export default {
       count.value++
     };
     
-    watch(
-      () => count.value,
-      () => {
+    watch( () => count.value, () => {
         other_count.value = count.value * count.value
       }
     );
