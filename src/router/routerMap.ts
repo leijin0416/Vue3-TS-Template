@@ -14,13 +14,12 @@ const getComponentMax = (name: any, component: any) => () =>
   import(`@/views/${name}/${component}.vue`)
 
 /**
- * @param {boolean} displayNavBar 是否需要底部导航
- * @param {boolean} keepAlive     是否缓存页面
- * @param {string}  title         页面标题
- * 
- * @param {string}  redirect      路由重定向
- * 
  * to.meta.index || from.meta.index || this.$router.isBack
+ * 
+ * @param {boolean} displayNavBar   是否需要底部导航
+ * @param {boolean} keepAlive       是否缓存页面
+ * @param {string}  title           页面标题
+ * @param {string}  redirect        路由重定向
  */
 export const routerMaps: Array<RouteRecordRaw> = [
   // 重定向：
