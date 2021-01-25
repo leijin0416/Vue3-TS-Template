@@ -213,7 +213,7 @@ export default {
       state.newProducts = newGoodses
       state.hotRecommend = hotGoodses
       state.newsRecommend = recommendGoodses
-      console.log(data);
+      // console.log(data);
     })
 
     /**
@@ -239,10 +239,15 @@ export default {
   font-size: 28px;
   line-height: 1;
   text-align: center;
+  p {
+    z-index: 999;
+    position: relative;
+  }
   .v-radius {
+    z-index: 99;
     position: relative;
     display: inline-block;
-    transform: scale(0.4);
+    transform: scale(0.5);
     span {
       display: block;
       &:nth-child(1), &:nth-child(2) {
@@ -251,9 +256,9 @@ export default {
         border-radius: 0 0 100px 100px;
       }
       &:nth-child(3), &:nth-child(4) {
-        z-index: 999;
+        z-index: 99;
         position: absolute;
-        top: 0;
+        top: -2px;
         width: 10px;
         height: 10px;
         border-radius: 50%;
@@ -263,18 +268,20 @@ export default {
         background-color: red;
       }
       &:nth-child(2) {
-        z-index: 99;
+        z-index: 1;
         position: absolute;
         left: 0;
-        top: -4px;
-        transform: scale(0.9);
+        top: -40px;
+        height: 80px;
+        border-radius: 50%;
+        transform: scale(0.8);
         background-color: #f9f9f9;
       }
       &:nth-child(3) {
-        left: -2px;
+        left: -1px;
       }
       &:nth-child(4) {
-        right: -2px;
+        right: -1px;
       }
     }
   }
