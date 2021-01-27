@@ -29,20 +29,20 @@ export const routerMaps: Array<RouteRecordRaw> = [
   },
   {
     path: "/index",
-    name: "Home",
+    name: "Index",
     component: getComponentMin("Index"),
     meta: { title: "NAI Trading Center", displayNavBar: true }
   },
   {
-    path: "/about",
-    name: "About",
+    path: "/home",
+    name: "Home",
     component: getComponentMin("Home"),
     meta: { title: "NAI Trading Center", displayNavBar: true }
   },
   {
     path: "/text",
     name: "Text",
-    component: getComponentMin("Text"),
+    component: getComponentMax('other', 'Text'),
     meta: { title: "NAI Trading Center", displayNavBar: false }
   },
 ]

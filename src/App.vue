@@ -1,7 +1,7 @@
 <template>
   <div class="create-app">
     <router-view v-wechat-title="$route.meta.title" v-slot="{ Component }">
-      <transition :name="'vux-pop-'+(getSessionNavTabrsType === 'next' ? 'in' : getSessionNavTabrsType ==='prev' ? 'out' : '')">
+      <transition :name="'vux-pop-'+(getSessionNavTabrsType === 'next' ? 'in' : getSessionNavTabrsType === 'prev' ? 'out' : '')">
         <component :is="Component" />
       </transition>
     </router-view>
@@ -15,6 +15,7 @@
 
 <script lang="ts">
 import { reactive, ref, onMounted, computed, toRefs, watch, defineAsyncComponent } from "vue"
+import { useRouter, useRoute } from "vue-router"
 import { useStore } from "vuex"
 import { sessionData } from "@/filters/storage"
 
@@ -26,11 +27,12 @@ export default {
     BottomNavTabs,
   },
   setup() {
-    const store = useStore() // 声明、获取 状态管理vuex
+    const route = useRoute()    // 获取路由信息
+    const store = useStore()    // 声明、获取 状态管理vuex
     const state = reactive({
       navTabsData: [
         {label: "首页", name: 1, active: require('@/assets/images/banner_active1.png'), inactive: require('@/assets/images/banner_inactive1.png'), path: "/"},
-        {label: "我的", name: 2, active: require('@/assets/images/banner_active2.png'), inactive: require('@/assets/images/banner_inactive2.jpg'), path: '"/about'},
+        {label: "我的", name: 2, active: require('@/assets/images/banner_active2.png'), inactive: require('@/assets/images/banner_inactive2.jpg'), path: '"/home'},
       ],
     })
     const getSessionNavTabrsType: any = ref()  // 初始null
@@ -42,7 +44,7 @@ export default {
       if (newer === null) return
       else {
         getSessionNavTabrsType.value = newer
-        console.log(`Watch-Vuex navType newer is：${newer}`)
+        console.log(`Watch__刷新底部切换导航动画类型__${newer}`)
       }
     }, { deep: true })
     
@@ -51,21 +53,21 @@ export default {
        *  状态管理  -获取底部导航栏的切换状态
        *  页面刷新
        */
-      const sessionNav = sessionData("get", "getSessionNavTabrsType", "")
-      const data = store.getters["storageUser/getSessionNavTabrsType"]
-      if (data === '' && typeof sessionNav === "string") {
-        getSessionNavTabrsType.value = sessionNav
+      const sessionNavType = sessionData("get", "getSessionNavTabrsType", "")
+      const typeData = store.getters["storageUser/getSessionNavTabrsType"]
+      const displayNavBar = route.meta.displayNavBar
+      
+      if (typeData === '' && typeof sessionNavType === "string") {
+        getSessionNavTabrsType.value = sessionNavType
 
       } else {
-        getSessionNavTabrsType.value = data
+        getSessionNavTabrsType.value = typeData
 
       }
-      // console.log(data)
-      // console.log(sessionNav)
     })
 
     const onTabsChange = (index: any) => {
-      console.log(`组件上下文对象的底部切换导航ID：${index}`)
+      console.log(`__刷新底部切换导航ID__${index}`)
     }
 
     const removeVeget = (index: any) => {
@@ -91,6 +93,7 @@ export default {
   margin: 0;
 }
 #app {
+  font-size: 28px;
   color: #333;
   background-color: #f9f9f9;
 }

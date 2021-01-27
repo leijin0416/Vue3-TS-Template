@@ -40,48 +40,51 @@ export default {
     const router = useRouter()   // 路由
     const route = useRoute()    // 获取路由信息
     const store = useStore()    // 状态管理vuex
+    const vuexStoreNav = store.state.storageUser
 
     const state = reactive({
       id: 1,
     })
     const active = ref(1)
 
+
     /**
      *  监听vuex -获取底部导航栏的切换ID
      */
-    watch(() => store.state.storageUser.getSessionNavTabrsID, (newer, older) => {
+    watch(() => vuexStoreNav.getSessionNavTabrsID, (newer, older) => {
       if (newer === null) return
       else {
         active.value = newer
-        console.log(`Watch navTab newer is ${newer}`)
+        console.log(`Watch__刷新底部切换导航ID__${newer}`)
       }
     }, { deep: true })
 
     onMounted(async () => {
-      const navId = store.getters["storageUser/getSessionNavTabrsID"]
+      const vuexNavId = store.getters["storageUser/getSessionNavTabrsID"]
       const sessionTabs = sessionData("get", "getSessionNavTabrsID", "")
-      // console.log(sessionTabs);
 
-      if (navId === '' && sessionTabs === null) {
+      if (vuexNavId === '' && sessionTabs === null) {
         // 第一次进来的时候
-        active.value = 1;
+        active.value = 1
 
-      } else if (navId === '' && sessionTabs !== null) {
+      } else if (vuexNavId === '' && sessionTabs !== null) {
         // 刷新页面的时候
-        let displayNavBar = route.meta.displayNavBar;
+        let displayNavBar = route.meta.displayNavBar
         if (displayNavBar) {
-          if (sessionTabs === "1") router.push("/");
-          if (sessionTabs === "2") router.push("/about");
+          if (sessionTabs === "1") router.push("/")
+          else if (sessionTabs === "2") router.push("/home")
+          else return
         }
         active.value = Number(sessionTabs);
-        console.log(`组件上下文对象的底部切换导航刷新ID：${sessionTabs}`)
 
+        console.log(`缓存__刷新底部切换导航ID__${sessionTabs}`)
         // Reflect.set(active, 0, Number(sessionTabs))
         
       } else {
         // 默认
-        active.value = Number(navId)
+        active.value = Number(vuexNavId)
       }
+      console.log(`VUEX__刷新底部切换导航ID__${vuexNavId}`);
     })
 
     // 组件上下文对象的底部切换导航ID
