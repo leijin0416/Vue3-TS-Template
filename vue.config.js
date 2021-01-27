@@ -2,12 +2,10 @@ const webpack = require("webpack")
 const path = require("path")
 const merge = require("webpack-merge")
 const pxtoviewport = require("postcss-px-to-viewport")
-const tsImportPluginFactory = require("ts-import-plugin")   // Vant按需加载
+const tsImportPluginFactory = require("ts-import-plugin")                // Vant按需加载
 
-// const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
-const CompressionWebpackPlugin = require("compression-webpack-plugin") // gzip
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-  .BundleAnalyzerPlugin
+const CompressionWebpackPlugin = require("compression-webpack-plugin")   // gzip
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin
 const TerserPlugin = require("terser-webpack-plugin")
 
 function resolve(dir) { return path.join(__dirname, dir) }

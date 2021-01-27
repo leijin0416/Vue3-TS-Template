@@ -16,7 +16,7 @@ history.removeItem("count")
 
 router.beforeEach((to, from, next) => {
   // 第一级栏目
-  const subArr = ["/", "/index", "/about"]
+  const subArr = ["/", "/index", "/home"]
   const [toIndex, prevIndex] = [history.getItem(to.path), history.getItem(from.path)]
   for (let index in subArr) history.setItem(subArr[index], "0")
   const numToIndex = Number(toIndex)  // 当前
@@ -31,19 +31,21 @@ router.beforeEach((to, from, next) => {
     if (!subArr.includes(to.path)) {
       ++numCount
       history.setItem(to.path, numCount.toString())
-      store.commit("storageUser/SET_sessionNavTabrsType", "next")
+      store.commit("vuexStorageNav/SET_sessionNavTabrsType", "next")
       
     } else if (numToIndex || numToIndex === 0) {
       if (numToIndex > numPrevIndex) {
-        store.commit("storageUser/SET_sessionNavTabrsType", "next")
+        console.log("===== NAV TYPE STRAT =====")
+        store.commit("vuexStorageNav/SET_sessionNavTabrsType", "next")
 
       } else if (numToIndex === numPrevIndex) {  // 一级栏目无切换效果
-        console.log("===== NAV TYPE STRAT =====")
+        console.log("===== NAV TYPE END =====")
         sessionData("clean", "getSessionNavTabrsType", "")
-        store.commit("storageUser/SET_sessionNavTabrsType", "null")
+        store.commit("vuexStorageNav/SET_sessionNavTabrsType", "null")
 
       } else {
-        store.commit("storageUser/SET_sessionNavTabrsType", "prev")
+        console.log("===== NAV TYPE STRAT =====")
+        store.commit("vuexStorageNav/SET_sessionNavTabrsType", "prev")
       }
     } else {console.log("===== NAV TYPE END =====")}
     next()

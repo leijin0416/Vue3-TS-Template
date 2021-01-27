@@ -12,8 +12,13 @@ export default {
     getSessionNavTabrsType: (state: any) => state.getSessionNavTabrsType,
     getSessionNavTabrsID: (state: any) => state.getSessionNavTabrsID,
   },
+  actions: {
+    updateTokenCart(ctx: any, context: any) {
+      ctx.commit('SET_sessionUserToken', context)
+    }
+  },
   mutations: {
-    // 底部导航切换ID
+    // 底部导航切换状态
     SET_sessionNavTabrsType(state: any, context: any) {
       state.getSessionNavTabrsType = context
       sessionData("set", "getSessionNavTabrsType", context)
@@ -25,8 +30,7 @@ export default {
     },
     SET_sessionUserToken(state: any, context: any) {
       state.getSessionUserToken = context
-      sessionData("set", "getSessionUserToken", context)
+      // sessionData("set", "getSessionUserToken", context)
     },
   },
-  actions: {},
 }

@@ -29,6 +29,7 @@ export default {
   setup() {
     const route = useRoute()    // 获取路由信息
     const store = useStore()    // 声明、获取 状态管理vuex
+    const vuexStoreNav = store.state.vuexStorageNav
     const state = reactive({
       navTabsData: [
         {label: "首页", name: 1, active: require('@/assets/images/banner_active1.png'), inactive: require('@/assets/images/banner_inactive1.png'), path: "/"},
@@ -40,7 +41,7 @@ export default {
     /**
      *  监听vuex -获取底部导航栏的切换状态
      */
-    watch(() => store.state.storageUser.getSessionNavTabrsType, (newer, older) => {
+    watch(() => vuexStoreNav.getSessionNavTabrsType, (newer, older) => {
       if (newer === null) return
       else {
         getSessionNavTabrsType.value = newer
@@ -54,7 +55,7 @@ export default {
        *  页面刷新
        */
       const sessionNavType = sessionData("get", "getSessionNavTabrsType", "")
-      const typeData = store.getters["storageUser/getSessionNavTabrsType"]
+      const typeData = store.getters["vuexStorageNav/getSessionNavTabrsType"]
       const displayNavBar = route.meta.displayNavBar
       
       if (typeData === '' && typeof sessionNavType === "string") {

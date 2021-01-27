@@ -6,7 +6,9 @@
           <div class="weui-cell-hd">
             <img src="@assets/images/avatar.jpg" alt="user.png" class="v-img" />
           </div>
-          <div class="weui-cell-bd">2</div>
+          <div class="weui-cell-bd">
+            <p class="v-text">{{userName}}</p>
+          </div>
         </div>
       </div>
     </header>
@@ -15,30 +17,43 @@
 </template>
 
 <script>
-import { ref, watch, computed, onMounted, getCurrentInstance } from "vue"
+import { ref, reactive, toRefs, watch, computed, onMounted, getCurrentInstance } from "vue"
+import { useStore } from "vuex"
 
 export default {
   setup() {
-    const { ctx } = getCurrentInstance()  // 获取当前组件实例,this
+    // 获取当前组件实例,this
+    const { ctx } = getCurrentInstance()
+    // 状态管理vuex
+    const store = useStore()
+    const vuexStoreNav = store.state.vuexStorageNav
     const count = ref(0)
+    const stateData = reactive({
+      userName: 'vue-Cropper-h5 图片裁剪',
+    })
     
-    watch( () => count.value, (newVal, oldVal) => {
+    watch( () => vuexStoreNav.getSessionUserToken, (newVal, oldVal) => {
+        console.log(newVal);
+        console.log(oldVal);
       }
     )
 
-    const other_two_count = computed(() => {
+    const otherTwoCount = computed(() => {
     })
 
     onMounted(() => {
+      // dispatch：含有异步操作
+      store.dispatch("vuexStorageNav/updateTokenCart", 123)
     })
 
     // vuex
     const testStatus = computed(() => {
-      return ctx.$store.state.testStatus
+      return ctx.$store.state.getSessionUserToken
     })
 
-    const commit = () => {
-      ctx.$store.commit("set_testStatus", testStatus.value + 1)
+    const vuexCommit = () => {
+      // commit：同步操作
+      ctx.$store.commit('vuexStorageNav/updateTokenCart', testStatus.value + 1)
     }
 
     // vue-router
@@ -47,10 +62,32 @@ export default {
     })
 
     return {
+      ...toRefs(stateData),
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.v-header-user {
+  padding: 30px;
+  background-color: red;
+  .weui-cell-hd {
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    border-radius: 50%;
+    .v-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .v-text {
+    padding-left: 30px;
+    font-size: 36px;
+    font-weight: bold;
+    color: #fff;
+  }
+}
 </style>

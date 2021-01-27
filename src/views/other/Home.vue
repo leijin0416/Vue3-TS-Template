@@ -36,7 +36,7 @@ export default {
     /**
      *  监听vuex
      */
-    watch(() => store.state.storageUser.getSessionUserToken, (newer, older) => {
+    watch(() => store.state.vuexStorageNav.getSessionUserToken, (newer, older) => {
       if (newer === null) {
           return
       } else {
@@ -50,8 +50,8 @@ export default {
       /**
        *  状态管理
        */
-      state.activeIds = store.getters["storageUser/getSessionUserToken"]
-      store.commit("storageUser/SET_sessionUserToken", 123)
+      state.activeIds = store.getters["vuexStorageNav/getSessionUserToken"]
+      store.commit("vuexStorageNav/SET_sessionUserToken", 123)
       const data = sessionData("get", "getSessionUserToken", "")
 
     })

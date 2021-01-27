@@ -1,6 +1,6 @@
 // modules入口
-import storageUser from './storageUser'
+import vuexStorageNav from './storageNav'
 
 export default {
-  storageUser,
+  vuexStorageNav,
 }

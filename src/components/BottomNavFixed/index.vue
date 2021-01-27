@@ -40,7 +40,7 @@ export default {
     const router = useRouter()   // 路由
     const route = useRoute()    // 获取路由信息
     const store = useStore()    // 状态管理vuex
-    const vuexStoreNav = store.state.storageUser
+    const vuexStoreNav = store.state.vuexStorageNav
 
     const state = reactive({
       id: 1,
@@ -60,7 +60,7 @@ export default {
     }, { deep: true })
 
     onMounted(async () => {
-      const vuexNavId = store.getters["storageUser/getSessionNavTabrsID"]
+      const vuexNavId = store.getters["vuexStorageNav/getSessionNavTabrsID"]
       const sessionTabs = sessionData("get", "getSessionNavTabrsID", "")
 
       if (vuexNavId === '' && sessionTabs === null) {
@@ -89,7 +89,7 @@ export default {
 
     // 组件上下文对象的底部切换导航ID
     const onTabsChange = (index: any) => {
-      store.commit("storageUser/SET_sessionNavTabrsID", index)
+      store.commit("vuexStorageNav/SET_sessionNavTabrsID", index)
       context.emit("onTabsChange", index)
     }
 
