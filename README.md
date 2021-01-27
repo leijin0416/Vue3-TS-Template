@@ -1,5 +1,15 @@
 # 文档
 
+- vue2.x中，所有的数据都在data方法中定义返回，方法定义在methods下面，**并通过 this调用**；
+
+- vue3.x中，所有的代码逻辑将在setup方法中实现，包括 `data、watch、computed、methods、hooks`，**并且不再有 this**；
+
+`yarn报错：Found incompatible module`  -解决：`yarn config set ignore-engines true`；
+
+`改造ts中，提示找不到模块vue`  -解决：tsconfig.json 的配置有问题：需要将compilerOptions中的 moduleResolution 改为 node；
+
+---
+
 标签|内容
 :-|:-:
 **`Vue3.0`** | [Vue Composition API](https://composition-api.vuejs.org/) [Vue Composition CN API](https://v3.cn.vuejs.org/api/options-lifecycle-hooks.html) --/-- [Vue3.0来袭清单1 jj](https://juejin.im/post/6872113750636232712) --/-- [Vue3.0来袭清单2 sf](https://segmentfault.com/a/1190000022451034?utm_source=sf-related) --/-- [Vue3.0来袭清单3 sf](https://segmentfault.com/a/1190000017088044?utm_source=sf-related)
@@ -14,14 +24,6 @@
 **`面试自检`** | [分享自检1 jj](https://juejin.im/post/6873444336059711495) -- [分享自检2 jj](https://juejin.im/post/6874275613360783368)
 —— |
 [【vue3.0】 掘金 全 评论](https://juejin.im/post/6874604408030789640) | [【leevii】 搜索框 博客](https://www.leevii.com/2020/09/the-first-experience-of-vue3-0.html) --/-- [【tower1229】 树形组件 博客](https://github.com/tower1229) --/-- [【vue2/3.0】 知乎理解 全](https://www.zhihu.com/question/402884177)
-
-- vue2.x中，所有的数据都在data方法中定义返回，方法定义在methods下面，**并通过 this调用**；
-
-- vue3.x中，所有的代码逻辑将在setup方法中实现，包括 `data、watch、computed、methods、hooks`，**并且不再有 this**；
-
-`yarn报错：Found incompatible module`  -解决：`yarn config set ignore-engines true`；
-
-`改造ts中，提示找不到模块vue`  -解决：tsconfig.json 的配置有问题：需要将compilerOptions中的 moduleResolution 改为 node；
 
 ---
 
