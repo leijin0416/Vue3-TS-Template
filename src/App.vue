@@ -95,8 +95,6 @@ export default {
 }
 #app {
   font-size: 28px;
-  color: #333;
-  background-color: #f9f9f9;
 }
 .vux-pop-out-enter-active,
 .vux-pop-out-leave-active,

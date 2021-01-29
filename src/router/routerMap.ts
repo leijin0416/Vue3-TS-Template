@@ -38,11 +38,11 @@ export const routerMaps: Array<RouteRecordRaw> = [
     name: "Home",
     component: getComponentMin("Home"),
     meta: { title: "NAI Trading Center", displayNavBar: true }
-  },
+  }, 
   {
-    path: "/text",
-    name: "Text",
-    component: getComponentMax('other', 'Text'),
+    path: "/home/modify",
+    name: "Modify",
+    component: getComponentMax('user', 'index'),
     meta: { title: "NAI Trading Center", displayNavBar: false }
   },
 ]
