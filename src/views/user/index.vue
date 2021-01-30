@@ -42,11 +42,16 @@
 <script>
 import { ref, reactive, toRefs, watch, computed, onMounted, getCurrentInstance } from "vue"
 import { useStore } from "vuex"
+import { useRouter, useRoute } from "vue-router"
 
 export default {
   setup() {
     // 获取当前组件实例,this
     const { ctx } = getCurrentInstance()
+    // 路由
+    const router = useRouter()
+    // 获取路由信息
+    const route = useRoute()
     // 状态管理vuex
     const store = useStore()
     const vuexStoreNav = store.state.vuexStorageNav
@@ -57,8 +62,8 @@ export default {
     })
     
     watch( () => vuexStoreNav.getSessionUserToken, (newVal, oldVal) => {
-        console.log(newVal);
-        console.log(oldVal);
+        // console.log(newVal);
+        // console.log(oldVal);
       }
     )
 
@@ -71,27 +76,33 @@ export default {
     })
     // console.log(testStatus);
 
-    const vuexCommit = () => {
-      // commit：同步操作
-      ctx.$store.commit('vuexStorageNav/updateTokenCart', testStatus.value + 1)
-    }
-
     // vue-router
     const routerName = computed(() => {
       return ctx.$router.currentRoute.value.name
     })
 
+    const vuexCommit = () => {
+      // commit：同步操作
+      ctx.$store.commit('vuexStorageNav/SET_sessionUserToken', testStatus.value + 1)
+    }
+
     const onClickSubmit = (values) => {
       let { username, password } = values
-      // dispatch：含有异步操作
-      store.dispatch("vuexStorageNav/updateTokenCart", username)
-
-      console.log(values);
-      console.log(username);
+      // dispatch：含有异步操作方法
+      store.dispatch('vuexStorageNav/updateTokenCart', username)
+      ctx.$toast({
+        duration: 3000,
+        message: '修改成功!',
+        onClose: () => {
+          onClickLeft()
+        }
+      })
+      // console.log(values);
+      // console.log(username);
     }
 
     const onClickLeft = () => {
-      ctx.$router.go(-1)
+      router.go(-1)
     }
 
     return {

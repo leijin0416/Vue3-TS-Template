@@ -3,9 +3,9 @@ import { sessionData } from "@/filters/storage"
 export default {
   namespaced: true,
   state: {
-    getSessionUserToken: "01",
-    getSessionNavTabrsType: "",
-    getSessionNavTabrsID: "",
+    getSessionUserToken: '',
+    getSessionNavTabrsType: '',
+    getSessionNavTabrsID: '',
   },
   getters: {
     getSessionUserToken: (state: any) => state.getSessionUserToken,

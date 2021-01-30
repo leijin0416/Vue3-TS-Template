@@ -95,30 +95,30 @@ export default {
   get(url: any) {
     return new Promise( (resolve, reject) => {
       axios({
-          method: "get",
-          url,
-          params: ''
+        method: "get",
+        url,
+        params: ''
       })
       .then( res => {
-          resolve(res)
+        resolve(res)
       })
       .catch( res => {
-          reject(res)
+        reject(res)
       })
     })
   },
   post(url: any, param: any) {
     return new Promise( (resolve, reject) => {
       axios({
-          method: "post",
-          url,
-          data: param
+        method: "post",
+        url,
+        data: param
       })
       .then( res => {
-          resolve(res)
+        resolve(res)
       })
       .catch( res => {
-          reject(res)
+        reject(res)
       })
     })
   }

@@ -110,13 +110,14 @@ import { useStore } from "vuex"
 import { webGetSelectAreaCode } from "@/mock/newbee"
 import { sessionData } from "@/filters/storage"
 
+// console.log(props.navTabsData[0].label)
+// ctx.emit('event')
 export default {
   name: '',
   props: {},
   setup(props:any, context:any) {
-    // console.log(props.navTabsData[0].label)
-    // ctx.emit('event')
-    const router = useRouter()   // 路由
+    // 路由
+    const router = useRouter()
     // 获取路由信息
     const route = useRoute()
     // 状态管理vuex

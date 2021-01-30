@@ -12,8 +12,11 @@
         </div>
       </div>
     </header>
-    <div class="v-introduce-text">
+    <div class="v-introduce-text" ref="introduce" :class="introduceType ? 'v-appear' : 'v-disappear'">
       <p class="v-text"><van-icon name="chat-o" /> 所有的学习，最开始都像是在照镜子，无非是学到了，再换一个老师，换一面镜子，直到有一天你发现，你的新的镜子里是你自己，你就有你自己的方法了，你就可以做别人的镜子了。</p>
+      <div class="v-icon-box" @click="onClickIntroduce">
+        <van-icon name="close" size="18" color="#999999" />
+      </div>
     </div>
     <main>
       <div class="v-cell-box">
@@ -39,6 +42,7 @@ export default {
     const vuexStoreNav = store.state.vuexStorageNav
     const count = ref(0)
     const stateData = reactive({
+      introduceType: true,
       userName: 'vue-Cropper-h5 图片裁剪',
     })
     
@@ -52,27 +56,35 @@ export default {
     })
 
     onMounted(() => {
-      // dispatch：含有异步操作
-      // store.dispatch("vuexStorageNav/updateTokenCart", 123)
+      let name = vuexStoreNav.getSessionUserToken
+      if (name !== '') stateData.userName = vuexStoreNav.getSessionUserToken
+      // console.log(vuexStoreNav.getSessionUserToken);
     })
+
+    const vuexCommit = () => {
+      // commit：同步操作
+      ctx.$store.commit('vuexStorageNav/SET_sessionUserToken', testStatus.value + 1)
+    }
 
     // vuex
     const testStatus = computed(() => {
       return ctx.$store.state.getSessionUserToken
     })
-
-    const vuexCommit = () => {
-      // commit：同步操作
-      ctx.$store.commit('vuexStorageNav/updateTokenCart', testStatus.value + 1)
-    }
-
     // vue-router
     const routerName = computed(() => {
       return ctx.$router.currentRoute.value.name
     })
 
+    const onClickIntroduce = () => {
+      stateData.introduceType = false;
+      setTimeout(() => {
+        ctx.$refs.introduce.style = "display: none"
+      }, 1000);
+    }
+
     return {
       ...toRefs(stateData),
+      onClickIntroduce
     }
   }
 }
@@ -87,18 +99,50 @@ export default {
 }
 
 .v-introduce-text {
-  padding: 30px;
+  position: relative;
+  padding: 0 30px;
+  margin-bottom: 30px;
+  // transition: all .3s linear;
   .v-text {
     padding: 30px;
     border-radius: 20px;
     box-shadow: 0 0 30px #eee;
     background-color: #fff;
   }
+  .v-icon-box {
+    position: absolute;
+    right: 22px;
+    top: -10px;
+  }
+}
+
+.v-appear {
+  animation: dropactive .3s linear 1;
+}
+.v-disappear {
+  animation: dropdown 1.3s linear 1;
+}
+
+@keyframes dropdown {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.6); }
+  60% { transform: scale(0.3); }
+  95% { transform: scale(0); }
+  // 100% { visibility: hidden; opacity: 0;height: 0; }
+}
+
+@keyframes dropactive {
+  0% { transform: scale(0); }
+  30% { transform: scale(0.3); }
+  60% { transform: scale(0.6); }
+  90% { transform: scale(0.9); }
+  100% { transform: scale(1); }
 }
 
 .v-header-user {
   padding: 30px;
-  background-color: red;
+  margin-bottom: 30px;
+  background-color: #fb395d;
   .weui-cell-hd {
     width: 120px;
     height: 120px;
@@ -118,7 +162,7 @@ export default {
 }
 
 .v-cell-box {
-  padding: 10px 0;
+  padding: 30px 0;
   background-color: #fff;
   /deep/.van-cell {
     line-height: 50px;

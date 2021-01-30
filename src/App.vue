@@ -1,10 +1,12 @@
 <template>
   <div class="create-app">
-    <router-view v-wechat-title="$route.meta.title" v-slot="{ Component }">
-      <transition :name="'vux-pop-'+(getSessionNavTabrsType === 'next' ? 'in' : getSessionNavTabrsType === 'prev' ? 'out' : '')">
-        <component :is="Component" />
-      </transition>
-    </router-view>
+    <keep-alive>
+      <router-view v-wechat-title="$route.meta.title" v-slot="{ Component }">
+        <transition :name="'vux-pop-'+(getSessionNavTabrsType === 'next' ? 'in' : getSessionNavTabrsType === 'prev' ? 'out' : '')">
+          <component :is="Component" />
+        </transition>
+      </router-view>
+    </keep-alive>
 
     <BottomNavTabs 
       v-if="$route.meta.displayNavBar"
