@@ -19,7 +19,7 @@ import { useRouter, useRoute } from "vue-router"
 import { useStore } from "vuex"
 import { sessionData } from "@/filters/storage"
 
-// 异步组件 -defineAsyncComponent可以接受一个加载器函数，该函数将承诺解析返回给实际的组件
+// 异步组件 -defineAsyncComponent 可以接受一个加载器函数，该函数将承诺解析返回给实际的组件;
 const BottomNavTabs = defineAsyncComponent(() => import('@/components/BottomNavFixed/index.vue'))
 
 export default {
