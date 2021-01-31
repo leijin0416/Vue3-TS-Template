@@ -1,16 +1,14 @@
 <template>
   <div class="router-view">
     <header>
-      <div class="v-navbar-box">
-        <van-nav-bar
-          title="修改个人信息"
-          :border="false"
-          fixed>
-          <template #left>
-            <van-icon name="arrow-left" size="18" color="#fe4f70" @click="onClickLeft" />
-          </template>
-        </van-nav-bar>
-      </div>
+      <van-nav-bar
+        title="修改个人信息"
+        :border="false"
+        fixed>
+        <template #left>
+          <van-icon name="arrow-left" size="18" color="#fe4f70" @click="onClickLeft" />
+        </template>
+      </van-nav-bar>
     </header>
     <main>
       <div class="v-form-box">
@@ -121,11 +119,10 @@ export default {
   padding-top: 90px;
   background-color: #f9f9f9;
 }
-.v-navbar-box {
-  margin-bottom: 30px;
-}
+
 .v-form-box {
   padding: 30px 0;
+  margin-top: 30px;
   background-color: #fff;
   /deep/.van-button {
     color: #fff;

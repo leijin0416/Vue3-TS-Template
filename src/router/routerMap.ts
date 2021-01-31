@@ -31,18 +31,18 @@ export const routerMaps: Array<RouteRecordRaw> = [
     path: "/index",
     name: "Index",
     component: getComponentMin("Index"),
-    meta: { title: "NAI Trading Center", displayNavBar: true }
+    meta: { title: "NAI Trading Center", keepAlive: true, displayNavBar: true }
   },
   {
     path: "/home",
     name: "Home",
     component: getComponentMin("Home"),
-    meta: { title: "NAI Trading Center", displayNavBar: true }
+    meta: { title: "NAI Trading Center", keepAlive: true, displayNavBar: true }
   }, 
   {
     path: "/home/modify",
     name: "Modify",
     component: getComponentMax('user', 'index'),
-    meta: { title: "NAI Trading Center", displayNavBar: false }
+    meta: { title: "NAI Trading Center", keepAlive: false, displayNavBar: false }
   },
 ]

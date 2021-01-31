@@ -1,6 +1,14 @@
 <template>
   <div class="create-app">
-    <router-view v-wechat-title="$route.meta.title" v-slot="{ Component }">
+    <router-view v-wechat-title="$route.meta.title" v-slot="{ Component }" v-if="$route.meta.keepAlive">
+      <transition :name="'vux-pop-'+(getSessionNavTabrsType === 'next' ? 'in' : getSessionNavTabrsType === 'prev' ? 'out' : '')">
+        <keep-alive>
+          <component :is="Component" />
+        </keep-alive>
+      </transition>
+    </router-view>
+    <!-- 不缓存 -->
+    <router-view v-wechat-title="$route.meta.title" v-slot="{ Component }" v-if="!$route.meta.keepAlive">
       <transition :name="'vux-pop-'+(getSessionNavTabrsType === 'next' ? 'in' : getSessionNavTabrsType === 'prev' ? 'out' : '')">
         <component :is="Component" />
       </transition>

@@ -234,6 +234,7 @@ export default {
 <style lang="scss" scoped>
 .router-view {
   padding-bottom: 110px;
+  background-color: #f9f9f9;
 }
 .v-title-min {
   padding: 30px 0 10px;

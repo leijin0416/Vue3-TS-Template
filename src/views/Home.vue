@@ -117,10 +117,10 @@ export default {
 }
 
 .v-appear {
-  animation: dropactive .3s linear 1;
+  // animation: dropactive .3s linear 1;
 }
 .v-disappear {
-  animation: dropdown 1.3s linear 1;
+  animation: dropdown 1.2s linear 1;
 }
 
 @keyframes dropdown {
