@@ -15,7 +15,7 @@ export default {
   actions: {
     updateTokenCart(ctx: any, context: any) {
       ctx.commit('SET_sessionUserToken', context)
-    }
+    },
   },
   mutations: {
     // 底部导航切换状态

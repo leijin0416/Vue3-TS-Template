@@ -2,7 +2,7 @@
   <div class="router-view">
     <header>
       <van-nav-bar
-        title="修改个人信息"
+        title="疫情信息"
         :border="false"
         fixed>
         <template #left>
@@ -11,28 +11,6 @@
       </van-nav-bar>
     </header>
     <main>
-      <div class="v-form-box">
-        <van-form @submit="onClickSubmit">
-          <van-field
-            v-model="username"
-            name="username"
-            label="用户名"
-            placeholder="请输入用户名"
-            :rules="[{ required: true, message: '请填写用户名!' }]"
-          />
-          <van-field
-            v-model="password"
-            type="password"
-            name="password"
-            label="密码"
-            placeholder="请输入密码"
-            :rules="[{ required: true, message: '请填写密码!' }]"
-          />
-          <div class="v-btn-box">
-            <van-button round block type="info" native-type="submit">提交</van-button>
-          </div>
-        </van-form>
-      </div>
     </main>
   </div>
 </template>
@@ -53,7 +31,7 @@ export default {
     // 状态管理vuex
     const store = useStore()
     const vuexStoreNav = store.state.vuexStorageNav
-    const count = ref(0)
+
     const stateData = reactive({
       username: '',
       password: '',
@@ -66,24 +44,8 @@ export default {
     )
 
     onMounted(() => {
-      // store.dispatch('vuexStorageDocs/updateDocsAreaStat', '山东')
+      store.dispatch('vuexStorageDocs/updateDocsAreaStat', '山东')
     })
-
-    // vuex
-    const testStatus = computed(() => {
-      return ctx.$store.state.getSessionUserToken
-    })
-    // console.log(testStatus);
-
-    // vue-router
-    const routerName = computed(() => {
-      return ctx.$router.currentRoute.value.name
-    })
-
-    const vuexCommit = () => {
-      // commit：同步操作
-      ctx.$store.commit('vuexStorageNav/SET_sessionUserToken', testStatus.value + 1)
-    }
 
     const onClickSubmit = (values) => {
       let { username, password } = values
@@ -121,17 +83,4 @@ export default {
   background-color: #f9f9f9;
 }
 
-.v-form-box {
-  padding: 30px 0;
-  margin-top: 30px;
-  background-color: #fff;
-  /deep/.van-button {
-    color: #fff;
-    background-color: #fe4f70;
-  }
-  .v-btn-box {
-    padding: 0 30px 10px;
-    margin-top: 80px;
-  }
-}
 </style>

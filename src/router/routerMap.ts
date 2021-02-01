@@ -45,4 +45,10 @@ export const routerMaps: Array<RouteRecordRaw> = [
     component: getComponentMax('user', 'index'),
     meta: { title: "NAI Trading Center", keepAlive: false, displayNavBar: false }
   },
+  {
+    path: "/docs",
+    name: "Docs",
+    component: getComponentMax('docs', 'index'),
+    meta: { title: "NAI Trading Center", keepAlive: true, displayNavBar: false }
+  },
 ]

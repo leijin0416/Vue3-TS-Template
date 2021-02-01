@@ -50,6 +50,14 @@ const isDevCS = {
     pathRewrite: {
       "^/newbee": "/",
     }
+  },
+  "/docs": {
+    target: "http://49.232.173.220:3001",
+    changeOrigin: true,
+    wx: true,
+    pathRewrite: {
+      "^/docs": "/",
+    }
   }
 }
 
