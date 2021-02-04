@@ -10,10 +10,11 @@ export default {
     getSessionDocsAreaStat: (state: any) => state.getSessionDocsAreaStat,
   },
   actions: {
+    // 获取省份信息
     async updateDocsAreaStat(ctx: any, context: any) {
       const data: any = await webDocsGetAreaStat(context)
-      console.log(data)
-      ctx.commit('SET_sessionDocsAreaStat', data)
+      ctx.commit('SET_sessionDocsAreaStat', data.data[0])
+      // console.log(data)
     }
   },
   mutations: {

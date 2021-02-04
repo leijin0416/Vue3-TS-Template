@@ -46,8 +46,8 @@ export const routerMaps: Array<RouteRecordRaw> = [
     meta: { title: "NAI Trading Center", keepAlive: false, displayNavBar: false }
   },
   {
-    path: "/docs",
-    name: "Docs",
+    path: "/home/pestilence",
+    name: "Pestilence",
     component: getComponentMax('docs', 'index'),
     meta: { title: "NAI Trading Center", keepAlive: true, displayNavBar: false }
   },

@@ -103,6 +103,7 @@ export default {
 }
 #app {
   font-size: 28px;
+  width: 100%;
 }
 .vux-pop-out-enter-active,
 .vux-pop-out-leave-active,
