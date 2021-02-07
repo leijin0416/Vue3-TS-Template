@@ -11,8 +11,10 @@
       </van-nav-bar>
       <div class="v-text-top">
         <div class="weui-flex">
-          <div class="weui-flex-bd">1</div>
-          <div class="weui-flex-bd">1</div>
+          <div class="weui-flex-bd">实时资讯</div>
+          <div class="weui-flex-bd">疫情地图</div>
+          <div class="weui-flex-bd">辟谣专区</div>
+          <div class="weui-flex-bd">疫情科普</div>
         </div>
       </div>
     </header>
