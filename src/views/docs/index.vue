@@ -9,10 +9,10 @@
           <van-icon name="arrow-left" size="18" color="#fe4f70" @click="onClickLeft" />
         </template>
       </van-nav-bar>
-      <div class="v-text-top">
+      <div class="v-title-top">
         <div class="weui-flex">
           <div class="weui-flex-bd">实时资讯</div>
-          <div class="weui-flex-bd">疫情地图</div>
+          <div class="weui-flex-bd">各地疫情</div>
           <div class="weui-flex-bd">辟谣专区</div>
           <div class="weui-flex-bd">疫情科普</div>
         </div>
@@ -37,9 +37,9 @@
         <div class="v-pestilence-header">
           <div class="weui-flex">
             <div class="weui-flex-bd">地区</div>
-            <div class="weui-flex-bd">现存确诊</div>
-            <div class="weui-flex-bd">累计确诊</div>
-            <div class="weui-flex-bd">死亡</div>
+            <div class="weui-flex-bd">总计现存确诊</div>
+            <div class="weui-flex-bd">总计累计确诊</div>
+            <div class="weui-flex-bd">总计死亡</div>
           </div>
         </div>
         <div class="v-pestilence-title">
@@ -136,16 +136,33 @@ export default {
   box-sizing: border-box;
   height: 100vh;
   padding-top: 84px;
+  background-color: #f9f9f9;
+}
+
+.v-title-top {
+  padding: 0 10px;
   background-color: #fff;
+  .weui-flex-bd {
+    box-sizing: border-box;
+    padding: 30px 10px;
+    font-size: 28px;
+    text-align: center;
+  }
+  .v-active {
+    position: relative;
+    font-weight: bold;
+  }
 }
 
 .v-search-box {
-  padding: 30px 16px 20px 6px;
+  padding: 20px 16px 20px 6px;
+  margin-top: 20px;
   background-color: #fff;
 }
 
 .v-pestilence-mian {
   padding: 0 30px 30px;
+  background-color: #fff;
   .v-pestilence-title {
     text-align: center;
     .weui-flex-bd {
@@ -154,7 +171,7 @@ export default {
       border-left: 2px solid #fff;
       background-color: #e3e7f3;
       &:nth-child(1) {border-left: none;}
-      &:nth-child(2) {background-color: #f3bab0;}
+      &:nth-child(2) {background-color: #ff9351;}
       &:nth-child(3) {background-color: #f3bab0;}
       &:nth-child(4) {background-color: #b4c0d5;}
       &:nth-child(5) {background-color:#95db9a;}
