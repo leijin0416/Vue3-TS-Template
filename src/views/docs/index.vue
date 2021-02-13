@@ -36,10 +36,21 @@
       <div class="v-pestilence-mian">
         <div class="v-pestilence-header">
           <div class="weui-flex">
-            <div class="weui-flex-bd">地区</div>
-            <div class="weui-flex-bd">总计现存确诊</div>
-            <div class="weui-flex-bd">总计累计确诊</div>
-            <div class="weui-flex-bd">总计死亡</div>
+            <div class="weui-flex-hd">
+              <p>{{provinceName}}</p>
+            </div>
+            <div class="weui-flex-bd">
+              <p>{{currentConfirmedCount}}</p>
+              <p>现存确诊</p>
+            </div>
+            <div class="weui-flex-bd">
+              <p>{{confirmedCount}}</p>
+              <p>累计确诊</p>
+            </div>
+            <div class="weui-flex-bd">
+              <p>{{deadCount}}</p>
+              <p>累计死亡</p>
+            </div>
           </div>
         </div>
         <div class="v-pestilence-title">
@@ -94,8 +105,13 @@ export default {
     
     watch( () => vuexStoreDocs.getSessionDocsAreaStat, (newVal, oldVal) => {
         if (newVal !== []) {
-          let {cities} = newVal
+          let {cities, confirmedCount, curedCount, deadCount, currentConfirmedCount, provinceName} = newVal
           stateData.citiesData = cities
+          stateData.confirmedCount = confirmedCount
+          stateData.curedCount = curedCount
+          stateData.deadCount = deadCount
+          stateData.currentConfirmedCount = currentConfirmedCount
+          stateData.provinceName = provinceName
         }
         console.log(newVal);
         // console.log(oldVal);
@@ -163,6 +179,29 @@ export default {
 .v-pestilence-mian {
   padding: 0 30px 30px;
   background-color: #fff;
+  .v-pestilence-header {
+    padding: 20px 0 40px;
+    .weui-flex-bd {
+      font-size: 24px;
+      text-align: center;
+      color: #555;
+      p:nth-child(1) {
+        padding-bottom: 10px;
+        font-size: 40px;
+        font-weight: bold;
+      }
+      &:nth-child(3) {
+        p:nth-child(1) {
+          color: #ae212c;
+        }
+      }
+      &:nth-child(4) {
+        p:nth-child(1) {
+          color: #5d7092;
+        }
+      }
+    }
+  }
   .v-pestilence-title {
     text-align: center;
     .weui-flex-bd {
