@@ -13,3 +13,8 @@ import requestMock from "./http"
  * @param {*} dangerAreas 风险区域
  */
 export const webDocsGetAreaStat = (params: any) => requestMock.get('/docs/data/getAreaStat/'+ params)
+/**
+ * 按时间线获取事件
+ * @param params 
+ */
+export const webDocsGetTimelineService = () => requestMock.get('/docs/data/getTimelineService')

@@ -141,6 +141,7 @@ export default {
     onMounted(() => {
       // dispatch：含有异步操作方法
       if (stateData.citiesData.length === 0) store.dispatch('vuexStorageDocs/updateDocsAreaStat', '湖南')
+      store.dispatch('vuexStorageDocs/updateDocsTimelineService')
     })
 
     const onTitleTopClick = (id) => {
