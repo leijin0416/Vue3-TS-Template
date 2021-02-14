@@ -11,10 +11,11 @@
       </van-nav-bar>
       <div class="v-title-top">
         <div class="weui-flex">
-          <div class="weui-flex-bd">实时资讯</div>
-          <div class="weui-flex-bd">各地疫情</div>
-          <div class="weui-flex-bd">辟谣专区</div>
-          <div class="weui-flex-bd">疫情科普</div>
+          <div class="weui-flex-bd" 
+            v-for="item in titleTopData" 
+            :key="item.id" 
+            :class="titleTopId === item.id ? 'v-active' : ''"
+            @click="onTitleTopClick(item.id)">{{item.name}}</div>
         </div>
       </div>
     </header>
@@ -94,6 +95,25 @@ export default {
     const vuexStoreDocs = store.state.vuexStorageDocs
 
     const stateData = reactive({
+      titleTopId: 2,
+      titleTopData: [
+        {
+          id: 1,
+          name: '实时资讯',
+        },
+        {
+          id: 2,
+          name: '各地疫情',
+        },
+        {
+          id: 3,
+          name: '辟谣专区',
+        },
+        {
+          id: 4,
+          name: '疫情科普',
+        },
+      ],
       searchValue: '',
       citiesData: [],
       confirmedCount: '',  // 累计
@@ -123,13 +143,17 @@ export default {
       if (stateData.citiesData.length === 0) store.dispatch('vuexStorageDocs/updateDocsAreaStat', '湖南')
     })
 
+    const onTitleTopClick = (id) => {
+      stateData.titleTopId = id
+    }
+
     const onClickSearch = () => {
       let value = stateData.searchValue
       store.dispatch('vuexStorageDocs/updateDocsAreaStat', value)
-      console.log(value);
+      // console.log(value);
       ctx.$toast({
         duration: 3000,
-        message: '查询成功!',
+        message: '查询成功',
         onClose: () => {}
       })
     }
@@ -142,6 +166,7 @@ export default {
       ...toRefs(stateData),
       onClickSearch,
       onClickLeft,
+      onTitleTopClick,
     }
   }
 }
@@ -167,6 +192,18 @@ export default {
   .v-active {
     position: relative;
     font-weight: bold;
+    color: #fe4f70;
+    &::before {
+      content: ' ';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 44px;
+      height: 8px;
+      border-radius: 100px;
+      background-color: #fe4f70;
+      transform: translateX(-50%);
+    }
   }
 }
 
@@ -184,18 +221,25 @@ export default {
     .weui-flex-bd {
       font-size: 24px;
       text-align: center;
+      border-right: 2px solid #f9f9f9;
       color: #555;
       p:nth-child(1) {
         padding-bottom: 10px;
-        font-size: 40px;
+        font-size: 44px;
         font-weight: bold;
+      }
+      &:nth-child(2) {
+        p:nth-child(1) {
+          color: #fe4f70;
+        }
       }
       &:nth-child(3) {
         p:nth-child(1) {
-          color: #ae212c;
+          color: #e02634;
         }
       }
       &:nth-child(4) {
+        border-right: none;
         p:nth-child(1) {
           color: #5d7092;
         }
