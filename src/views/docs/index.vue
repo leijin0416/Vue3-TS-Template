@@ -20,6 +20,9 @@
       </div>
     </header>
     <main>
+      <TimelineService />
+    </main>
+    <main>
       <div class="v-search-box">
         <van-search
           v-model="searchValue"
@@ -32,8 +35,6 @@
           </template>
         </van-search>
       </div>
-    </main>
-    <main>
       <div class="v-pestilence-mian">
         <div class="v-pestilence-header">
           <div class="weui-flex">
@@ -78,11 +79,16 @@
 </template>
 
 <script>
-import { ref, reactive, toRefs, watch, computed, onMounted, getCurrentInstance } from "vue"
+import { ref, reactive, toRefs, watch, computed, onMounted, defineAsyncComponent, getCurrentInstance } from "vue"
 import { useStore } from "vuex"
 import { useRouter, useRoute } from "vue-router"
 
+const TimelineService = defineAsyncComponent(() => import('./TimelineService.vue'))
+
 export default {
+  components: {
+    TimelineService,
+  },
   setup() {
     // 获取当前组件实例,this
     const { ctx } = getCurrentInstance()
@@ -123,6 +129,7 @@ export default {
       provinceName: '',
     })
     
+    // 捕获省份信息
     watch( () => vuexStoreDocs.getSessionDocsAreaStat, (newVal, oldVal) => {
         if (newVal !== []) {
           let {cities, confirmedCount, curedCount, deadCount, currentConfirmedCount, provinceName} = newVal
@@ -133,7 +140,7 @@ export default {
           stateData.currentConfirmedCount = currentConfirmedCount
           stateData.provinceName = provinceName
         }
-        console.log(newVal);
+        // console.log(newVal);
         // console.log(oldVal);
       }
     )

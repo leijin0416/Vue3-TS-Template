@@ -1,29 +1,33 @@
 <template>
-  <div class="router-view">
+  <div class="components-view">
     <div class="v-service-mian">
       <div class="v-list" v-for="item in timeLineService" :key="item.id">
-        <div class="weui-flex">
-          <div class="weui-cell-hd">
-            <img :src="item.imgurl" alt="" srcset="" class="v-img" >
-          </div>
-          <div class="weui-cell-bd">
-            <h3 class="v-h3-title">{{item.title}}</h3>
-          </div>
-        </div>
+        <h3 class="v-h3-title">{{item.title}}</h3>
+        <p class="v-text">{{item.summary}}</p>
+        <p class="v-text">{{item.infoSource}}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { ref, toRefs, watch, computed, onMounted, getCurrentInstance } from "vue"
+import { ref, reactive, toRefs, watch, computed, onMounted, defineAsyncComponent, getCurrentInstance } from "vue"
 
 export default {
+  components: {
+  },
   setup() {
     const { ctx } = getCurrentInstance()
     const count = ref(0)
     const stateData = reactive({
-      timeLineService: [],
+      timeLineService: [
+        {
+          id: 1,
+          title: '123',
+          summary: '123',
+          infoSource: '',
+        }
+      ],
     })
 
     watch(
