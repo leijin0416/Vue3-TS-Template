@@ -21,12 +21,12 @@
     </header>
 
     <!-- 实时资讯 -->
-    <main>
+    <main class="item-content" :ref="myRefOne">
       <TimelineService :timeLineService="timeLineService"/>
     </main>
 
     <!-- 各地疫情 -->
-    <main>
+    <main class="item-content" :ref="myRefTwo">
       <div class="v-search-box">
         <van-search
           v-model="searchValue"
@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import { ref, reactive, toRefs, watch, computed, onMounted, defineAsyncComponent, getCurrentInstance } from "vue"
+import { ref, reactive, toRefs, watch, computed, onMounted, defineAsyncComponent, getCurrentInstance, onUnmounted } from "vue"
 import { useStore } from "vuex"
 import { useRouter, useRoute } from "vue-router"
 import { ParseTime } from "@/filters/common"
@@ -106,6 +106,8 @@ export default {
     const vuexStoreDocs = store.state.vuexStorageDocs
 
     const stateData = reactive({
+      headerFixed: '',
+      arrScrollDom: '',
       titleTopId: 1,
       titleTopData: [
         {
@@ -137,42 +139,58 @@ export default {
 
     // 最新新闻
     watch( () => vuexStoreDocs.getSessionDocsTimelineService, (newVal, oldVal) => {
-        let info = [];
-        if (newVal !== []) {
-          for (let i = 0; i < 10; i++) {
-            newVal[i].pubDate = ParseTime(newVal[i].pubDate)
-            info.push(newVal[i])
-            // console.log();
-          }
+      let info = [];
+      if (newVal !== []) {
+        for (let i = 0; i < 10; i++) {
+          newVal[i].pubDate = ParseTime(newVal[i].pubDate)
+          info.push(newVal[i])
+          // console.log();
         }
-        stateData.timeLineService = info
       }
-    )
+      stateData.timeLineService = info
+    })
     
     // 捕获省份信息 
     watch( () => vuexStoreDocs.getSessionDocsAreaStat, (newVal, oldVal) => {
-        if (newVal !== []) {
-          let {cities, confirmedCount, curedCount, deadCount, currentConfirmedCount, provinceName} = newVal
-          stateData.citiesData = cities
-          stateData.confirmedCount = confirmedCount
-          stateData.curedCount = curedCount
-          stateData.deadCount = deadCount
-          stateData.currentConfirmedCount = currentConfirmedCount
-          stateData.provinceName = provinceName
-        }
-        // console.log(newVal);
-        // console.log(oldVal);
+      if (newVal !== []) {
+        let {cities, confirmedCount, curedCount, deadCount, currentConfirmedCount, provinceName} = newVal
+        stateData.citiesData = cities
+        stateData.confirmedCount = confirmedCount
+        stateData.curedCount = curedCount
+        stateData.deadCount = deadCount
+        stateData.currentConfirmedCount = currentConfirmedCount
+        stateData.provinceName = provinceName
       }
-    )
+      // console.log(newVal);
+      // console.log(oldVal);
+    })
 
     onMounted(() => {
       // dispatch：含有异步操作方法
       if (stateData.timeLineService.length === 0) store.dispatch('vuexStorageDocs/updateDocsTimelineService')
       if (stateData.citiesData.length === 0) store.dispatch('vuexStorageDocs/updateDocsAreaStat', '湖南')
+      // 获取长度列表
+      stateData.arrScrollDom = document.getElementsByClassName("item-content");
+      window.addEventListener('scroll', handleScroll);
     })
 
+    let setRefOne = ''
+    let setRefTwo = ''
+
+    const myRefOne = el => {
+      setRefOne = el;
+    }
+    const myRefTwo = el => {
+      setRefTwo = el;
+    }
+
     const onTitleTopClick = (id) => {
+      let dom
+      if (id == 1) dom = setRefOne.offsetTop
+      else if (id == 2) dom = setRefTwo.offsetTop
+      window.scrollTo(0, dom)
       stateData.titleTopId = id
+      // console.log(dom);
     }
 
     const onClickSearch = () => {
@@ -190,13 +208,38 @@ export default {
       router.go(-1)
     }
 
+    const handleScroll = () => {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+      // 获取长度
+      let arrScrollDomLength = stateData.arrScrollDom.length
+      stateData.headerFixed = scrollTop > ctx.offsetTop
+
+      for (let i = 0; i < arrScrollDomLength; i++) {
+        //因为下面使用到了i+1，所以需要把最后一个分离出来判断
+        if (stateData.arrScrollDom[arrScrollDomLength-1].offsetTop-scrollTop > 80){
+          if (stateData.arrScrollDom[i].offsetTop-scrollTop <= 80 && stateData.arrScrollDom[i+1].offsetTop-scrollTop > 80){
+            stateData.titleTopId = i + 1
+          }
+        } else {
+          stateData.titleTopId = arrScrollDomLength;
+        }
+      }
+    }
+
+    onUnmounted(() => {
+      window.removeEventListener('scroll', handleScroll);
+    })
+
     return {
       ...toRefs(stateData),
+      myRefOne,
+      myRefTwo,
       onClickSearch,
       onClickLeft,
       onTitleTopClick,
+      handleScroll,
     }
-  }
+  },
 }
 </script>
 

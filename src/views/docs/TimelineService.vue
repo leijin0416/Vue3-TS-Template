@@ -2,13 +2,14 @@
   <div class="components-view">
     <div class="v-service-mian">
       <div class="v-list-box">
-        <div class="v-list" v-for="item in timeLineService" :key="item.id">
+        <div class="v-list"
+          v-for="item in timeLineService" :key="item.id">
           <p class="v-time">{{item.pubDate}}</p>
           <div class="v-info">
             <h3 class="v-h3-title">{{item.title}}</h3>
-            <div class="v-text">
+            <div class="v-text" :class="item.classId ? '' : 'v-text-overflow'">
               <p>{{item.summary}}</p>
-              <p @click="">更多</p>
+              <p @click="onAddClassClick(item.id)">更多</p>
             </div>
             <p class="v-text-bottom">来源：{{item.infoSource}}</p>
           </div>
@@ -30,10 +31,11 @@ export default {
       required: true
     }
   },
-  setup() {
+  setup(props, ctxs) {
     const { ctx } = getCurrentInstance()
     const count = ref(0)
     const stateData = reactive({
+      timeLineClassId: ''
     })
 
     watch(
@@ -54,9 +56,17 @@ export default {
       return ctx.$router.currentRoute.value.name
     })
 
+    const onAddClassClick = (id) => {
+      props.timeLineService.forEach( (el, i) => {
+        if (el.id === Number(id)) el.classId = 1
+      });
+      // stateData.timeLineClassId = Number(id)
+    }
+
     return {
       ...toRefs(stateData),
       count,
+      onAddClassClick,
     }
   }
 }
@@ -68,6 +78,7 @@ export default {
   .v-service-mian {
     padding: 30px 0;
     .v-list-box {
+      min-height: 400px;
       padding: 30px;
       background-color: #fff;
     }
@@ -114,6 +125,8 @@ export default {
       .v-text {
         position: relative;
         line-height: 1.5;
+      }
+      .v-text-overflow {
         max-height: 120px;
         overflow: hidden;
         p:last-child {
@@ -127,6 +140,7 @@ export default {
           background: -moz-linear-gradient(right, transparent, #f5f5f5 45%);
           background: linear-gradient(to right, transparent, #f5f5f5 45%);
         }
+
       }
     }
   }
