@@ -174,20 +174,19 @@ export default {
       window.addEventListener('scroll', handleScroll);
     })
 
+    // 获取dom元素 ref
     let setRefOne = ''
     let setRefTwo = ''
 
-    const myRefOne = el => {
-      setRefOne = el;
-    }
-    const myRefTwo = el => {
-      setRefTwo = el;
-    }
+    const myRefOne = el => { setRefOne = el }
+    const myRefTwo = el => { setRefTwo = el }
 
+    // 标题点击
     const onTitleTopClick = (id) => {
       let dom
       if (id == 1) dom = setRefOne.offsetTop
       else if (id == 2) dom = setRefTwo.offsetTop
+      else dom = null
       window.scrollTo(0, dom)
       stateData.titleTopId = id
       // console.log(dom);
