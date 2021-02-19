@@ -20,8 +20,8 @@ const ParseTime = (timestamp: any) => {
   var m = (date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes()) + ':'
   var s = (date.getSeconds() < 10 ? '0'+date.getSeconds() : date.getSeconds())
 
-  let strDate = Y+M+D+h+m+s
-  console.log(strDate) //2020-05-08 17:44:56　
+  let strDate = Y + M + D + h + m + s
+  // console.log(strDate) //2020-05-08 17:44:56　
   return strDate
 }
 

@@ -106,7 +106,7 @@ export default {
     const vuexStoreDocs = store.state.vuexStorageDocs
 
     const stateData = reactive({
-      titleTopId: 2,
+      titleTopId: 1,
       titleTopData: [
         {
           id: 1,
@@ -134,6 +134,20 @@ export default {
       provinceName: '',
       timeLineService: [],
     })
+
+    // 最新新闻
+    watch( () => vuexStoreDocs.getSessionDocsTimelineService, (newVal, oldVal) => {
+        let info = [];
+        if (newVal !== []) {
+          for (let i = 0; i < 10; i++) {
+            newVal[i].pubDate = ParseTime(newVal[i].pubDate)
+            info.push(newVal[i])
+            // console.log();
+          }
+        }
+        stateData.timeLineService = info
+      }
+    )
     
     // 捕获省份信息 
     watch( () => vuexStoreDocs.getSessionDocsAreaStat, (newVal, oldVal) => {
@@ -150,24 +164,11 @@ export default {
         // console.log(oldVal);
       }
     )
-    // 最新新闻
-    watch( () => vuexStoreDocs.getSessionDocsTimelineService, (newVal, oldVal) => {
-        let info = [];
-        if (newVal !== []) {
-          for (let i = 0; i < 10; i++) {
-            newVal[i].pubDate = ParseTime(newVal[i].pubDate)
-            info.push(newVal[i])
-            // console.log();
-          }
-        }
-        stateData.timeLineService = info
-      }
-    )
 
     onMounted(() => {
       // dispatch：含有异步操作方法
+      if (stateData.timeLineService.length === 0) store.dispatch('vuexStorageDocs/updateDocsTimelineService')
       if (stateData.citiesData.length === 0) store.dispatch('vuexStorageDocs/updateDocsAreaStat', '湖南')
-      store.dispatch('vuexStorageDocs/updateDocsTimelineService')
     })
 
     const onTitleTopClick = (id) => {
@@ -202,12 +203,16 @@ export default {
 <style lang="scss" scoped>
 .router-view {
   box-sizing: border-box;
-  height: 100vh;
-  padding-top: 84px;
+  height: auto;
+  padding: 84px 30px 30px;
   background-color: #f9f9f9;
 }
 
 .v-title-top {
+  z-index: 99;
+  position: fixed;
+  left: 0;
+  right: 0;
   padding: 0 10px;
   background-color: #fff;
   .weui-flex-bd {
@@ -236,7 +241,6 @@ export default {
 
 .v-search-box {
   padding: 20px 16px 20px 6px;
-  margin-top: 20px;
   background-color: #fff;
 }
 

@@ -68,10 +68,8 @@ export default {
       
       if (typeData === '' && typeof sessionNavType === "string") {
         getSessionNavTabrsType.value = sessionNavType
-
       } else {
         getSessionNavTabrsType.value = typeData
-
       }
     })
 
@@ -112,7 +110,7 @@ export default {
   position: relative;
   z-index: 9999;
   will-change: transform;
-  transition: all 0.3s linear;
+  transition: all .3s linear;
   height: 100%;
   top: 0;
   position: absolute;
