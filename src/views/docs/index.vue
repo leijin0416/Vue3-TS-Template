@@ -19,9 +19,13 @@
         </div>
       </div>
     </header>
+
+    <!-- 实时资讯 -->
     <main>
-      <TimelineService />
+      <TimelineService :timeLineService="timeLineService"/>
     </main>
+
+    <!-- 各地疫情 -->
     <main>
       <div class="v-search-box">
         <van-search
@@ -82,6 +86,7 @@
 import { ref, reactive, toRefs, watch, computed, onMounted, defineAsyncComponent, getCurrentInstance } from "vue"
 import { useStore } from "vuex"
 import { useRouter, useRoute } from "vue-router"
+import { ParseTime } from "@/filters/common"
 
 const TimelineService = defineAsyncComponent(() => import('./TimelineService.vue'))
 
@@ -127,9 +132,10 @@ export default {
       deadCount: '',       // 死亡
       currentConfirmedCount: '', // 现存
       provinceName: '',
+      timeLineService: [],
     })
     
-    // 捕获省份信息
+    // 捕获省份信息 
     watch( () => vuexStoreDocs.getSessionDocsAreaStat, (newVal, oldVal) => {
         if (newVal !== []) {
           let {cities, confirmedCount, curedCount, deadCount, currentConfirmedCount, provinceName} = newVal
@@ -142,6 +148,19 @@ export default {
         }
         // console.log(newVal);
         // console.log(oldVal);
+      }
+    )
+    // 最新新闻
+    watch( () => vuexStoreDocs.getSessionDocsTimelineService, (newVal, oldVal) => {
+        let info = [];
+        if (newVal !== []) {
+          for (let i = 0; i < 10; i++) {
+            newVal[i].pubDate = ParseTime(newVal[i].pubDate)
+            info.push(newVal[i])
+            // console.log();
+          }
+        }
+        stateData.timeLineService = info
       }
     )
 
