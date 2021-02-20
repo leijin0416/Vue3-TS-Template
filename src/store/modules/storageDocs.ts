@@ -1,4 +1,4 @@
-import { webDocsGetAreaStat, webDocsGetTimelineService } from "@/mock/docs"
+import { webDocsGetAreaStat, webDocsGetTimelineService, webDocsGetIndexRumorList } from "@/mock/docs"
 import { sessionData } from "@/filters/storage"
 
 export default {
@@ -6,10 +6,12 @@ export default {
   state: {
     getSessionDocsAreaStat: [],
     getSessionDocsTimelineService: [],
+    getSessionDocsIndexRumorList: [],
   },
   getters: {
     getSessionDocsAreaStat: (state: any) => state.getSessionDocsAreaStat,
     getSessionDocsTimelineService: (state: any) => state.getSessionDocsTimelineService,
+    getSessionDocsIndexRumorList: (state: any) => state.getSessionDocsIndexRumorList,
   },
   actions: {
     // 获取省份信息
@@ -22,8 +24,13 @@ export default {
     async updateDocsTimelineService(ctx: any) {
       const data: any = await webDocsGetTimelineService()
       ctx.commit('SET_sessionDocsTimelineService', data.data)
-      // console.log(data.data)
-    }
+    },
+    // 最新辟谣
+    async updateDocsIndexRumorList(ctx: any) {
+      const data: any = await webDocsGetIndexRumorList()
+      ctx.commit('SET_sessionDocsIndexRumorList', data.data)
+      console.log(data)
+    },
   },
   mutations: {
     SET_sessionDocsAreaStat(state: any, context: any) {
@@ -31,6 +38,9 @@ export default {
     },
     SET_sessionDocsTimelineService(state: any, context: any) {
       state.getSessionDocsTimelineService = context
+    },
+    SET_sessionDocsIndexRumorList(state: any, context: any) {
+      state.getSessionDocsIndexRumorList = context
     },
   },
 }

@@ -14,7 +14,12 @@ import requestMock from "./http"
  */
 export const webDocsGetAreaStat = (params: any) => requestMock.get('/docs/data/getAreaStat/'+ params)
 /**
- * 按时间线获取事件
+ * 按时间线获取实时资讯
  * @param params 
  */
 export const webDocsGetTimelineService = () => requestMock.get('/docs/data/getTimelineService')
+/**
+ * 获取最新辟谣
+ * @param params 
+ */
+export const webDocsGetIndexRumorList = () => requestMock.get('/docs/data/getIndexRumorList')

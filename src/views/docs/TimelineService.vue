@@ -1,7 +1,8 @@
 <template>
   <div class="components-view">
     <div class="v-service-mian">
-      <div class="v-list-box">
+      <p class="v-text-min" v-if="timeLineService.length === 0">加载中...</p>
+      <div class="v-list-box" v-else>
         <div class="v-list"
           v-for="item in timeLineService" :key="item.id">
           <p class="v-time">{{item.pubDate}}</p>
@@ -20,7 +21,7 @@
 </template>
 
 <script>
-import { ref, reactive, toRefs, watch, computed, onMounted, defineAsyncComponent, getCurrentInstance } from "vue"
+import { ref, reactive, toRefs, watch, computed, onMounted, getCurrentInstance } from "vue"
 
 export default {
   components: {
@@ -56,6 +57,7 @@ export default {
       return ctx.$router.currentRoute.value.name
     })
 
+    // 点击事件-查看更多
     const onAddClassClick = (id) => {
       props.timeLineService.forEach( (el, i) => {
         if (el.id === Number(id)) el.classId = 1
@@ -77,11 +79,12 @@ export default {
   padding-top: 100px;
   .v-service-mian {
     padding: 30px 0;
-    .v-list-box {
-      min-height: 400px;
+    .v-list-box, .v-text-min {
+      min-height: 500px;
       padding: 30px;
       background-color: #fff;
     }
+    .v-text-min {padding-top: 80px; text-align: center; color: #666;}
     .v-list {
       padding: 20px 0 20px 20px;
       border-left: 2px solid rgba(254, 79, 112, 0.3);
@@ -120,7 +123,8 @@ export default {
       }
       .v-text-bottom {
         padding-top: 20px;
-        color: #ababab;
+        font-size: 24px;
+        color: #c3c3c3;
       }
       .v-text {
         position: relative;

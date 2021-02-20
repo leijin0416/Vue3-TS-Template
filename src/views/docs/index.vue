@@ -27,6 +27,7 @@
 
     <!-- 各地疫情 -->
     <main class="item-content" :ref="myRefTwo">
+      <h3 class="v-h3-title">各地疫情</h3>
       <div class="v-search-box">
         <van-search
           v-model="searchValue"
@@ -79,6 +80,12 @@
         </div>
       </div>
     </main>
+
+    <!-- 实时资讯 -->
+    <main class="item-content" :ref="myRefThree">
+      <RumorList :rumorListData="rumorListData"/>
+    </main>
+
   </div>
 </template>
 
@@ -89,10 +96,12 @@ import { useRouter, useRoute } from "vue-router"
 import { ParseTime } from "@/filters/common"
 
 const TimelineService = defineAsyncComponent(() => import('./TimelineService.vue'))
+const RumorList = defineAsyncComponent(() => import('./RumorList.vue'))
 
 export default {
   components: {
     TimelineService,
+    RumorList,
   },
   setup() {
     // 获取当前组件实例,this
@@ -135,19 +144,20 @@ export default {
       currentConfirmedCount: '', // 现存
       provinceName: '',
       timeLineService: [],
+      rumorListData: [],
     })
 
     // 最新新闻
     watch( () => vuexStoreDocs.getSessionDocsTimelineService, (newVal, oldVal) => {
-      let info = [];
       if (newVal !== []) {
-        for (let i = 0; i < 10; i++) {
+        let info = [];
+        for (let i = 0; i < 15; i++) {
           newVal[i].pubDate = ParseTime(newVal[i].pubDate)
           info.push(newVal[i])
           // console.log();
         }
+        stateData.timeLineService = info
       }
-      stateData.timeLineService = info
     })
     
     // 捕获省份信息 
@@ -165,32 +175,23 @@ export default {
       // console.log(oldVal);
     })
 
+    // 最新新闻
+    watch( () => vuexStoreDocs.getSessionDocsIndexRumorList, (newVal, oldVal) => {
+      if (newVal !== []) {
+        stateData.rumorListData = newVal
+      }
+    })
+
     onMounted(() => {
       // dispatch：含有异步操作方法
       if (stateData.timeLineService.length === 0) store.dispatch('vuexStorageDocs/updateDocsTimelineService')
       if (stateData.citiesData.length === 0) store.dispatch('vuexStorageDocs/updateDocsAreaStat', '湖南')
+      store.dispatch('vuexStorageDocs/updateDocsIndexRumorList')
+      
       // 获取长度列表
       stateData.arrScrollDom = document.getElementsByClassName("item-content");
       window.addEventListener('scroll', handleScroll);
     })
-
-    // 获取dom元素 ref
-    let setRefOne = ''
-    let setRefTwo = ''
-
-    const myRefOne = el => { setRefOne = el }
-    const myRefTwo = el => { setRefTwo = el }
-
-    // 标题点击
-    const onTitleTopClick = (id) => {
-      let dom
-      if (id == 1) dom = setRefOne.offsetTop
-      else if (id == 2) dom = setRefTwo.offsetTop
-      else dom = null
-      window.scrollTo(0, dom)
-      stateData.titleTopId = id
-      // console.log(dom);
-    }
 
     const onClickSearch = () => {
       let value = stateData.searchValue
@@ -203,10 +204,27 @@ export default {
       })
     }
 
-    const onClickLeft = () => {
-      router.go(-1)
+    // 获取dom元素 ref
+    let setRefOne = ''
+    let setRefTwo = ''
+    let setRefThree = ''
+    const myRefOne = el => { setRefOne = el }
+    const myRefTwo = el => { setRefTwo = el }
+    const myRefThree = el => { setRefThree = el }
+
+    // 标题TAB点击
+    const onTitleTopClick = (id) => {
+      let dom
+      if (id == 1) dom = setRefOne.offsetTop
+      else if (id == 2) dom = setRefTwo.offsetTop
+      else if (id == 3) dom = setRefThree.offsetTop
+      else dom = null
+      window.scrollTo(0, dom)
+      stateData.titleTopId = id
+      // console.log(dom);
     }
 
+    // 标题TAB滚动位置
     const handleScroll = () => {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
       // 获取长度
@@ -214,7 +232,7 @@ export default {
       stateData.headerFixed = scrollTop > ctx.offsetTop
 
       for (let i = 0; i < arrScrollDomLength; i++) {
-        //因为下面使用到了i+1，所以需要把最后一个分离出来判断
+        // 因为下面使用到了i+1，所以需要把最后一个分离出来判断
         if (stateData.arrScrollDom[arrScrollDomLength-1].offsetTop-scrollTop > 80){
           if (stateData.arrScrollDom[i].offsetTop-scrollTop <= 80 && stateData.arrScrollDom[i+1].offsetTop-scrollTop > 80){
             stateData.titleTopId = i + 1
@@ -225,6 +243,8 @@ export default {
       }
     }
 
+    const onClickLeft = () => { router.go(-1) }
+
     onUnmounted(() => {
       window.removeEventListener('scroll', handleScroll);
     })
@@ -233,6 +253,7 @@ export default {
       ...toRefs(stateData),
       myRefOne,
       myRefTwo,
+      myRefThree,
       onClickSearch,
       onClickLeft,
       onTitleTopClick,
@@ -248,6 +269,10 @@ export default {
   height: auto;
   padding: 84px 30px 30px;
   background-color: #f9f9f9;
+  .v-h3-title {
+    padding: 30px 30px 10px;
+    background-color: #fff;
+  }
 }
 
 .v-title-top {
