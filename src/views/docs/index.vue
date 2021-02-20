@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import { ref, reactive, toRefs, watch, computed, onMounted, defineAsyncComponent, getCurrentInstance, onUnmounted } from "vue"
+import { ref, reactive, toRefs, watch, computed, onMounted, defineAsyncComponent, getCurrentInstance, onUnmounted, onActivated } from "vue"
 import { useStore } from "vuex"
 import { useRouter, useRoute } from "vue-router"
 import { ParseTime } from "@/filters/common"
@@ -186,11 +186,18 @@ export default {
       // dispatch：含有异步操作方法
       if (stateData.timeLineService.length === 0) store.dispatch('vuexStorageDocs/updateDocsTimelineService')
       if (stateData.citiesData.length === 0) store.dispatch('vuexStorageDocs/updateDocsAreaStat', '湖南')
-      store.dispatch('vuexStorageDocs/updateDocsIndexRumorList')
+      if (stateData.citiesData.length === 0) store.dispatch('vuexStorageDocs/updateDocsIndexRumorList')
       
       // 获取长度列表
       stateData.arrScrollDom = document.getElementsByClassName("item-content");
       window.addEventListener('scroll', handleScroll);
+    })
+
+    // keep-alive 缓存刷新  -生命周期
+    onActivated(() => {
+      // if (stateData.timeLineService.length !== 0) store.dispatch('vuexStorageDocs/updateDocsTimelineService')
+      // if (stateData.citiesData.length !== 0) store.dispatch('vuexStorageDocs/updateDocsAreaStat', '湖南')
+      // if (stateData.citiesData.length !== 0) store.dispatch('vuexStorageDocs/updateDocsIndexRumorList')
     })
 
     const onClickSearch = () => {
@@ -219,7 +226,7 @@ export default {
       else if (id == 2) dom = setRefTwo.offsetTop
       else if (id == 3) dom = setRefThree.offsetTop
       else dom = null
-      window.scrollTo(0, dom)
+      window.scrollTo(0, dom)    // 滚动位置
       stateData.titleTopId = id
       // console.log(dom);
     }
@@ -233,18 +240,19 @@ export default {
 
       for (let i = 0; i < arrScrollDomLength; i++) {
         // 因为下面使用到了i+1，所以需要把最后一个分离出来判断
-        if (stateData.arrScrollDom[arrScrollDomLength-1].offsetTop-scrollTop > 80){
-          if (stateData.arrScrollDom[i].offsetTop-scrollTop <= 80 && stateData.arrScrollDom[i+1].offsetTop-scrollTop > 80){
+        if (stateData.arrScrollDom[arrScrollDomLength-1].offsetTop-scrollTop > 80) {
+          if (stateData.arrScrollDom[i].offsetTop-scrollTop <= 80 && stateData.arrScrollDom[i+1].offsetTop-scrollTop > 80) {
             stateData.titleTopId = i + 1
           }
         } else {
-          stateData.titleTopId = arrScrollDomLength;
+          stateData.titleTopId = arrScrollDomLength
         }
       }
     }
 
     const onClickLeft = () => { router.go(-1) }
 
+    // 页面销毁
     onUnmounted(() => {
       window.removeEventListener('scroll', handleScroll);
     })

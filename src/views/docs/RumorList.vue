@@ -2,14 +2,15 @@
   <div class="components-view">
     <div class="v-rumor-mian">
       <div class="v-list-box">
+        <h3 class="v-h3-title">辟谣专区</h3>
         <div class="v-list"
           v-for="item in rumorListData" :key="item.id">
           <div class="v-info">
-            <h3 class="v-h3-title">{{item.title}}</h3>
+            <h3 class="v-title">{{item.title}}</h3>
             <div class="v-text">
               <p>{{item.body}}</p>
             </div>
-            <p class="v-text-bottom">{{item.mainSummary}}</p>
+            <p class="v-text-bottom">- {{item.mainSummary}}</p>
           </div>
         </div>
       </div>
@@ -54,12 +55,28 @@ export default {
 
 <style lang="scss" scoped>
 .components-view {
-  .v-service-mian {
+  .v-rumor-mian {
     padding: 30px 0;
     .v-list-box {
       min-height: 500px;
       padding: 30px;
       background-color: #fff;
+    }
+    .v-h3-title {padding-bottom: 20px;}
+    .v-list {
+      padding: 30px 0;
+      border-bottom: 2px dashed #eee;
+      &:last-child {border-bottom: none;}
+    }
+    .v-text {
+      z-index: 5;
+      padding: 20px 0 30px;
+      text-indent: 2em;
+      color: #666;
+    }
+    .v-text-bottom {
+      font-weight: bold;
+      color: #fe4f70;
     }
   }
 }
