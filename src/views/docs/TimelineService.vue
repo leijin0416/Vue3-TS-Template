@@ -39,15 +39,13 @@ export default {
       timeLineClassId: ''
     })
 
-    watch(
-      () => count.value,
+    watch( () => count.value,
       () => {
         other_count.value = count.value * count.value
       }
     )
 
-    onMounted(() => {
-    })
+    onMounted(() => {})
 
     // vuex
     const testStatus = computed(() => {
@@ -87,7 +85,7 @@ export default {
     .v-text-min {padding-top: 80px; text-align: center; color: #666;}
     .v-list {
       padding: 20px 0 20px 20px;
-      border-left: 2px solid rgba(254, 79, 112, 0.3);
+      border-left: 2px solid rgba(254, 79, 112, .3);
       &:nth-child(1) {
         padding-top: 0;
       }

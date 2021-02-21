@@ -1,16 +1,20 @@
 <template>
   <div class="components-view">
-    <div class="v-rumor-mian">
+    <div class="v-wiki-mian">
       <div class="v-list-box">
-        <h3 class="v-h3-title">辟谣专区</h3>
+        <h3 class="v-h3-title">疫情科普</h3>
         <div class="v-list"
-          v-for="item in rumorListData" :key="item.id">
-          <div class="v-info">
-            <h3 class="v-title">{{item.title}}</h3>
-            <div class="v-text">
-              <p>{{item.body}}</p>
+          v-for="item in wikiListData" :key="item.id">
+          <div class="weui-flex">
+            <div class="weui-cell-hd" v-if="item.id !== 9">
+              <img :src="item.imgUrl" alt="wiki.png" class="v-img">
             </div>
-            <p class="v-text-bottom">- {{item.mainSummary}}</p>
+            <div class="weui-cell-bd">
+              <h3 class="v-title">{{item.title}}</h3>
+              <div class="v-text">
+                <a :href="item.linkUrl" class="v-ahover">{{item.description}} <span>查看</span></a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -25,7 +29,7 @@ export default {
   components: {
   },
   props: {
-    rumorListData: {
+    wikiListData: {
       type: Array,
       required: true
     }
@@ -52,28 +56,36 @@ export default {
 
 <style lang="scss" scoped>
 .components-view {
-  .v-rumor-mian {
-    padding: 30px 0;
+  .v-wiki-mian {
+    padding-bottom: 30px;
     .v-list-box {
       min-height: 500px;
       padding: 30px;
       background-color: #fff;
     }
+    .weui-flex {align-items: end;}
     .v-h3-title {padding-bottom: 20px;}
+    .weui-cell-bd {
+      padding-left: 20px;
+    }
     .v-list {
       padding: 30px 0;
       border-bottom: 2px dashed #eee;
+      &:nth-child(2) .weui-cell-bd {padding-left: 0;}
       &:last-child {border-bottom: none;}
     }
     .v-text {
-      z-index: 5;
-      padding: 20px 0 30px;
-      text-indent: 2em;
-      color: #666;
+      position: relative;
+      padding: 20px 0 0;
+      .v-ahover {
+        color: #666;
+      }
+      span {
+        color: #fe4f70;
+      }
     }
-    .v-text-bottom {
-      font-weight: bold;
-      color: #fe4f70;
+    .v-img {
+      width: 180px;
     }
   }
 }

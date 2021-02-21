@@ -23,3 +23,8 @@ export const webDocsGetTimelineService = () => requestMock.get('/docs/data/getTi
  * @param params 
  */
 export const webDocsGetIndexRumorList = () => requestMock.get('/docs/data/getIndexRumorList')
+/**
+ * 获取知识百科
+ * @param params 
+ */
+export const webDocsGetWikiList = () => requestMock.get('/docs/data/getWikiList')

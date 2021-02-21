@@ -86,6 +86,11 @@
       <RumorList :rumorListData="rumorListData"/>
     </main>
 
+    <!-- 疫情科普 -->
+    <main class="item-content" ref="myRefFour">
+      <WikiList :wikiListData="wikiListData"/>
+    </main>
+
   </div>
 </template>
 
@@ -97,11 +102,13 @@ import { ParseTime } from "@/filters/common"
 
 const TimelineService = defineAsyncComponent(() => import('./TimelineService.vue'))
 const RumorList = defineAsyncComponent(() => import('./RumorList.vue'))
+const WikiList = defineAsyncComponent(() => import('./WikiList.vue'))
 
 export default {
   components: {
     TimelineService,
     RumorList,
+    WikiList,
   },
   setup() {
     // 获取当前组件实例,this
@@ -145,6 +152,7 @@ export default {
       provinceName: '',
       timeLineService: [],
       rumorListData: [],
+      wikiListData: [],
     })
 
     // 最新新闻
@@ -181,12 +189,20 @@ export default {
         stateData.rumorListData = newVal
       }
     })
+    
+    // 辟谣专区
+    watch( () => vuexStoreDocs.getSessionDocsWikiList, (newVal, oldVal) => {
+      if (newVal !== []) {
+        stateData.wikiListData = newVal
+      }
+    })
 
     onMounted(() => {
       // dispatch：含有异步操作方法
       if (stateData.timeLineService.length === 0) store.dispatch('vuexStorageDocs/updateDocsTimelineService')
       if (stateData.citiesData.length === 0) store.dispatch('vuexStorageDocs/updateDocsAreaStat', '湖南')
       if (stateData.citiesData.length === 0) store.dispatch('vuexStorageDocs/updateDocsIndexRumorList')
+      store.dispatch('vuexStorageDocs/updateDocsWikiList')
       
       // 获取长度列表
       stateData.arrScrollDom = document.getElementsByClassName("item-content");
@@ -225,7 +241,7 @@ export default {
       if (id == 1) dom = ctx.$refs.myRefOne.offsetTop
       else if (id == 2) dom = ctx.$refs.myRefTwo.offsetTop
       else if (id == 3) dom = ctx.$refs.myRefThree.offsetTop
-      else dom = null
+      else dom = ctx.$refs.myRefFour.offsetTop
       window.scrollTo(0, dom)    // 滚动条位置
       stateData.titleTopId = id
       // console.log(dom);
