@@ -32,11 +32,16 @@
 <script>
 import { ref, reactive, toRefs, watch, computed, onMounted, getCurrentInstance } from "vue"
 import { useStore } from "vuex"
+import { useRouter, useRoute } from "vue-router"
 
 export default {
   setup() {
     // 获取当前组件实例,this
     const { ctx } = getCurrentInstance()
+    // 路由
+    const router = useRouter()
+    // 获取路由信息
+    const route = useRoute()
     // 状态管理vuex
     const store = useStore()
     const vuexStoreNav = store.state.vuexStorageNav
@@ -58,6 +63,7 @@ export default {
     onMounted(() => {
       let name = vuexStoreNav.getSessionUserToken
       if (name !== '') stateData.userName = vuexStoreNav.getSessionUserToken
+      // console.log(route.meta.keepAlive);
       // console.log(vuexStoreNav.getSessionUserToken);
     })
 

@@ -175,7 +175,7 @@ export default {
       // console.log(oldVal);
     })
 
-    // 最新新闻
+    // 辟谣专区
     watch( () => vuexStoreDocs.getSessionDocsIndexRumorList, (newVal, oldVal) => {
       if (newVal !== []) {
         stateData.rumorListData = newVal
@@ -211,7 +211,7 @@ export default {
       })
     }
 
-    // 获取dom元素 ref
+    // 获取dom元素 ref，setRefOne -获取后的值
     let setRefOne = ''
     let setRefTwo = ''
     let setRefThree = ''
@@ -219,19 +219,19 @@ export default {
     const myRefTwo = el => { setRefTwo = el }
     const myRefThree = el => { setRefThree = el }
 
-    // 标题TAB点击
+    // 标题TAB点击-获取滚动条位置
     const onTitleTopClick = (id) => {
       let dom
-      if (id == 1) dom = setRefOne.offsetTop
-      else if (id == 2) dom = setRefTwo.offsetTop
-      else if (id == 3) dom = setRefThree.offsetTop
+      if (id == 1) dom = ctx.$refs.myRefOne.offsetTop
+      else if (id == 2) dom = ctx.$refs.myRefTwo.offsetTop
+      else if (id == 3) dom = ctx.$refs.myRefThree.offsetTop
       else dom = null
-      window.scrollTo(0, dom)    // 滚动位置
+      window.scrollTo(0, dom)    // 滚动条位置
       stateData.titleTopId = id
       // console.log(dom);
     }
 
-    // 标题TAB滚动位置
+    // 标题TAB滚动条位置
     const handleScroll = () => {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
       // 获取长度

@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { ref, reactive, toRefs, watch, computed, onMounted, getCurrentInstance } from "vue"
+import { ref, reactive, toRefs, watch, onMounted, getCurrentInstance } from "vue"
 
 export default {
   components: {
