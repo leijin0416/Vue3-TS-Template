@@ -60,7 +60,7 @@
           <van-col span="12" v-for="item in hotRecommend" :key="item.goodsId">
             <div class="v-info">
               <div class="v-img-box">
-                <img :src="url + item.goodsCoverImg" alt="tabs.png" class="v-img" >
+                <img :src="item.goodsCoverImg" alt="tabs.png" class="v-img" >
               </div>
               <div class="v-title">{{item.goodsName}}</div>
               <div class="v-price">
@@ -195,10 +195,14 @@ export default {
       }
     }, { deep: true })
 
+    onMounted(() => {
+      getInTheatersData()
+    })
+
     /**
      *  异步加载数据
      */
-    onMounted(async () => {
+    const getInTheatersData = async () => {
       const { data }:any = await webGetSelectAreaCode({})
       const { carousels, newGoodses, hotGoodses, recommendGoodses } = data.data;
       if (!data) {
@@ -211,16 +215,15 @@ export default {
           image: item.carouselUrl,
         }
       })
+      hotGoodses.forEach( (item: any, i: any) => {
+        if (item.goodsId == 10902) return
+        else item.goodsCoverImg = state.url + item.goodsCoverImg
+      })
       state.newProducts = newGoodses
       state.hotRecommend = hotGoodses
       state.newsRecommend = recommendGoodses
-      // console.log(data);
-    })
-
-    /**
-     *  异步加载数据
-     */
-    const getInTheatersData = async () => {}
+      // console.log(hotGoodses);
+    }
 
     return {
       ...toRefs(state),
