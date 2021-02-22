@@ -122,8 +122,8 @@ export default {
     const vuexStoreDocs = store.state.vuexStorageDocs
 
     const stateData = reactive({
-      headerFixed: '',
-      arrScrollDom: '',
+      headerFixed: true,
+      arrScrollDom: [],
       titleTopId: 1,
       titleTopData: [
         {
@@ -158,11 +158,15 @@ export default {
     // 最新新闻
     watch( () => vuexStoreDocs.getSessionDocsTimelineService, (newVal, oldVal) => {
       if (newVal !== []) {
-        let info = [];
+        let info = []
+        // sort -时间戳排序
+        newVal = newVal.sort(function(a, b) {
+          return b.pubDate - a.pubDate;
+        })
+        // console.log(arr);
         for (let i = 0; i < 15; i++) {
           newVal[i].pubDate = ParseTime(newVal[i].pubDate)
           info.push(newVal[i])
-          // console.log();
         }
         stateData.timeLineService = info
       }
@@ -205,8 +209,8 @@ export default {
       store.dispatch('vuexStorageDocs/updateDocsWikiList')
       
       // 获取长度列表
-      stateData.arrScrollDom = document.getElementsByClassName("item-content");
-      window.addEventListener('scroll', handleScroll);
+      stateData.arrScrollDom = document.getElementsByClassName("item-content")
+      window.addEventListener('scroll', handleScroll)
     })
 
     // keep-alive 缓存刷新  -生命周期
@@ -250,9 +254,9 @@ export default {
     // 标题TAB滚动条位置
     const handleScroll = () => {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
-      // 获取长度
+      // 获取 arrScrollDom 数组长度
       let arrScrollDomLength = stateData.arrScrollDom.length
-      stateData.headerFixed = scrollTop > ctx.offsetTop
+      stateData.headerFixed = scrollTop > ctx.offsetTop     // 返回布尔值
 
       for (let i = 0; i < arrScrollDomLength; i++) {
         // 因为下面使用到了i+1，所以需要把最后一个分离出来判断
@@ -268,7 +272,7 @@ export default {
 
     const onClickLeft = () => { router.go(-1) }
 
-    // 页面销毁
+    // 页面离开销毁
     onUnmounted(() => {
       window.removeEventListener('scroll', handleScroll);
     })
