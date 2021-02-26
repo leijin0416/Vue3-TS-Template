@@ -50,10 +50,11 @@ export default {
      *  监听vuex -获取底部导航栏的切换状态
      */
     watch(() => vuexStoreNav.getSessionNavTabrsType, (newer, older) => {
-      if (newer === null) return
+      // console.log(typeof newer);
+      if (newer === 'null') return getSessionNavTabrsType.value = ''
       else {
         getSessionNavTabrsType.value = newer
-        console.log(`Watch__刷新底部切换导航动画类型__${newer}`)
+        console.log(`Watch__刷新【底部】切换导航动画类型__${newer}`)
       }
     }, { deep: true })
     
@@ -95,10 +96,6 @@ export default {
 <style lang="scss">
 // 谷歌字体
 @import url("https://fonts.font.im/css2?family=Noto+Sans&display=swap");
-* {
-  padding: 0;
-  margin: 0;
-}
 #app {
   font-size: 28px;
   width: 100%;
@@ -112,12 +109,14 @@ export default {
   perspective: 500px;
   transition: all 0.35s linear;
 }
+// 后退
 .vux-pop-out-enter, .vux-pop-in-leave-active {
   z-index: 9999;
   position: fixed;
   top: 0;
   transform: translate3d(100%, 0, 0);
 }
+// 前进
 .vux-pop-in-enter, .vux-pop-out-leave-active {
   z-index: 9999;
   position: fixed;
