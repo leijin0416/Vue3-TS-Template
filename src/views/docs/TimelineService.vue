@@ -22,6 +22,8 @@
 
 <script>
 import { ref, reactive, toRefs, watch, computed, onMounted, getCurrentInstance } from "vue"
+import { useRouter, useRoute } from "vue-router"
+import { useStore } from "vuex"
 
 export default {
   components: {
@@ -34,6 +36,13 @@ export default {
   },
   setup(props, ctxs) {
     const { ctx } = getCurrentInstance()
+    // 路由
+    const router = useRouter()
+    // 获取路由信息
+    const route = useRoute()
+    // 状态管理vuex
+    const store = useStore()
+
     const count = ref(0)
     const stateData = reactive({
       timeLineClassId: ''

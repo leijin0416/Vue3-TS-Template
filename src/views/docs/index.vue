@@ -231,24 +231,25 @@ export default {
       })
     }
 
-    // 获取dom元素 ref，setRefOne -获取后的值
+    // ref 获取DOM元素，setRefOne -获取后的值  
     let setRefOne = ''
     let setRefTwo = ''
     let setRefThree = ''
+    let setRefFour = ''
     const myRefOne = el => { setRefOne = el }
     const myRefTwo = el => { setRefTwo = el }
     const myRefThree = el => { setRefThree = el }
+    const myRefFour = el => { setRefFour = el }
 
     // 标题TAB点击-获取滚动条位置
     const onTitleTopClick = (id) => {
       let dom
-      if (id == 1) dom = ctx.$refs.myRefOne.offsetTop
-      else if (id == 2) dom = ctx.$refs.myRefTwo.offsetTop
-      else if (id == 3) dom = ctx.$refs.myRefThree.offsetTop
-      else dom = ctx.$refs.myRefFour.offsetTop
+      if (id == 1) dom = setRefOne.offsetTop
+      else if (id == 2) dom = setRefTwo.offsetTop
+      else if (id == 3) dom = setRefThree.offsetTop
+      else dom = myRefFour.offsetTop
       window.scrollTo(0, dom)    // 滚动条位置
       stateData.titleTopId = id
-      // console.log(dom);
     }
 
     // 标题TAB滚动条位置
@@ -282,6 +283,7 @@ export default {
       myRefOne,
       myRefTwo,
       myRefThree,
+      myRefFour,
       onClickSearch,
       onClickLeft,
       onTitleTopClick,
@@ -294,7 +296,6 @@ export default {
 <style lang="scss" scoped>
 .router-view {
   box-sizing: border-box;
-  height: auto;
   padding: 84px 30px 30px;
   background-color: #f9f9f9;
   .v-h3-title {

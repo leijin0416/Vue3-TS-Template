@@ -31,6 +31,7 @@ export default {
     async updateDocsIndexRumorList(ctx: any) {
       const data: any = await webDocsGetIndexRumorList()
       ctx.commit('SET_sessionDocsIndexRumorList', data.data)
+      // console.log(data)
     },
     // 知识百科
     async updateDocsWikiList(ctx: any) {

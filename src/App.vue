@@ -1,15 +1,15 @@
 <template>
   <div class="create-app">
-    <router-view v-wechat-title="$route.meta.title" v-slot="{ Component }" v-if="$route.meta.keepAlive">
-      <transition :name="'vux-pop-'+(getSessionNavTabrsType === 'next' ? 'in' : getSessionNavTabrsType === 'prev' ? 'out' : '')">
+    <router-view v-wechat-title="$route.meta.title" v-slot="{ Component }" v-show="$route.meta.keepAlive">
+      <transition :name="'vux-pop-'+(getSessionNavTabrsType == 'next' ? 'in' : getSessionNavTabrsType == 'prev' ? 'out' : '')">
         <keep-alive>
           <component :is="Component" />
         </keep-alive>
       </transition>
     </router-view>
     <!-- 不缓存 -->
-    <router-view v-wechat-title="$route.meta.title" v-slot="{ Component }" v-if="!$route.meta.keepAlive">
-      <transition :name="'vux-pop-'+(getSessionNavTabrsType === 'next' ? 'in' : getSessionNavTabrsType === 'prev' ? 'out' : '')">
+    <router-view v-wechat-title="$route.meta.title" v-slot="{ Component }" v-show="!$route.meta.keepAlive">
+      <transition :name="'vux-pop-'+(getSessionNavTabrsType == 'next' ? 'in' : getSessionNavTabrsType == 'prev' ? 'out' : '')">
         <component :is="Component" />
       </transition>
     </router-view>
@@ -107,30 +107,21 @@ export default {
 .vux-pop-out-leave-active,
 .vux-pop-in-enter-active,
 .vux-pop-in-leave-active {
-  position: relative;
-  z-index: 9999;
   will-change: transform;
-  transition: all .3s linear;
-  height: 100%;
-  top: 0;
-  position: absolute;
   backface-visibility: hidden;
   perspective: 500px;
+  transition: all 0.35s linear;
 }
-.vux-pop-out-enter {
-  opacity: 0;
-  transform: translate3d(-100%, 0, 0);
-}
-.vux-pop-out-leave-active {
-  opacity: 0;
+.vux-pop-out-enter, .vux-pop-in-leave-active {
+  z-index: 9999;
+  position: fixed;
+  top: 0;
   transform: translate3d(100%, 0, 0);
 }
-.vux-pop-in-enter {
-  opacity: 0;
+.vux-pop-in-enter, .vux-pop-out-leave-active {
+  z-index: 9999;
+  position: fixed;
+  top: 0;
   transform: translate3d(100%, 0, 0);
-}
-.vux-pop-in-leave-active {
-  opacity: 0;
-  transform: translate3d(-100%, 0, 0);
 }
 </style>
