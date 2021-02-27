@@ -217,10 +217,10 @@ export default {
     // keep-alive 缓存刷新  -生命周期
     onActivated(() => {
       // 更新数据
-      if (stateData.timeLineService.length !== 0) store.dispatch('vuexStorageDocs/updateDocsTimelineService')
-      if (stateData.citiesData.length !== 0) store.dispatch('vuexStorageDocs/updateDocsAreaStat', '湖南')
-      if (stateData.rumorListData.length !== 0) store.dispatch('vuexStorageDocs/updateDocsIndexRumorList')
-      if (stateData.wikiListData.length !== 0) store.dispatch('vuexStorageDocs/updateDocsWikiList')
+      // if (stateData.timeLineService.length !== 0) store.dispatch('vuexStorageDocs/updateDocsTimelineService')
+      // if (stateData.citiesData.length !== 0) store.dispatch('vuexStorageDocs/updateDocsAreaStat', '湖南')
+      // if (stateData.rumorListData.length !== 0) store.dispatch('vuexStorageDocs/updateDocsIndexRumorList')
+      // if (stateData.wikiListData.length !== 0) store.dispatch('vuexStorageDocs/updateDocsWikiList')
     })
 
     const onClickSearch = () => {
