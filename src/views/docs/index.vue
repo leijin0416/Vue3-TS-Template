@@ -205,19 +205,22 @@ export default {
       // dispatch：含有异步操作方法
       if (stateData.timeLineService.length === 0) store.dispatch('vuexStorageDocs/updateDocsTimelineService')
       if (stateData.citiesData.length === 0) store.dispatch('vuexStorageDocs/updateDocsAreaStat', '湖南')
-      if (stateData.citiesData.length === 0) store.dispatch('vuexStorageDocs/updateDocsIndexRumorList')
-      store.dispatch('vuexStorageDocs/updateDocsWikiList')
+      if (stateData.rumorListData.length === 0) store.dispatch('vuexStorageDocs/updateDocsIndexRumorList')
+      if (stateData.wikiListData.length === 0) store.dispatch('vuexStorageDocs/updateDocsWikiList')
       
-      // 获取长度列表
+      // 获取需要滚动长度列表
       stateData.arrScrollDom = document.getElementsByClassName("item-content")
       window.addEventListener('scroll', handleScroll)
+      // console.log(stateData.arrScrollDom)
     })
 
     // keep-alive 缓存刷新  -生命周期
     onActivated(() => {
-      // if (stateData.timeLineService.length !== 0) store.dispatch('vuexStorageDocs/updateDocsTimelineService')
-      // if (stateData.citiesData.length !== 0) store.dispatch('vuexStorageDocs/updateDocsAreaStat', '湖南')
-      // if (stateData.citiesData.length !== 0) store.dispatch('vuexStorageDocs/updateDocsIndexRumorList')
+      // 更新数据
+      if (stateData.timeLineService.length !== 0) store.dispatch('vuexStorageDocs/updateDocsTimelineService')
+      if (stateData.citiesData.length !== 0) store.dispatch('vuexStorageDocs/updateDocsAreaStat', '湖南')
+      if (stateData.rumorListData.length !== 0) store.dispatch('vuexStorageDocs/updateDocsIndexRumorList')
+      if (stateData.wikiListData.length !== 0) store.dispatch('vuexStorageDocs/updateDocsWikiList')
     })
 
     const onClickSearch = () => {
@@ -247,7 +250,7 @@ export default {
       if (id == 1) dom = setRefOne.offsetTop
       else if (id == 2) dom = setRefTwo.offsetTop
       else if (id == 3) dom = setRefThree.offsetTop
-      else dom = myRefFour.offsetTop
+      else dom = setRefFour.offsetTop
       window.scrollTo(0, dom)    // 滚动条位置
       stateData.titleTopId = id
     }
@@ -275,7 +278,8 @@ export default {
 
     // 页面离开销毁
     onUnmounted(() => {
-      window.removeEventListener('scroll', handleScroll);
+      stateData.arrScrollDom = []
+      window.removeEventListener('scroll', handleScroll)
     })
 
     return {
