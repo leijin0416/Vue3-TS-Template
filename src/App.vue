@@ -96,6 +96,10 @@ export default {
 <style lang="scss">
 // 谷歌字体
 @import url("https://fonts.font.im/css2?family=Noto+Sans&display=swap");
+*{
+  padding: 0;
+  margin: 0;
+}
 #app {
   font-size: 28px;
   width: 100%;
@@ -107,14 +111,14 @@ export default {
   will-change: transform;
   backface-visibility: hidden;
   perspective: 500px;
-  transition: all 0.35s linear;
+  transition: all 0.3s linear;
 }
 // 后退
 .vux-pop-out-enter, .vux-pop-in-leave-active {
   z-index: 9999;
   position: fixed;
   top: 0;
-  transform: translate3d(100%, 0, 0);
+  transform: translate3d(-100%, 0, 0);
 }
 // 前进
 .vux-pop-in-enter, .vux-pop-out-leave-active {
