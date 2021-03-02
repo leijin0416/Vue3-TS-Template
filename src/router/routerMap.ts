@@ -43,7 +43,7 @@ export const routerMaps: Array<RouteRecordRaw> = [
     path: "/home/modify",
     name: "Modify",
     component: getComponentMax('user', 'index'),
-    meta: { title: "NAI Trading Center", keepAlive: false, displayNavBar: false }
+    meta: { title: "NAI Trading Center", keepAlive: true, displayNavBar: false }
   },
   {
     path: "/home/pestilence",
