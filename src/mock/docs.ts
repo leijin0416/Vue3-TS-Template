@@ -1,5 +1,5 @@
 /**
- * 请求统一管理 
+ * 疫情模块-请求统一管理 
  */
 import requestMock from "./http"
 
