@@ -22,7 +22,7 @@
       <div class="v-cell-box">
         <van-cell title="个人信息" icon="contact" to="/home/modify" is-link />
         <van-cell title="疫情信息" icon="volume-o" to="/home/pestilence" is-link />
-        <van-cell title="分享海报" icon="share-o" is-link />
+        <van-cell title="分享海报" icon="share-o" to="/home/share" is-link />
         <van-cell title="帮助中心" icon="question-o" is-link />
       </div>
     </main>
