@@ -55,6 +55,6 @@ export const routerMaps: Array<RouteRecordRaw> = [
     path: "/home/share",
     name: "Share",
     component: getComponentMax('share', 'index'),
-    meta: { title: "NAI Trading Center", keepAlive: true, displayNavBar: true }
+    meta: { title: "NAI Trading Center", keepAlive: true, displayNavBar: false }
   },
 ]
