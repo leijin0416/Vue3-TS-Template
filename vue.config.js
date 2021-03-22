@@ -76,7 +76,7 @@ module.exports = {
   },
   parallel: false,
   css: {
-    extract: false,
+    extract: true,  // 分离
     loaderOptions: {
       sass: {
         // prependData 最新
